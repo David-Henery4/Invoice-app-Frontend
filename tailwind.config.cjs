@@ -48,13 +48,21 @@ module.exports = {
     extend: {
       fontSize: {
         xtraSm: "11px",
+        med: "15px",
         lrgHeading: "32px",
       },
       gridTemplateColumns: {
+        mainMob: "24px repeat(10,1fr) 24px",
+        mainDesk: "101px .5fr repeat(12,1fr) 1fr",
         invoiceMob: "24px repeat(10,1fr) 24px",
+        invoiceTab: "48px repeat(10,1fr) 48px",
+        invoiceMax: "repeat(12,1fr)",
       },
       gridTemplateRows: {
         firstRowMinContent: "min-content",
+      },
+      screens: {
+        lgTab: "51.62em", // 826px
       },
     },
   },

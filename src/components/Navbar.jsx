@@ -2,9 +2,9 @@ import { Logo, avatarIcon, MoonIcon } from "../assets";
 
 const Navbar = () => {
   return (
-    <nav className="w-full bg-navbarLight h-[72px] flex justify-between items-center">
+    <nav className="w-full bg-navbarLight h-[72px] flex justify-between items-center col-start-1 col-end-13 md:h-20 lg:col-start-1 lg:col-end-2 lg:h-full lg:flex-col lg:rounded-r-[20px]">
       {/* Left/Top */}
-      <div className="h-full bg-primaryPurple w-[72px] relative rounded-r-[20px] overflow-hidden">
+      <div className="h-full bg-primaryPurple w-[72px] relative rounded-r-[20px] overflow-hidden md:w-20 lg:w-full lg:h-[103px]">
         <div
           className="w-full h-1/2
           "
@@ -21,12 +21,12 @@ const Navbar = () => {
       {/* Right/Bottom */}
       <div
         className="
-        h-full flex"
+        h-full flex lg:flex-col lg:w-full lg:h-auto"
       >
-        <div className="h-full px-6 grid place-items-center">
+        <div className="h-full px-6 grid place-items-center md:px-8 lg:px-0 lg:py-8">
           <MoonIcon className="hover:cursor-pointer" />
         </div>
-        <div className="h-full px-6 grid place-items-center border-l border-l-avatarBorderColour">
+        <div className="h-full px-6 grid place-items-center border-l border-avatarBorderColour md:pr-6 md:pl-8 lg:px-0 lg:py-6 lg:border-l-0 lg:border-t">
           <div
             className="w-8 h-8 rounded-full overflow-hidden
             "
