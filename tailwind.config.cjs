@@ -60,6 +60,7 @@ module.exports = {
       },
       gridTemplateRows: {
         firstRowMinContent: "min-content",
+        invoiceContainerMobRows: "min-content 36px 1fr",
       },
       screens: {
         lgTab: "51.62em", // 826px
