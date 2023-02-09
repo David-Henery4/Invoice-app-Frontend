@@ -55,6 +55,8 @@ module.exports = {
         mainMob: "24px repeat(10,1fr) 24px",
         mainDesk: "101px .5fr repeat(12,1fr) 1fr",
         invoiceMob: "24px repeat(10,1fr) 24px",
+        invoiceTabSml: "75px repeat(2,100px) 1fr",
+        invoiceTabMd: "85px repeat(2,110px) 1fr;",
         invoiceTab: "48px repeat(10,1fr) 48px",
         invoiceMax: "repeat(12,1fr)",
       },
@@ -63,6 +65,8 @@ module.exports = {
         invoiceContainerMobRows: "min-content 36px 1fr",
       },
       screens: {
+        smlTab: "35.31em", // 565px
+        mdTab: "38.75em", // 620px
         lgTab: "51.62em", // 826px
       },
     },
