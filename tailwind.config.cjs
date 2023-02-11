@@ -14,6 +14,7 @@ module.exports = {
       heading2: "22px",
       heading3: "24px",
       heading4: "15px",
+      subheading: "20px",
     },
     letterSpacing: {
       body1: "-0.25px",
@@ -22,6 +23,7 @@ module.exports = {
       heading2: "-0.63px",
       heading3: "-0.8px",
       heading4: "-0.25px",
+      subheading: "-0.31px",
     },
     colors: {
       bgColourDark: "#141625",
@@ -58,10 +60,12 @@ module.exports = {
         singleInvoiceContainer: "15% 22% 22% 1fr",
         invoiceTab: "48px repeat(10,1fr) 48px",
         invoiceMax: "repeat(12,1fr)",
+        datesAddressMob: "1fr 41px 1fr",
       },
       gridTemplateRows: {
         firstRowMinContent: "min-content",
         invoiceContainerMobRows: "min-content 36px 1fr",
+        datesAddressMob: "1fr 36px min-content;",
       },
       screens: {
         smlTab: "35.5em", // 568px

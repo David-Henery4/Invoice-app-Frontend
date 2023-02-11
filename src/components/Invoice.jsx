@@ -1,4 +1,5 @@
 import React from 'react'
+import {Status} from "../components"
 
 const Invoice = () => {
   return (
@@ -14,10 +15,7 @@ const Invoice = () => {
       </p>
       <div className="col-start-1 col-end-13 flex justify-between items-center row-start-3 row-end-4 tab:row-auto tab:col-start-4 tab:col-end-5 tab:justify-end tab:gap-10">
         <p className="text-base self-end tab:self-center">£ 1,800.90</p>
-        <div className="bg-paidStatus/10 flex justify-center items-center w-[104px] h-10 gap-2">
-          <div className="w-2 h-2 rounded-full bg-paidStatus"></div>
-          <p className="text-paidStatus md:text-med">Paid</p>
-        </div>
+        <Status status={"Paid"}/>
       </div>
     </div>
   );
