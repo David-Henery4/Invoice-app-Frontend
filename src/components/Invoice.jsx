@@ -4,7 +4,7 @@ import {Status} from "../components"
 const Invoice = () => {
   return (
     <div className="bg-basicWhite w-full grid text-xs font-bold grid-cols-invoiceMax grid-rows-invoiceContainerMobRows p-6 tab:grid-cols-singleInvoiceContainer tab:grid-rows-none  tab:items-center ">
-      <p className="col-start-1 col-end-6 row-start-1 row-end-2 smlTab:row-auto smlTab:col-end-2 md:text-med">
+      <p className="col-start-1 col-end-6 row-start-1 row-end-2 tab:row-auto tab:col-end-2 md:text-med">
         <span className="text-toggleColourDark">#</span>RT3080
       </p>
       <p className="text-textReallyDark font-medium col-start-1 col-end-6 row-start-3 row-end-4 tab:col-start-2 tab:col-end-3 tab:row-auto md:text-med">

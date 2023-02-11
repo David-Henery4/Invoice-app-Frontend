@@ -61,14 +61,15 @@ module.exports = {
         invoiceTab: "48px repeat(10,1fr) 48px",
         invoiceMax: "repeat(12,1fr)",
         datesAddressMob: "1fr 41px 1fr",
+        datesAddressTab: "auto 41px auto 53px auto",
       },
       gridTemplateRows: {
         firstRowMinContent: "min-content",
         invoiceContainerMobRows: "min-content 36px 1fr",
-        datesAddressMob: "1fr 36px min-content;",
+        datesAddressMob: "1fr 36px min-content",
+        datesAddressTab: "none",
       },
       screens: {
-        smlTab: "35.5em", // 568px
         mdTab: "38.75em", // 620px
         tab: "42.5em", // 680px
       },

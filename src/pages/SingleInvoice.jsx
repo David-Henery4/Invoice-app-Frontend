@@ -1,14 +1,15 @@
 import React from "react";
 import { ArrowLeft } from "../assets";
 import { Status } from "../components";
+import {ActionBtns} from "../components/SingleInvoiceComponents";
 
 const SingleInvoice = () => {
   return (
     <>
-      <main className="col-start-2 col-end-12 lg:col-start-3 lg:col-end-[14] pt-8">
+      <main className="w-full max-w-[730px] mx-auto col-start-2 col-end-12 lg:col-start-3 lg:col-end-[14] pt-8">
         <a
           href="#"
-          className="mb-8 flex justify-start items-center gap-6 text-xs tracking-body1 leading-body1 font-bold"
+          className="w-fit mb-8 flex justify-start items-center gap-6 text-xs tracking-body1 leading-body1 font-bold"
         >
           <ArrowLeft />
           <p>Go back</p>
@@ -19,19 +20,20 @@ const SingleInvoice = () => {
         "
         >
           {/* Status */}
-          <div className="w-full bg-basicWhite p-6 rounded-lg">
-            <div className="flex justify-between items-center">
+          <div className="w-full bg-basicWhite p-6 rounded-lg mdTab:flex items-center justify-between md:p-8">
+            <div className="flex justify-between items-center mdTab:justify-start mdTab:gap-4">
               <p className="text-xs text-toggleColourDark leading-body1 tracking-body1">
                 Status
               </p>
               <Status status={"Pending"} />
             </div>
+            <ActionBtns isOnLargerScreens={true} />
           </div>
 
           {/* Details */}
-          <div className="w-full p-6 bg-basicWhite rounded-lg">
+          <div className="w-full p-6 bg-basicWhite rounded-lg md:p-8">
             <div className="w-full grid gap-8 pb-10">
-              <div className="w-full flex justify-between items-start flex-col gap-8">
+              <div className="w-full flex justify-between items-start flex-col gap-8 mdTab:flex-row">
                 {/* Title, Reference & Sender Address */}
                 <div className="text-xs font-bold tracking-heading4 leading-heading4">
                   <h4 className=" text-textLight">
@@ -50,7 +52,7 @@ const SingleInvoice = () => {
               </div>
 
               {/* Dates & Customer Address */}
-              <div className="grid grid-cols-datesAddressMob grid-rows-datesAddressMob">
+              <div className="grid grid-cols-datesAddressMob grid-rows-datesAddressMob mdTab:grid-cols-datesAddressTab mdTab:grid-rows-datesAddressTab">
                 <div className="grid gap-8 col-start-1 col-end-2">
                   <div className="grid gap-3">
                     <h4 className="text-xs tracking-heading4 leading-heading4 text-shadedTextLight">
@@ -83,7 +85,7 @@ const SingleInvoice = () => {
                     <p>United Kingdom</p>
                   </div>
                 </div>
-                <div className="col-start-1 col-end-5 row-start-3 row-end-4">
+                <div className="col-start-1 col-end-5 row-start-3 row-end-4 mdTab:row-start-1 mdTab:row-end-2 mdTab:col-start-5 mdTab:col-end-6">
                   <h4 className="text-xs text-shadedTextLight tracking-heading4 leading-heading4">
                     Sent to
                   </h4>
@@ -97,7 +99,7 @@ const SingleInvoice = () => {
             {/* Summary */}
             {/* Services, Prices, Totals & Quanity */}
             <div className="w-full rounded-lg overflow-hidden">
-              <div className="w-full flex flex-col justify-start items-center gap-6 p-6 bg-shadedContentLight text-xs font-bold tracking-heading4 leading-heading4 text-textLight">
+              <div className="w-full flex flex-col justify-start items-center gap-6 p-6 bg-shadedContentLight text-xs font-bold tracking-heading4 leading-heading4 text-textLight md:p-8">
                 <div className="w-full flex justify-between items-center">
                   <div className="flex flex-col">
                     <h4>Banner Design</h4>
@@ -115,7 +117,7 @@ const SingleInvoice = () => {
               </div>
 
               {/* Total */}
-              <div className="flex justify-between items-center p-6 bg-navbarLight text-basicWhite">
+              <div className="flex justify-between items-center p-6 bg-navbarLight text-basicWhite md:p-8">
                 <p className="text-xtraSm leading-body2 tracking-body2">
                   Grand Total
                 </p>
@@ -129,18 +131,8 @@ const SingleInvoice = () => {
       </main>
 
       {/* Mobile Bottom Btns */}
-      <div className="col-start-1 col-end-13 w-full p-6 mt-14 bg-basicWhite">
-        <div className="flex flex-wrap justify-center items-center gap-2">
-          <button className="w-[73px] h-12 rounded-3xl bg-shadedContentLight text-shadedTextLight">
-            Edit
-          </button>
-          <button className="w-[89px] h-12 rounded-3xl bg-deleteBtn text-basicWhite">
-            Delete
-          </button>
-          <button className="w-[149px] h-12 rounded-3xl bg-primaryPurple text-basicWhite">
-            Mark as Paid
-          </button>
-        </div>
+      <div className="col-start-1 col-end-13 w-full p-6 mt-14 bg-basicWhite mdTab:hidden">
+        <ActionBtns />
       </div>
     </>
   );
