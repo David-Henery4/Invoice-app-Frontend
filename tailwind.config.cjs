@@ -1,9 +1,15 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class",
   theme: {
+    screens: {
+      mdTab: "38.75em", // 620px
+      tab: "42.5em", // 680px
+      ...defaultTheme.screens,
+    },
     fontFamily: {
       spartan: "League Spartan, sans-serif",
     },
@@ -50,6 +56,7 @@ module.exports = {
     extend: {
       fontSize: {
         xtraSm: "11px",
+        14: "14px",
         med: "15px",
         lrgHeading: "32px",
       },
@@ -62,16 +69,13 @@ module.exports = {
         invoiceMax: "repeat(12,1fr)",
         datesAddressMob: "1fr 41px 1fr",
         datesAddressTab: "auto 41px auto 53px auto",
+        datesAddressDesk: "max-content 100px 100px 110px auto",
       },
       gridTemplateRows: {
         firstRowMinContent: "min-content",
         invoiceContainerMobRows: "min-content 36px 1fr",
         datesAddressMob: "1fr 36px min-content",
         datesAddressTab: "none",
-      },
-      screens: {
-        mdTab: "38.75em", // 620px
-        tab: "42.5em", // 680px
       },
     },
   },
