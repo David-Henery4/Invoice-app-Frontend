@@ -19,7 +19,7 @@ const BillFrom = () => {
           type="text"
         />
       </div>
-      <div className="grid gap-2 col-start-1 col-end-4">
+      <div className="grid gap-2 col-start-1 col-end-4 tab:col-start-1 tab:col-end-3">
         <label
           className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
           htmlFor=""
@@ -32,7 +32,7 @@ const BillFrom = () => {
         />
       </div>
 
-      <div className="grid gap-2 col-start-4 col-end-7">
+      <div className="grid gap-2 col-start-4 col-end-7 tab:col-start-3 tab:col-end-5">
         <label
           className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
           htmlFor=""
@@ -45,7 +45,7 @@ const BillFrom = () => {
         />
       </div>
 
-      <div className="grid gap-2 col-start-1 col-end-7">
+      <div className="grid gap-2 col-start-1 col-end-7 tab:col-start-5 tab:col-end-7">
         <label
           className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
           htmlFor=""

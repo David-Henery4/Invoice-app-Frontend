@@ -72,6 +72,7 @@ module.exports = {
         datesAddressMob: "1fr 41px 1fr",
         datesAddressTab: "auto 41px auto 53px auto",
         datesAddressDesk: "max-content 100px 100px 110px auto",
+        itemListDesk: "214px 46px 100px 96px",
       },
       gridTemplateRows: {
         firstRowMinContent: "min-content",

@@ -3,7 +3,7 @@ import React from 'react'
 const InvoiceDets = () => {
   return (
     <div className="w-full grid gap-6 grid-cols-6 col-start-1 col-end-7">
-      <div className="grid gap-2 col-start-1 col-end-7">
+      <div className="grid gap-2 col-start-1 col-end-7 tab:col-start-1 tab:col-end-4">
         <label
           className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
           htmlFor=""
@@ -15,7 +15,7 @@ const InvoiceDets = () => {
           type="date"
         />
       </div>
-      <div className="grid gap-2 col-start-1 col-end-7">
+      <div className="grid gap-2 col-start-1 col-end-7 tab:col-start-4 tab:col-end-7">
         <label
           className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
           htmlFor=""
