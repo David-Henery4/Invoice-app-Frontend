@@ -1,5 +1,5 @@
-import React from 'react'
-import {IconDelete} from "../../assets"
+import React from "react";
+import { IconDelete } from "../../assets";
 
 const ItemList = () => {
   return (
@@ -60,10 +60,12 @@ const ItemList = () => {
           </div>
         </div>
       </div>
-      {/* ADD NEW ITEM BUTTON */} 
-      <button className='w-full py-4 bg-shadedContentLight rounded-3xl mt-12'>+ Add New Item</button>
+      {/* ADD NEW ITEM BUTTON */}
+      <button className="w-full py-4 bg-shadedContentLight rounded-3xl mt-12 text-xs font-bold text-shadedTextLight leading-body1 tracking-body1">
+        + Add New Item
+      </button>
     </div>
   );
-}
+};
 
-export default ItemList
+export default ItemList;

@@ -62,6 +62,8 @@ module.exports = {
       },
       gridTemplateColumns: {
         mainMob: "24px repeat(10,1fr) 24px",
+        formPageMob: "24px repeat(10,1fr) 24px",
+        formPageTab: "56px repeat(10,1fr) 56px",
         mainDesk: "101px .5fr repeat(12,1fr) 1fr",
         invoiceMob: "24px repeat(10,1fr) 24px",
         singleInvoiceContainer: "15% 22% 22% 1fr",
