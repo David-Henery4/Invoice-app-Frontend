@@ -2,7 +2,7 @@ import { Logo, avatarIcon, MoonIcon } from "../assets";
 
 const Navbar = () => {
   return (
-    <nav className="w-full bg-navbarLight h-[72px] flex justify-between items-center col-start-1 col-end-13 md:h-20 lg:col-start-1 lg:col-end-2 lg:h-full lg:flex-col lg:rounded-r-[20px]">
+    <nav className="w-full bg-navbarLight h-[72px] sticky top-0 z-[5] flex justify-between items-center col-start-1 col-end-13 md:h-20 lg:col-start-1 lg:col-end-2 lg:h-full lg:flex-col lg:rounded-r-[20px] lg:fixed lg:w-[101px]">
       {/* Left/Top */}
       <div className="h-full bg-primaryPurple w-[72px] relative rounded-r-[20px] overflow-hidden md:w-20 lg:w-full lg:h-[103px]">
         <div
