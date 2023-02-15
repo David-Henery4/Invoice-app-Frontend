@@ -4,6 +4,7 @@ import EmptyInvoices from "./EmptyInvoices";
 import InvoicesContainer from "./InvoicesContainer";
 import Status from "./Status";
 import BackBtn from "./BackBtn";
+import Overlay from "./Overlay";
 
 export {
   Navbar,
@@ -12,4 +13,5 @@ export {
   InvoicesContainer,
   Status,
   BackBtn,
+  Overlay,
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { ArrowDown, PlusIcon } from "../assets";
 
-const InvoiceBar = () => {
+const InvoiceBar = ({ setIsFormOpen }) => {
   return (
     <div className="flex justify-between items-center col-start-1 col-end-13 md:py-1">
       {/* LEFT */}
@@ -23,17 +23,22 @@ const InvoiceBar = () => {
           <ArrowDown />
         </div>
         {/* New Invoice Button */}
-        <button className="w-[90px] flex justify-start items-center p-[6px] bg-primaryPurple rounded-3xl gap-2 md:w-[150px] md:h-12 md:gap-4 md:p-2">
+        <button
+          className="w-[90px] flex justify-start items-center p-[6px] bg-primaryPurple rounded-3xl gap-2 md:w-[150px] md:h-12 md:gap-4 md:p-2"
+          onClick={() => {
+            setIsFormOpen(true)
+          }}
+        >
           <span className="h-8 w-8 rounded-full bg-basicWhite grid place-items-center">
             <PlusIcon />
           </span>
           <p className="text-xs font-bold text-basicWhite tracking-body1 leading-heading4 md:text-med">
-            New <span className='hidden md:inline'>Invoice</span>
+            New <span className="hidden md:inline">Invoice</span>
           </p>
         </button>
       </div>
     </div>
   );
-}
+};
 
 export default InvoiceBar
