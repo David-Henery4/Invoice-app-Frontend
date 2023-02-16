@@ -4,7 +4,9 @@ import invoiceData from "../../../data.json";
 
 
 const initialState = {
-  invoiceData: invoiceData
+  invoiceData: invoiceData,
+  activeSingleInvoice: {},
+  
 }
 
 const InvoiceDataSlice = createSlice({

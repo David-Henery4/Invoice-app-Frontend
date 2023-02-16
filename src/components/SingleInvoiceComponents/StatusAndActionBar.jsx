@@ -9,7 +9,7 @@ const StatusAndActionBar = () => {
         <p className="text-xs text-toggleColourDark leading-body1 tracking-body1 md:text-med">
           Status
         </p>
-        <Status status={"Pending"} />
+        <Status status={"pending"} />
       </div>
       <ActionBtns isOnLargerScreens={true} />
     </div>

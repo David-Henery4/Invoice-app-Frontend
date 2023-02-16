@@ -1,39 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from 'react'
 
-const Status = ({ status = "paid" }) => {
+const Status = ({status = "draft"}) => {
   //
-  const handleStatusColourChange = () => {
-    if (status === "paid")
-      return {
-        bg: "bg-paidStatus/10",
-        text: "text-paidStatus",
-        dot: "bg-paidStatus",
-      };
-    if (status === "pending") 
-    return {
-      bg: "bg-pendingStatus/10",
-      text: "text-pendingStatus",
-      dot: "bg-pendingStatus",
+  const handleStatusColourChanges = () => {
+    if (status === "paid") return {
+      dot: "bg-paidStatus",
+      bg: "bg-paidStatus/10",
+      text: "text-paidStatus",
     };
     if (status === "draft") return {
+      dot: "bg-navbarLight",
       bg: "bg-navbarLight/10",
       text: "text-navbarLight",
-      dot: "bg-navbarLight",
     };
-  };
+    if (status === "pending") return {
+      dot: "bg-pendingStatus",
+      bg: "bg-pendingStatus/10",
+      text: "text-pendingStatus",
+    };
+  }
   //
   return (
     <div
       className={`${
-        handleStatusColourChange().bg
+        handleStatusColourChanges()?.bg
       } flex justify-center items-center w-[104px] h-10 gap-2`}
     >
       <div
-        className={`w-2 h-2 rounded-full ${handleStatusColourChange().dot}`}
+        className={`${handleStatusColourChanges()?.dot} w-2 h-2 rounded-full`}
       ></div>
-      <p className={`${handleStatusColourChange().text} capitalize md:text-med`}>{status}</p>
+      <p className={`${handleStatusColourChanges()?.text} capitalize md:text-med`}>
+        {status}
+      </p>
     </div>
   );
-};
+}
 
-export default Status;
+export default Status

@@ -1,11 +1,11 @@
-import React from 'react'
-import { useDispatch } from "react-redux";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { ArrowDown, PlusIcon } from "../assets";
-import { setFormModalOpenToTrue } from '../features/formModal/formModalSlice';
-
+import { setFormModalOpenToTrue } from "../features/formModal/formModalSlice";
 
 const InvoiceBar = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const { invoiceData } = useSelector((store) => store.invoiceData);
   //
   return (
     <div className="flex justify-between items-center col-start-1 col-end-13 md:py-1">
@@ -15,7 +15,19 @@ const InvoiceBar = () => {
           Invoices
         </h1>
         <h4 className="text-xs text-textReallyDark leading-heading4 -tracking-heading4 md:text-med">
-          No invoices
+          {invoiceData?.length <= 0 ? (
+            <span>No Invoices</span>
+          ) : invoiceData?.length === 1 ? (
+            <>
+              <span className="md:hidden">{`${invoiceData?.length} invoice`}</span>
+              <span className="hidden md:block">{`There is ${invoiceData?.length} invoice`}</span>
+            </>
+          ) : (
+            <>
+              <span className="md:hidden">{`${invoiceData?.length} invoices`}</span>
+              <span className="hidden md:block">{`There are ${invoiceData?.length} total invoices`}</span>
+            </>
+          )}
         </h4>
       </div>
       {/* RIGHT */}
@@ -31,7 +43,7 @@ const InvoiceBar = () => {
         <button
           className="w-[90px] flex justify-start items-center p-[6px] bg-primaryPurple rounded-3xl gap-2 md:w-[150px] md:h-12 md:gap-4 md:p-2"
           onClick={() => {
-            dispatch(setFormModalOpenToTrue())
+            dispatch(setFormModalOpenToTrue());
           }}
         >
           <span className="h-8 w-8 rounded-full bg-basicWhite grid place-items-center">
@@ -46,4 +58,4 @@ const InvoiceBar = () => {
   );
 };
 
-export default InvoiceBar
+export default InvoiceBar;
