@@ -1,7 +1,10 @@
 import React from 'react'
 import { ArrowLeft } from "../assets";
+import { useDispatch } from 'react-redux';
+import { setFormModalOpenToFalse } from '../features/formModal/formModalSlice';
 
-const BackBtn = ({isOnInvoiceForm = false, setIsFormOpen}) => {
+const BackBtn = ({isOnInvoiceForm = false}) => {
+  const dispatch = useDispatch()
   return (
     <a
       href="#"
@@ -9,7 +12,9 @@ const BackBtn = ({isOnInvoiceForm = false, setIsFormOpen}) => {
         isOnInvoiceForm && "tab:hidden"
       }`}
       onClick={() => {
-        if (setIsFormOpen) setIsFormOpen(false);
+        if (isOnInvoiceForm) {
+          dispatch(setFormModalOpenToFalse())
+        }
       }}
     >
       <ArrowLeft />

@@ -1,11 +1,15 @@
 import React from 'react'
 import {BackBtn} from "../components"
 import {BillFrom, BillTo, ItemList} from "../components/FormComponents"
+import { useSelector, useDispatch } from "react-redux";
+import { setFormModalOpenToFalse } from '../features/formModal/formModalSlice';
 
-const NewEditInvoice = ({ isFormOpen, setIsFormOpen }) => {
+const NewEditInvoice = () => {
+  const dispatch = useDispatch()
+  const {isFormOpen} = useSelector(store => store.formModal)
   //
   const handleCloseForm = () => {
-    setIsFormOpen(false)
+    dispatch(setFormModalOpenToFalse())
   }
   //
   return (
@@ -18,7 +22,7 @@ const NewEditInvoice = ({ isFormOpen, setIsFormOpen }) => {
         className="col-start-2 col-end-12 pb-6
         "
       >
-        <BackBtn isOnInvoiceForm={true} setIsFormOpen={setIsFormOpen} />
+        <BackBtn isOnInvoiceForm={true}/>
         <h2 className="text-2xl leading-heading1 -tracking-subheading font-bold mb-6">
           New Invoice
         </h2>

@@ -1,7 +1,12 @@
 import React from 'react'
+import { useDispatch } from "react-redux";
 import { ArrowDown, PlusIcon } from "../assets";
+import { setFormModalOpenToTrue } from '../features/formModal/formModalSlice';
 
-const InvoiceBar = ({ setIsFormOpen }) => {
+
+const InvoiceBar = () => {
+  const dispatch = useDispatch()
+  //
   return (
     <div className="flex justify-between items-center col-start-1 col-end-13 md:py-1">
       {/* LEFT */}
@@ -26,7 +31,7 @@ const InvoiceBar = ({ setIsFormOpen }) => {
         <button
           className="w-[90px] flex justify-start items-center p-[6px] bg-primaryPurple rounded-3xl gap-2 md:w-[150px] md:h-12 md:gap-4 md:p-2"
           onClick={() => {
-            setIsFormOpen(true)
+            dispatch(setFormModalOpenToTrue())
           }}
         >
           <span className="h-8 w-8 rounded-full bg-basicWhite grid place-items-center">
