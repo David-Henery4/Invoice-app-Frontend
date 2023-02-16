@@ -1,19 +1,14 @@
-import { Navbar, Overlay } from "./components";
-import { Invoices, SingleInvoice, NewEditInvoice } from "./pages";
-import { useState } from "react";
+import { Invoices, SingleInvoice,  Home } from "./pages";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
-  const [isFormOpen,setIsFormOpen] = useState(false)
-  //
   return (
-    <div className="App bg-bgColourLight font-spartan min-h-screen w-full grid grid-cols-mainMob grid-rows-firstRowMinContent md:grid-cols-invoiceTab lg:grid-cols-mainDesk lg:grid-rows-[auto] lg:gap-x-[30px]">
-      <Overlay isFormOpen={isFormOpen} setIsFormOpen={setIsFormOpen} />
-      <Navbar />
-      <Invoices setIsFormOpen={setIsFormOpen} />
-      {/* <SingleInvoice/>  */}
-
-      <NewEditInvoice isFormOpen={isFormOpen} setIsFormOpen={setIsFormOpen} />
-    </div>
+    <Routes>
+      <Route path="/" element={<Home/>}>
+        <Route index element={<Invoices/>}/>
+        <Route path="singleInvoice/:invoiceId" element={<SingleInvoice/>}/>
+      </Route>
+    </Routes>
   );
 }
 
