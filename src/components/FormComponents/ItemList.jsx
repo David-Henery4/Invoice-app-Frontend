@@ -61,7 +61,10 @@ const ItemList = () => {
         </div>
       </div>
       {/* ADD NEW ITEM BUTTON */}
-      <button className="w-full py-4 bg-shadedContentLight rounded-3xl mt-12 text-xs font-bold text-shadedTextLight leading-body1 tracking-body1">
+      <button
+        className="w-full py-4 bg-shadedContentLight rounded-3xl mt-12 text-xs font-bold text-shadedTextLight leading-body1 tracking-body1"
+        onClick={(e) => e.preventDefault()}
+      >
         + Add New Item
       </button>
     </div>

@@ -6,11 +6,13 @@ const ClientsDets = () => {
       <div className="grid gap-2 col-start-1 col-end-7">
         <label
           className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
-          htmlFor=""
+          htmlFor="clientName"
         >
           Client's Name
         </label>
         <input
+          id="clientName"
+          name="clientName"
           className="w-full rounded-md border-2 border-shadedTextDark outline-none px-5 py-3"
           type="text"
         />
@@ -18,11 +20,13 @@ const ClientsDets = () => {
       <div className="grid gap-2 col-start-1 col-end-7">
         <label
           className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
-          htmlFor=""
+          htmlFor="clientEmail"
         >
           Clients's Email
         </label>
         <input
+          id="clientEmail"
+          name="clientEmail"
           className="w-full rounded-md border-2 border-shadedTextDark outline-none px-5 py-3"
           type="text"
         />
@@ -30,11 +34,13 @@ const ClientsDets = () => {
       <div className="grid gap-2 col-start-1 col-end-7">
         <label
           className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
-          htmlFor=""
+          htmlFor="clientStreetAddress"
         >
           Street Address
         </label>
         <input
+          id="clientStreetAddress"
+          name="clientStreetAddress"
           className="w-full rounded-md border-2 border-shadedTextDark outline-none px-5 py-3"
           type="text"
         />
@@ -42,11 +48,13 @@ const ClientsDets = () => {
       <div className="grid gap-2 col-start-1 col-end-4 tab:col-start-1 tab:col-end-3">
         <label
           className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
-          htmlFor=""
+          htmlFor="clientCity"
         >
           City
         </label>
         <input
+          id="clientCity"
+          name="clientCity"
           className="w-full rounded-md border-2 border-shadedTextDark outline-none px-5 py-3"
           type="text"
         />
@@ -55,11 +63,13 @@ const ClientsDets = () => {
       <div className="grid gap-2 col-start-4 col-end-7 tab:col-start-3 tab:col-end-5">
         <label
           className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
-          htmlFor=""
+          htmlFor="clientPostCode"
         >
           Post Code
         </label>
         <input
+          id="clientPostCode"
+          name="clientPostCode"
           className="w-full rounded-md border-2 border-shadedTextDark outline-none px-5 py-3"
           type="text"
         />
@@ -68,11 +78,13 @@ const ClientsDets = () => {
       <div className="grid gap-2 col-start-1 col-end-7 tab:col-start-5 tab:col-end-7">
         <label
           className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
-          htmlFor=""
+          htmlFor="clientCountry"
         >
           Country
         </label>
         <input
+          id="clientCountry"
+          name="clientCountry"
           className="w-full rounded-md border-2 border-shadedTextDark outline-none px-5 py-3"
           type="text"
         />

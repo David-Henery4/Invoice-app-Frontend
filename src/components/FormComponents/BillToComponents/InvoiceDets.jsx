@@ -6,11 +6,13 @@ const InvoiceDets = () => {
       <div className="grid gap-2 col-start-1 col-end-7 tab:col-start-1 tab:col-end-4">
         <label
           className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
-          htmlFor=""
+          htmlFor="invoiceDate"
         >
           Invoice Date
         </label>
         <input
+          id="invoiceDate"
+          name="invoiceDate"
           className="w-full rounded-md border-2 border-shadedTextDark outline-none px-5 py-3"
           type="date"
         />
@@ -18,11 +20,13 @@ const InvoiceDets = () => {
       <div className="grid gap-2 col-start-1 col-end-7 tab:col-start-4 tab:col-end-7">
         <label
           className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
-          htmlFor=""
+          htmlFor="paymentTerms"
         >
           Payment Terms
         </label>
         <input
+          id="paymentTerms"
+          name="paymentTerms"
           className="w-full rounded-md border-2 border-shadedTextDark outline-none px-5 py-3"
           type="text"
         />
@@ -30,11 +34,13 @@ const InvoiceDets = () => {
       <div className="grid gap-2 col-start-1 col-end-7">
         <label
           className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
-          htmlFor=""
+          htmlFor="projectDescription"
         >
           Project Description
         </label>
         <input
+          id="projectDescription"
+          name="projectDescription"
           className="w-full rounded-md border-2 border-shadedTextDark outline-none px-5 py-3"
           type="text"
         />
