@@ -1,20 +1,7 @@
-import {Status} from "../components"
+import { Status } from "../components";
+import handleDateFormatting from "../reusableFunctions/dateFormatting";
 
-const Invoice = ({
-  clientName,
-  id,
-  status,
-  total,
-  paymentDue,
-}) => {
-  //
-  const handleDateFormatting = (due) => {
-    return Intl.DateTimeFormat([navigator.language, "en-GB"], {
-      month: "short",
-      day: "2-digit",
-      year: "numeric",
-    }).format(new Date(due));
-  }
+const Invoice = ({ clientName, id, status, total, paymentDue }) => {
   //
   return (
     <div className="bg-basicWhite w-full grid text-xs font-bold grid-cols-invoiceMax grid-rows-invoiceContainerMobRows p-6 tab:grid-cols-singleInvoiceContainer tab:grid-rows-none  tab:items-center ">
@@ -29,11 +16,13 @@ const Invoice = ({
         {clientName}
       </p>
       <div className="col-start-1 col-end-13 flex justify-between items-center row-start-3 row-end-4 tab:row-auto tab:col-start-4 tab:col-end-5 tab:justify-end tab:gap-10">
-        <p className="text-base self-end tab:self-center">£ {total?.toLocaleString()}</p>
+        <p className="text-base self-end tab:self-center">
+          £ {total?.toLocaleString()}
+        </p>
         <Status status={status} />
       </div>
     </div>
   );
 };
 
-export default Invoice
+export default Invoice;

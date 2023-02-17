@@ -1,6 +1,14 @@
 import React from 'react'
+import handleDateFormatting from "../../reusableFunctions/dateFormatting";
 
-const DatesClientsDets = () => {
+const DatesClientsDets = ({
+  paymentDue,
+  createdAt,
+  clientName,
+  clientEmail,
+  clientAddress,
+}) => {
+  //
   return (
     <div className="grid grid-cols-datesAddressMob grid-rows-datesAddressMob mdTab:grid-cols-datesAddressTab mdTab:grid-rows-datesAddressTab md:grid-cols-datesAddressDesk">
       <div className="grid gap-8 col-start-1 col-end-2 md:row-start-1 md:row-end-2">
@@ -9,7 +17,7 @@ const DatesClientsDets = () => {
             Invoice Date
           </h4>
           <p className="text-med font-bold leading-subheading tracking-subheading text-textLight md:text-lg">
-            21 Aug 2021
+            {createdAt && handleDateFormatting(createdAt)}
           </p>
         </div>
         <div className="grid gap-3">
@@ -17,7 +25,7 @@ const DatesClientsDets = () => {
             Payment Due
           </h4>
           <p className="text-med font-bold leading-subheading tracking-subheading text-textLight md:text-lg">
-            20 Sep 2021
+            {paymentDue && handleDateFormatting(paymentDue)}
           </p>
         </div>
       </div>
@@ -27,12 +35,12 @@ const DatesClientsDets = () => {
         </h4>
         <div>
           <h2 className="text-med font-bold leading-subheading tracking-subheading text-textLight mb-2 md:text-lg">
-            Alex Grim
+            {clientName && clientName}
           </h2>
-          <p>84 Church Way</p>
-          <p>Bradford</p>
-          <p>BD1 9PB</p>
-          <p>United Kingdom</p>
+          <p>{clientAddress?.street}</p>
+          <p>{clientAddress?.city}</p>
+          <p>{clientAddress?.postCode}</p>
+          <p>{clientAddress?.country}</p>
         </div>
       </div>
       <div className="col-start-1 col-end-5 row-start-3 row-end-4 mdTab:row-start-1 mdTab:row-end-2 mdTab:col-start-5 mdTab:col-end-6">
@@ -40,11 +48,11 @@ const DatesClientsDets = () => {
           Sent to
         </h4>
         <p className="text-med font-bold leading-subheading tracking-subheading text-textLight break-all md:text-lg">
-          alexgrim@mail.com
+          {clientEmail && clientEmail}
         </p>
       </div>
     </div>
   );
-}
+};
 
 export default DatesClientsDets
