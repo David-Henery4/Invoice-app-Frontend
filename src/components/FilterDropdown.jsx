@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { filterInvoices } from "../features/invoiceData/invoiceDataSlice";
 import { CheckIcon } from "../assets";
 
 const FilterDropdown = ({ isFilterDropdownOpen}) => {
   const dispatch = useDispatch()
-  const { filterModes } = useSelector((store) => store.invoiceData);
+  const { filterModes, isFilterActive, invoiceData } = useSelector(
+    (store) => store.invoiceData
+  );
+  //
+  useEffect(() => {
+    if (isFilterActive){
+      const currentFilterType = filterModes.find(filter => filter?.filterActive === true)
+      dispatch(filterInvoices(currentFilterType.id))
+    }
+  }, [invoiceData])
   //
   return (
     <div

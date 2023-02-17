@@ -36,7 +36,7 @@ const InvoiceDataSlice = createSlice({
       );
     },
     filterInvoices: (state, { payload }) => {
-      
+
       // selects what filter type is active
       state.filterModes.map((filter) => {
         filter.id === payload ? filter.filterActive = !filter.filterActive : filter.filterActive = false
@@ -56,9 +56,17 @@ const InvoiceDataSlice = createSlice({
 
       // MAYBE reset to empty if filter is not active anymore?
     },
+    deleteInvoice: (state, {payload}) => {
+      console.log(payload)
+      const newInvoiceData = state.invoiceData.filter(invoice => invoice.id !== payload)
+      state.invoiceData = newInvoiceData
+    },
+    markInvoiceAsPaid: (state, {payload}) => {
+      state.invoiceData.find(invoice => invoice.id === payload).status = "paid"
+    },
   },
 });
 
-export const { getActiveSingleInvoice, filterInvoices } =
+export const { getActiveSingleInvoice, filterInvoices, deleteInvoice, markInvoiceAsPaid } =
   InvoiceDataSlice.actions;
 export default InvoiceDataSlice.reducer;
