@@ -6,6 +6,7 @@ import Status from "./Status";
 import BackBtn from "./BackBtn";
 import Overlay from "./Overlay";
 import FilterDropdown from "./FilterDropdown";
+import InvoiceCount from "./InvoiceCount";
 
 export {
   Navbar,
@@ -16,4 +17,5 @@ export {
   BackBtn,
   Overlay,
   FilterDropdown,
+  InvoiceCount,
 }

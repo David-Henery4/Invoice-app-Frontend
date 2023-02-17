@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ArrowDown, PlusIcon } from "../assets";
 import { setFormModalOpenToTrue } from "../features/formModal/formModalSlice";
-import { FilterDropdown } from "../components";
+import { FilterDropdown , InvoiceCount} from "../components";
 
 const InvoiceBar = () => {
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState(false);
@@ -16,21 +16,8 @@ const InvoiceBar = () => {
         <h1 className="text-xl font-bold tracking-heading2 md:text-lrgHeading md:tracking-heading1">
           Invoices
         </h1>
-        <h4 className="text-xs text-textReallyDark leading-heading4 -tracking-heading4 md:text-med">
-          {invoiceData?.length <= 0 ? (
-            <span>No Invoices</span>
-          ) : invoiceData?.length === 1 ? (
-            <>
-              <span className="md:hidden">{`${invoiceData?.length} invoice`}</span>
-              <span className="hidden md:block">{`There is ${invoiceData?.length} invoice`}</span>
-            </>
-          ) : (
-            <>
-              <span className="md:hidden">{`${invoiceData?.length} invoices`}</span>
-              <span className="hidden md:block">{`There are ${invoiceData?.length} total invoices`}</span>
-            </>
-          )}
-        </h4>
+        {/*  */}
+        <InvoiceCount/>
       </div>
       {/* RIGHT */}
       <div className="flex justify-center items-center gap-[18px] md:gap-10">

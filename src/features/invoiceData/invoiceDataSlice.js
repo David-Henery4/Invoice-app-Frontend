@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-// const invoiceData = require("../../../data.json")
 import invoiceData from "../../../data.json";
 
 const initialState = {
