@@ -5,6 +5,7 @@ import InvoicesContainer from "./InvoicesContainer";
 import Status from "./Status";
 import BackBtn from "./BackBtn";
 import Overlay from "./Overlay";
+import FilterDropdown from "./FilterDropdown";
 
 export {
   Navbar,
@@ -14,4 +15,5 @@ export {
   Status,
   BackBtn,
   Overlay,
+  FilterDropdown,
 }

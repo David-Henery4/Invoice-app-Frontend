@@ -8,7 +8,9 @@ import {
 } from "../components";
 
 const Invoices = () => {
-  const { invoiceData } = useSelector((store) => store.invoiceData);
+  const { invoiceData, isFilterActive, filteredInvoiceData } = useSelector(
+    (store) => store.invoiceData
+  );
   //
   return (
     <main

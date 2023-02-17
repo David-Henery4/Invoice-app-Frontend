@@ -80,6 +80,9 @@ module.exports = {
         datesAddressMob: "1fr 36px min-content",
         datesAddressTab: "none",
       },
+      boxShadow: {
+        filterShadow: "0px 10px 20px rgba(72, 84, 159, 0.25)",
+      },
     },
   },
   plugins: [],
