@@ -1,18 +1,10 @@
-import {useState} from 'react'
-import {BackBtn} from "../components"
-import {BillFrom, BillTo, ItemList} from "../components/FormComponents"
+import {BackBtn, Form} from "../components"
 import { useSelector, useDispatch } from "react-redux";
 import { setFormModalOpenToFalse } from '../features/formModal/formModalSlice';
-import {useUniqueId} from "../hooks"
 
 const NewEditInvoice = () => {
-  const generateId = useUniqueId()
   const dispatch = useDispatch()
   const {isFormOpen} = useSelector(store => store.formModal)
-  const [invoiceFormValues, SetInvoiceFormValues] = useState({
-    id: generateId(),
-    
-  });
   //
   const handleCloseForm = () => {
     dispatch(setFormModalOpenToFalse())
@@ -32,11 +24,7 @@ const NewEditInvoice = () => {
         <h2 className="text-2xl leading-heading1 -tracking-subheading font-bold mb-6">
           New Invoice
         </h2>
-        <form id="invoiceForm" name="invoiceForm">
-          <BillFrom />
-          <BillTo />
-          <ItemList />
-        </form>
+        <Form/>
       </section>
       <div className="w-full col-start-1 col-end-13 tab:sticky tab:bottom-0 tab:left-0">
         <div className="w-full h-16 bg-gradient-to-t from-basicBlack to-basicBlack/10 opacity-10"></div>
