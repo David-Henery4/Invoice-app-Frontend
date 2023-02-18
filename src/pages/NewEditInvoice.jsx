@@ -1,12 +1,18 @@
-import React from 'react'
+import {useState} from 'react'
 import {BackBtn} from "../components"
 import {BillFrom, BillTo, ItemList} from "../components/FormComponents"
 import { useSelector, useDispatch } from "react-redux";
 import { setFormModalOpenToFalse } from '../features/formModal/formModalSlice';
+import {useUniqueId} from "../hooks"
 
 const NewEditInvoice = () => {
+  const generateId = useUniqueId()
   const dispatch = useDispatch()
   const {isFormOpen} = useSelector(store => store.formModal)
+  const [invoiceFormValues, SetInvoiceFormValues] = useState({
+    id: generateId(),
+    
+  });
   //
   const handleCloseForm = () => {
     dispatch(setFormModalOpenToFalse())

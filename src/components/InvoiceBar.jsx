@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ArrowDown, PlusIcon } from "../assets";
 import { setFormModalOpenToTrue } from "../features/formModal/formModalSlice";
 import { FilterDropdown , InvoiceCount} from "../components";
@@ -7,7 +7,6 @@ import { FilterDropdown , InvoiceCount} from "../components";
 const InvoiceBar = () => {
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState(false);
   const dispatch = useDispatch();
-  const { invoiceData } = useSelector((store) => store.invoiceData);
   //
   return (
     <div className="flex justify-between items-center col-start-1 col-end-13 md:py-1">
