@@ -27,7 +27,7 @@ const NewEditInvoice = () => {
         <Form/>
       </section>
       <div className="w-full col-start-1 col-end-13 tab:sticky tab:bottom-0 tab:left-0">
-        <div className="w-full h-16 bg-gradient-to-t from-basicBlack to-basicBlack/10 opacity-10"></div>
+        <div className="w-full h-16 bg-gradient-to-t from-basicBlack to-basicBlack/10 opacity-10 pointer-events-none"></div>
         <div className="w-full px-6 py-5 flex flex-wrap justify-center items-center gap-[7px] bg-basicWhite tab:px-14 tab:py-8">
           <button
             className="w-[84px] h-12 rounded-3xl bg-shadedContentLight text-shadedTextLight tab:w-24 tab:mr-auto"

@@ -1,69 +1,153 @@
 import React from "react";
 import { IconDelete } from "../../assets";
 
-const ItemList = () => {
+const ItemList = ({ setInvoiceFormValues, items }) => {
+  //
+  const handleAddNewItem = () => {
+    setInvoiceFormValues((prevValues) => {
+      return {
+        ...prevValues,
+        items: [
+          ...prevValues.items,
+          {
+            name: "",
+            quantity: 0,
+            price: 0,
+            total: 0,
+          },
+        ],
+      };
+    });
+  };
+  //
+  const handleItemsValueChanges = (items, i, e) => {
+    return items
+      .map((item, index) => {
+        if (i === index) {
+          return { ...item, [e.target.name]: e.target.value };
+        }
+        return item;
+      })
+      .map((item, index) => {
+        if (i === index) {
+          return { ...item, total: +item.price * +item.quantity };
+        }
+        return item;
+      });
+  };
+  //
+  const handleDeleteItem = (items,i) => {
+    return items.filter((_,index) => index !== i)
+  }
+  //
   return (
     <div>
       <h2 className="font-bold text-[#777F98] text-lg leading-heading1 -tracking-[0.38px] mb-6">
         Item List
       </h2>
       {/* item */}
-      <div className="grid grid-cols-12 gap-x-4 gap-y-6 tab:grid-cols-itemListDesk">
-        <div className="w-full col-start-1 col-end-13 tab:col-start-1 tab:col-end-2">
-          <label
-            className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
-            htmlFor="itemName"
+      {items?.map((item, i) => {
+        return (
+          <div
+            key={i}
+            className="grid grid-cols-12 gap-x-4 gap-y-6 tab:grid-cols-itemListDesk"
           >
-            Item Name
-          </label>
-          <input
-            className="w-full rounded-md border-2 border-shadedTextDark outline-none px-5 py-3"
-            name="itemName"
-            id="itemName"
-            type="text"
-          />
-        </div>
-        <div className="w-full col-start-1 col-end-4 tab:col-start-2 tab:col-end-3">
-          <label
-            className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
-            htmlFor="itemQuantity"
-          >
-            Qty
-          </label>
-          <input
-            className="w-full rounded-md border-2 border-shadedTextDark outline-none pl-5 py-3"
-            name="itemQuantity"
-            id="itemQuantity"
-            type="text"
-          />
-        </div>
-        <div className="w-full col-start-4 col-end-8 tab:col-start-3 tab:col-end-4">
-          <label
-            className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
-            htmlFor="itemPrice"
-          >
-            Price
-          </label>
-          <input
-            className="w-full rounded-md border-2 border-shadedTextDark outline-none px-5 py-3"
-            name="itemPrice"
-            id="itemPrice"
-            type="text"
-          />
-        </div>
-        {/* Item Total */}
-        <div className="w-full col-start-8 col-end-13 tab:col-start-4 tab:col-end-5">
-          <h4>Total</h4>
-          <div className="flex justify-between items-center py-3">
-            <p>400.00</p>
-            <IconDelete />
+            <div className="w-full col-start-1 col-end-13 tab:col-start-1 tab:col-end-2">
+              <label
+                className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
+                htmlFor="itemName"
+              >
+                Item Name
+              </label>
+              <input
+                className="w-full rounded-md border-2 border-shadedTextDark outline-none px-5 py-3"
+                name="name"
+                id="itemName"
+                type="text"
+                value={item?.name}
+                onChange={(e) => {
+                  setInvoiceFormValues((prevValues) => {
+                    const { items } = prevValues;
+                    const newItems = handleItemsValueChanges(items, i, e);
+                    return { ...prevValues, items: newItems };
+                  });
+                }}
+              />
+            </div>
+            <div className="w-full col-start-1 col-end-4 tab:col-start-2 tab:col-end-3">
+              <label
+                className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
+                htmlFor="itemQuantity"
+              >
+                Qty
+              </label>
+              <input
+                className="w-full rounded-md border-2 border-shadedTextDark outline-none p-3"
+                name="quantity"
+                id="itemQuantity"
+                type="number"
+                value={item?.quantity}
+                onChange={(e) => {
+                  setInvoiceFormValues((prevValues) => {
+                    const { items } = prevValues;
+                    const newItems = handleItemsValueChanges(items, i, e);
+                    return { ...prevValues, items: newItems };
+                  });
+                }}
+              />
+            </div>
+            <div className="w-full col-start-4 col-end-8 tab:col-start-3 tab:col-end-4">
+              <label
+                className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
+                htmlFor="itemPrice"
+              >
+                Price
+              </label>
+              <input
+                className="w-full rounded-md border-2 border-shadedTextDark outline-none px-5 py-3"
+                name="price"
+                id="itemPrice"
+                type="number"
+                value={item?.price}
+                onChange={(e) => {
+                  setInvoiceFormValues((prevValues) => {
+                    const { items } = prevValues;
+                    const newItems = handleItemsValueChanges(items, i, e);
+                    return { ...prevValues, items: newItems };
+                  });
+                }}
+              />
+            </div>
+            {/* Item Total */}
+            <div className="w-full col-start-8 col-end-13 tab:col-start-4 tab:col-end-5">
+              <h4>Total</h4>
+              <div className="flex justify-between items-center py-3">
+                <p>{item.total?.toLocaleString()}</p>
+                <button
+                className="hover:cursor-pointer"
+                disabled={items.length <= 1}
+                  onClick={() => {
+                    setInvoiceFormValues((prevItems) => {
+                      const { items } = prevItems;
+                      const newItems = handleDeleteItem(items, i);
+                      return { ...prevItems, items: newItems };
+                    });
+                  }}
+                >
+                  <IconDelete />
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        );
+      })}
       {/* ADD NEW ITEM BUTTON */}
       <button
         className="w-full py-4 bg-shadedContentLight rounded-3xl mt-12 text-xs font-bold text-shadedTextLight leading-body1 tracking-body1"
-        onClick={(e) => e.preventDefault()}
+        onClick={(e) => {
+          e.preventDefault();
+          handleAddNewItem();
+        }}
       >
         + Add New Item
       </button>

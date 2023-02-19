@@ -36,6 +36,7 @@ const Form = () => {
     total: 0,
   });
   //
+  //
   return (
     <form id="invoiceForm" name="invoiceForm">
       <BillFrom
