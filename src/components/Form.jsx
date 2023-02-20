@@ -44,18 +44,32 @@ const Form = () => {
         ...prevValues,
         paymentDue: getCreatedAtDateFormat(
           new Date(
-            new Date(invoiceFormValues.createdAt).setDate(
-              new Date(invoiceFormValues.createdAt).getDate() +
+            new Date(invoiceFormValues?.createdAt).setDate(
+              new Date(invoiceFormValues?.createdAt).getDate() +
                 invoiceFormValues?.paymentTerms
             )
           )
         ),
       };
+    });
+  };
+  //
+  const handleTotalSum = () => {
+    let total = 0
+    invoiceFormValues?.items?.forEach(item => {
+      total += item.total
     })
+    setInvoiceFormValues((prevValues) => {
+      return { ...prevValues, total };
+    });
   };
   //
   useEffect(() => {
-    handlePaymentDue()
+    handleTotalSum();
+  }, [invoiceFormValues?.items]);
+  //
+  useEffect(() => {
+    handlePaymentDue();
   }, [invoiceFormValues?.paymentTerms, invoiceFormValues?.createdAt]);
   //
   return (
