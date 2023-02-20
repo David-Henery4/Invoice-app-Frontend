@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BillFrom, BillTo, ItemList } from "../components/FormComponents";
+import handleDateFormatting from "../reusableFunctions/dateFormatting";
+import getCreatedAtDateFormat from "../reusableFunctions/createdAtDateFormat";
 import { useUniqueId } from "../hooks";
 
 const Form = () => {
   const generateId = useUniqueId();
   const [invoiceFormValues, setInvoiceFormValues] = useState({
     id: generateId(),
-    createdAt: "",
+    createdAt: getCreatedAtDateFormat(),
     paymentDue: "",
     description: "",
-    paymentTerms: 0,
+    paymentTerms: 1,
     clientName: "",
     clientEmail: "",
     status: "pending",
@@ -36,6 +38,25 @@ const Form = () => {
     total: 0,
   });
   //
+  const handlePaymentDue = () => {
+    setInvoiceFormValues((prevValues) => {
+      return {
+        ...prevValues,
+        paymentDue: getCreatedAtDateFormat(
+          new Date(
+            new Date(invoiceFormValues.createdAt).setDate(
+              new Date(invoiceFormValues.createdAt).getDate() +
+                invoiceFormValues?.paymentTerms
+            )
+          )
+        ),
+      };
+    })
+  };
+  //
+  useEffect(() => {
+    handlePaymentDue()
+  }, [invoiceFormValues?.paymentTerms, invoiceFormValues?.createdAt]);
   //
   return (
     <form id="invoiceForm" name="invoiceForm">
