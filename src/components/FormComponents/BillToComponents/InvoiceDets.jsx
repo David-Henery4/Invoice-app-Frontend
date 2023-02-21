@@ -5,14 +5,15 @@ import getCreatedAtDateFormat from "../../../reusableFunctions/createdAtDateForm
 import handleDateFormatting from "../../../reusableFunctions/dateFormatting";
 
 const InvoiceDets = ({ invoiceDets }) => {
-  const { description, createdAt, paymentTerms, setInvoiceFormValues } =
-    invoiceDets;
+  const {
+    description,
+    createdAt,
+    paymentTerms,
+    setInvoiceFormValues,
+    defaultTerms,
+    setDefaultTerms,
+  } = invoiceDets;
   const [isTermsDropdownActive, setIsTermsDropdownActive] = useState(false);
-  const [defaultTerms, setDefaultTerms] = useState({
-    id: 1,
-    label: "Net 1 day",
-    days: 1,
-  });
   //
   const handleValueChanges = (e) => {
     setInvoiceFormValues((prevValues) => {

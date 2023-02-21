@@ -4,39 +4,12 @@ import handleDateFormatting from "../reusableFunctions/dateFormatting";
 import getCreatedAtDateFormat from "../reusableFunctions/createdAtDateFormat";
 import { useUniqueId } from "../hooks";
 
-const Form = () => {
-  const generateId = useUniqueId();
-  const [invoiceFormValues, setInvoiceFormValues] = useState({
-    id: generateId(),
-    createdAt: getCreatedAtDateFormat(),
-    paymentDue: "",
-    description: "",
-    paymentTerms: 1,
-    clientName: "",
-    clientEmail: "",
-    status: "pending",
-    senderAddress: {
-      street: "",
-      city: "",
-      postCode: "",
-      country: "",
-    },
-    clientAddress: {
-      street: "",
-      city: "",
-      postCode: "",
-      country: "",
-    },
-    items: [
-      {
-        name: "",
-        quantity: 0,
-        price: 0,
-        total: 0,
-      },
-    ],
-    total: 0,
-  });
+const Form = ({
+  invoiceFormValues,
+  setInvoiceFormValues,
+  defaultTerms,
+  setDefaultTerms,
+}) => {
   //
   const handlePaymentDue = () => {
     setInvoiceFormValues((prevValues) => {
@@ -55,10 +28,10 @@ const Form = () => {
   };
   //
   const handleTotalSum = () => {
-    let total = 0
-    invoiceFormValues?.items?.forEach(item => {
-      total += item.total
-    })
+    let total = 0;
+    invoiceFormValues?.items?.forEach((item) => {
+      total += item.total;
+    });
     setInvoiceFormValues((prevValues) => {
       return { ...prevValues, total };
     });
@@ -81,6 +54,8 @@ const Form = () => {
       <BillTo
         setInvoiceFormValues={setInvoiceFormValues}
         {...invoiceFormValues}
+        setDefaultTerms={setDefaultTerms}
+        defaultTerms={defaultTerms}
       />
       <ItemList
         setInvoiceFormValues={setInvoiceFormValues}

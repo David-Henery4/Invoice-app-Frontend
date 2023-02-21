@@ -9,6 +9,8 @@ const BillTo = ({
   description,
   createdAt,
   paymentTerms,
+  defaultTerms,
+  setDefaultTerms,
 }) => {
   return (
     <div className="grid grid-cols-6 pb-16">
@@ -19,7 +21,16 @@ const BillTo = ({
         clientDets={{ setInvoiceFormValues, clientName, clientEmail }}
         {...clientAddress}
       />
-      <InvoiceDets invoiceDets={{description,createdAt,paymentTerms, setInvoiceFormValues}} />
+      <InvoiceDets
+        invoiceDets={{
+          description,
+          createdAt,
+          paymentTerms,
+          setInvoiceFormValues,
+          defaultTerms,
+          setDefaultTerms,
+        }}
+      />
     </div>
   );
 };

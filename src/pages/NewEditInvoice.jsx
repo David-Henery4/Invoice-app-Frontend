@@ -1,14 +1,46 @@
-import {BackBtn, Form} from "../components"
+import { useState } from "react";
+import { BackBtn, Form } from "../components";
 import { useSelector, useDispatch } from "react-redux";
-import { setFormModalOpenToFalse } from '../features/formModal/formModalSlice';
+import { setFormModalOpenToFalse } from "../features/formModal/formModalSlice";
+import initialInvoiceValues from "../initialInvoiceValueData/initialInvoiceValues";
+import { useUniqueId } from "../hooks";
+import getCreatedAtDateFormat from "../reusableFunctions/createdAtDateFormat";
+
+// NEED TO RESET THE PAYMENT TERMS ON DISCARD
+// & CLOSE IT ASWELL
+// ALSO CLOSE WHEN WE CLICK ANYWHERE ELSE.
 
 const NewEditInvoice = () => {
-  const dispatch = useDispatch()
-  const {isFormOpen} = useSelector(store => store.formModal)
+  const dispatch = useDispatch();
+  const generateId = useUniqueId();
+  const { isFormOpen } = useSelector((store) => store.formModal);
+  const [invoiceFormValues, setInvoiceFormValues] =
+    useState(initialInvoiceValues);
+  const [defaultTerms, setDefaultTerms] = useState({
+    id: 1,
+    label: "Net 1 day",
+    days: 1,
+  });
   //
   const handleCloseForm = () => {
-    dispatch(setFormModalOpenToFalse())
-  }
+    dispatch(setFormModalOpenToFalse());
+  };
+  //
+  const handleDiscardResetFormValues = () => {
+    setInvoiceFormValues(initialInvoiceValues);
+    setInvoiceFormValues((prevValues) => {
+      return {
+        ...prevValues,
+        id: generateId(),
+        createdAt: getCreatedAtDateFormat(),
+      };
+    });
+    setDefaultTerms({
+      id: 1,
+      label: "Net 1 day",
+      days: 1,
+    });
+  };
   //
   return (
     <main
@@ -24,7 +56,12 @@ const NewEditInvoice = () => {
         <h2 className="text-2xl leading-heading1 -tracking-subheading font-bold mb-6">
           New Invoice
         </h2>
-        <Form />
+        <Form
+          invoiceFormValues={invoiceFormValues}
+          setInvoiceFormValues={setInvoiceFormValues}
+          defaultTerms={defaultTerms}
+          setDefaultTerms={setDefaultTerms}
+        />
       </section>
       <div className="w-full col-start-1 col-end-13 tab:sticky tab:bottom-0 tab:left-0 pointer-events-none">
         <div className="w-full h-16 bg-gradient-to-t from-basicBlack to-basicBlack/10 opacity-10"></div>
@@ -33,6 +70,7 @@ const NewEditInvoice = () => {
             className="w-[84px] h-12 rounded-3xl bg-shadedContentLight text-shadedTextLight tab:w-24 tab:mr-auto"
             onClick={() => {
               handleCloseForm();
+              handleDiscardResetFormValues();
             }}
           >
             Discard
@@ -59,4 +97,4 @@ const NewEditInvoice = () => {
   );
 };
 
-export default NewEditInvoice
+export default NewEditInvoice;
