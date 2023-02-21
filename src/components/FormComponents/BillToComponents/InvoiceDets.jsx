@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { ArrowDown } from "../../../assets";
 import PaymentTermsDroptdown from "./PaymentTermsDroptdown";
 import getCreatedAtDateFormat from "../../../reusableFunctions/createdAtDateFormat";
 import handleDateFormatting from "../../../reusableFunctions/dateFormatting";
+import useClickOffDropdown from "../../../hooks/useClickOffDropdown";
 
 const InvoiceDets = ({ invoiceDets }) => {
   const {
@@ -14,6 +15,12 @@ const InvoiceDets = ({ invoiceDets }) => {
     setDefaultTerms,
   } = invoiceDets;
   const [isTermsDropdownActive, setIsTermsDropdownActive] = useState(false);
+  const termsDropDownRef = useRef();
+  useClickOffDropdown(
+    termsDropDownRef,
+    setIsTermsDropdownActive,
+    "#paymentTerms"
+  );
   //
   const handleValueChanges = (e) => {
     setInvoiceFormValues((prevValues) => {
@@ -23,9 +30,9 @@ const InvoiceDets = ({ invoiceDets }) => {
   //
   useEffect(() => {
     setInvoiceFormValues((prevValues) => {
-      return { ...prevValues, paymentTerms : defaultTerms?.days};
-    })
-  },[defaultTerms])
+      return { ...prevValues, paymentTerms: defaultTerms?.days };
+    });
+  }, [defaultTerms]);
   //
   return (
     <div className="w-full grid gap-6 grid-cols-6 col-start-1 col-end-7">
@@ -57,6 +64,7 @@ const InvoiceDets = ({ invoiceDets }) => {
         </label>
         <div className="relative">
           <input
+            ref={termsDropDownRef}
             id="paymentTerms"
             name="paymentTerms"
             readOnly={true}
@@ -67,7 +75,7 @@ const InvoiceDets = ({ invoiceDets }) => {
               setIsTermsDropdownActive(!isTermsDropdownActive);
             }}
           />
-          <ArrowDown className="absolute -translate-y-1/2 top-1/2 right-5 hover:cursor-pointer" />
+          <ArrowDown className="absolute -translate-y-1/2 top-1/2 right-5 pointer-events-none hover:cursor-pointer" />
           {/* Dropdown */}
           <PaymentTermsDroptdown
             setDefaultTerms={setDefaultTerms}

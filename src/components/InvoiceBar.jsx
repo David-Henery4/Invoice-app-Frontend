@@ -1,12 +1,19 @@
-import { useState } from "react";
+import { useState, useRef} from "react";
 import { useDispatch } from "react-redux";
 import { ArrowDown, PlusIcon } from "../assets";
 import { setFormModalOpenToTrue } from "../features/formModal/formModalSlice";
-import { FilterDropdown , InvoiceCount} from "../components";
+import { FilterDropdown, InvoiceCount } from "../components";
+import useClickOffDropdown from "../hooks/useClickOffDropdown";
 
 const InvoiceBar = () => {
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState(false);
   const dispatch = useDispatch();
+  const filterDropDownRef = useRef();
+  useClickOffDropdown(
+    filterDropDownRef,
+    setIsFilterDropdownOpen,
+    "#filter-dropdown"
+  );
   //
   return (
     <div className="flex justify-between items-center col-start-1 col-end-13 md:py-1">
@@ -16,13 +23,15 @@ const InvoiceBar = () => {
           Invoices
         </h1>
         {/*  */}
-        <InvoiceCount/>
+        <InvoiceCount />
       </div>
       {/* RIGHT */}
       <div className="flex justify-center items-center gap-[18px] md:gap-10">
         {/* Filter & Icon */}
         <div className="relative">
           <div
+            id="filter-dropdown"
+            ref={filterDropDownRef}
             className="flex justify-center items-center gap-3 hover:cursor-pointer"
             onClick={() => setIsFilterDropdownOpen(!isFilterDropdownOpen)}
           >
@@ -33,7 +42,10 @@ const InvoiceBar = () => {
             </h4>
             <ArrowDown />
           </div>
-          <FilterDropdown isFilterDropdownOpen={isFilterDropdownOpen} />
+          <FilterDropdown
+            setIsFilterDropdownOpen={setIsFilterDropdownOpen}
+            isFilterDropdownOpen={isFilterDropdownOpen}
+          />
         </div>
         {/* New Invoice Button */}
         <button

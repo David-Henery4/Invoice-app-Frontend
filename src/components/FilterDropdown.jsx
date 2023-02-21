@@ -3,25 +3,28 @@ import { useSelector, useDispatch } from "react-redux";
 import { filterInvoices } from "../features/invoiceData/invoiceDataSlice";
 import { CheckIcon } from "../assets";
 
-const FilterDropdown = ({ isFilterDropdownOpen}) => {
-  const dispatch = useDispatch()
+const FilterDropdown = ({ isFilterDropdownOpen }) => {
+  const dispatch = useDispatch();
   const { filterModes, isFilterActive, invoiceData } = useSelector(
     (store) => store.invoiceData
   );
   //
   useEffect(() => {
-    if (isFilterActive){
-      const currentFilterType = filterModes.find(filter => filter?.filterActive === true)
-      dispatch(filterInvoices(currentFilterType.id))
+    if (isFilterActive) {
+      const currentFilterType = filterModes.find(
+        (filter) => filter?.filterActive === true
+      );
+      dispatch(filterInvoices(currentFilterType.id));
     }
-  }, [invoiceData])
+  }, [invoiceData]);
   //
   return (
     <div
       className={`${
         isFilterDropdownOpen ? "flex" : "hidden"
-      } absolute top-8 left-1/2 -translate-x-1/2  bg-basicWhite text-textLight shadow-filterShadow rounded-lg p-6 flex-col gap-4 justify-start items-start hover:cursor-default`}>
-      {filterModes?.map(filter => {
+      } absolute top-8 left-1/2 -translate-x-1/2  bg-basicWhite text-textLight shadow-filterShadow rounded-lg p-6 flex-col gap-4 justify-start items-start hover:cursor-default`}
+    >
+      {filterModes?.map((filter) => {
         return (
           <div
             key={filter?.id}
@@ -38,9 +41,7 @@ const FilterDropdown = ({ isFilterDropdownOpen}) => {
               }`}
             >
               <CheckIcon
-                className={`${
-                  filter.filterActive ? "block" : "hidden"
-                }`}
+                className={`${filter.filterActive ? "block" : "hidden"}`}
               />
             </div>
             <p className="capitalize">{filter.name}</p>

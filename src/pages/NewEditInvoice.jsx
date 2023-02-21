@@ -6,10 +6,6 @@ import initialInvoiceValues from "../initialInvoiceValueData/initialInvoiceValue
 import { useUniqueId } from "../hooks";
 import getCreatedAtDateFormat from "../reusableFunctions/createdAtDateFormat";
 
-// NEED TO RESET THE PAYMENT TERMS ON DISCARD
-// & CLOSE IT ASWELL
-// ALSO CLOSE WHEN WE CLICK ANYWHERE ELSE.
-
 const NewEditInvoice = () => {
   const dispatch = useDispatch();
   const generateId = useUniqueId();
