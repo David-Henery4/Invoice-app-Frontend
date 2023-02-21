@@ -43,7 +43,7 @@ Want some support on the challenge? [Join our Slack community](https://www.front
   - If the invoice being edited is a "draft", the status needs to be updated to "pending" when the "Save Changes" button is clicked. All fields are required at this stage.
 - Users should be able to mark invoices as paid by clicking the "Mark as Paid" button. This should change the invoice's status to "paid".
 - Users should receive a confirmation modal when trying to delete invoices.
-- Feel free not to add custom styling for the date and dropdown form fields. The designs for those fields are optional extras and are mostly for illustration purposes.
+- Feel free to add custom styling for the date and dropdown form fields. The designs for those fields are optional extras and are mostly for illustration purposes.
 
 ## Where to find everything
 

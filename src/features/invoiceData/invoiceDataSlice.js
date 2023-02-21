@@ -57,8 +57,11 @@ const InvoiceDataSlice = createSlice({
 
       // MAYBE reset to empty if filter is not active anymore?
     },
-    deleteInvoice: (state, {payload}) => {
+    addNewInvoice: (state, {payload}) => {
       console.log(payload)
+      state.invoiceData = [...state.invoiceData, payload]
+    },
+    deleteInvoice: (state, {payload}) => {
       const newInvoiceData = state.invoiceData.filter(invoice => invoice.id !== payload)
       state.invoiceData = newInvoiceData
     },
@@ -69,15 +72,29 @@ const InvoiceDataSlice = createSlice({
       payload.status= "draft"
       state.invoiceData = [...state.invoiceData, payload]
     },
-    editInvoice: (state, {payload}) => {
+    getAndActivateEditInvoice: (state, {payload}) => {
       state.isEditModeActive = true
       state.currentEditedInvoice = state.invoiceData.find(
         (item) => item.id === payload
+      );
+    },
+    endAndDeactivateEditInvoice: (state, {payload}) => {
+      state.isEditModeActive = false
+      state.currentEditedInvoice = {}
+    },
+    updateAndDeactivateEditInvoice: (state, {payload}) => {
+      state.isEditModeActive = false;
+      state.currentEditedInvoice = {};
+      if (payload.status === "draft"){
+        payload.status = "pending"
+      }
+      state.invoiceData = state.invoiceData.map((invoice) =>
+        invoice.id === payload.id ? (invoice = payload) : invoice
       );
     }
   },
 });
 
-export const { getActiveSingleInvoice, filterInvoices, deleteInvoice, markInvoiceAsPaid, saveInvoiceAsDraft, editInvoice } =
+export const { getActiveSingleInvoice, filterInvoices, deleteInvoice, markInvoiceAsPaid, saveInvoiceAsDraft, getAndActivateEditInvoice, endAndDeactivateEditInvoice, updateAndDeactivateEditInvoice, addNewInvoice } =
   InvoiceDataSlice.actions;
 export default InvoiceDataSlice.reducer;
