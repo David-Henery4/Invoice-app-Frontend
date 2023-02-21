@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BackBtn, Form } from "../components";
 import { useSelector, useDispatch } from "react-redux";
 import { setFormModalOpenToFalse } from "../features/formModal/formModalSlice";
+import { saveInvoiceAsDraft } from "../features/invoiceData/invoiceDataSlice";
 import initialInvoiceValues from "../initialInvoiceValueData/initialInvoiceValues";
 import { useUniqueId } from "../hooks";
 import getCreatedAtDateFormat from "../reusableFunctions/createdAtDateFormat";
@@ -75,6 +76,7 @@ const NewEditInvoice = () => {
             className="w-[117px] h-12 rounded-3xl bg-navbarLight text-textReallyDark tab:w-[113px]"
             onClick={() => {
               handleCloseForm();
+              dispatch(saveInvoiceAsDraft(invoiceFormValues))
             }}
           >
             Save as Draft

@@ -1,7 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { deleteInvoice, markInvoiceAsPaid } from "../../features/invoiceData/invoiceDataSlice";
+import { deleteInvoice, markInvoiceAsPaid, editInvoice } from "../../features/invoiceData/invoiceDataSlice";
+import{setFormModalOpenToTrue} from "../../features/formModal/formModalSlice"
+
 
 const ActionBtns = ({ isOnLargerScreens = false, id }) => {
   const navigate = useNavigate();
@@ -12,7 +14,10 @@ const ActionBtns = ({ isOnLargerScreens = false, id }) => {
         isOnLargerScreens && "hidden flex-nowrap mdTab:flex"
       }`}
     >
-      <button className="w-[73px] h-12 rounded-3xl bg-shadedContentLight text-shadedTextLight">
+      <button className="w-[73px] h-12 rounded-3xl bg-shadedContentLight text-shadedTextLight" onClick={() => {
+          dispatch(setFormModalOpenToTrue())
+          dispatch(editInvoice(id))
+      }}>
         Edit
       </button>
       <button

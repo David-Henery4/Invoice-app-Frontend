@@ -23,6 +23,8 @@ const initialState = {
       filterActive: false,
     },
   ],
+  isEditModeActive: false,
+  currentEditedInvoice: {}
 };
 
 const InvoiceDataSlice = createSlice({
@@ -63,9 +65,19 @@ const InvoiceDataSlice = createSlice({
     markInvoiceAsPaid: (state, {payload}) => {
       state.invoiceData.find(invoice => invoice.id === payload).status = "paid"
     },
+    saveInvoiceAsDraft: (state, {payload}) => {
+      payload.status= "draft"
+      state.invoiceData = [...state.invoiceData, payload]
+    },
+    editInvoice: (state, {payload}) => {
+      state.isEditModeActive = true
+      state.currentEditedInvoice = state.invoiceData.find(
+        (item) => item.id === payload
+      );
+    }
   },
 });
 
-export const { getActiveSingleInvoice, filterInvoices, deleteInvoice, markInvoiceAsPaid } =
+export const { getActiveSingleInvoice, filterInvoices, deleteInvoice, markInvoiceAsPaid, saveInvoiceAsDraft, editInvoice } =
   InvoiceDataSlice.actions;
 export default InvoiceDataSlice.reducer;
