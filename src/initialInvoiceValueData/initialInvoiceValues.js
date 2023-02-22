@@ -25,6 +25,7 @@ const initialInvoiceValues = {
   },
   items: [
     {
+      id: generateId(),
       name: "",
       quantity: 0,
       price: 0,

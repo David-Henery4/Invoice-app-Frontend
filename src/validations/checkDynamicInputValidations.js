@@ -1,58 +1,50 @@
 
-const checkDynamicInputValidations = (items,type) => {
-  const errorsList = []
-  const copyOfInputArray = [...items]
-  copyOfInputArray.map(item => {
+
+const checkDynamicInputValidations = (items) => {
+  const listErrorsList = [];
+  const copyOfInputArray = [...items];
+  copyOfInputArray.map((item) => {
     const itemErrors = {
+      id: item.id,
       nameError: {
         isError: false,
-        msg: ""
+        msg: "",
       },
       quantityError: {
         isError: false,
-        msg: ""
+        msg: "",
       },
-      priceError:{
+      priceError: {
         isError: false,
-        msg: ""
+        msg: "",
       },
+    };
+    if (item.name.trim().length <= 0) {
+      itemErrors.nameError = {
+        isError: true,
+        msg: "Can't be empty",
+      };
     }
-    if (item.name.trim().length <= 0){
-      errorsList.push({
-        ...itemErrors,
-        nameError: {
-          ...itemErrors.nameError,
-          isError: true,
-          msg: "Can't be empty",
-        }
-      })
+    if (item.quantity <= 0) {
+      itemErrors.quantityError = {
+        isError: true,
+        msg: "Can't be empty",
+      };
     }
-    if (item.quantity.trim().length <= 0){
-      errorsList.push({
-        ...itemErrors,
-        quantityError: {
-          ...itemErrors.quantityError,
-          isError: true,
-          msg: "Can't be empty",
-        },
-      });
+    if (item.price <= 0) {
+      itemErrors.priceError = {
+        isError: true,
+        msg: "Can't be empty",
+      };
     }
-    if (item.price.trim().length <= 0){
-      errorsList.push({
-        ...itemErrors,
-        priceError: {
-          ...itemErrors.priceError,
-          isError: true,
-          msg: "Can't be empty",
-        },
-      });
-    }
-    return item
-  })
+    if (item.name.trim().length <= 0 || item.quantity <= 0 || item.price <= 0) {
+      listErrorsList.push(itemErrors)
+    } 
+    return item;
+  });
 
-  const isErrors = errorsList.length >= 1
-  return {errorsList, isErrors}
+  const isListErrors = listErrorsList.length >= 1;
+  return { listErrorsList, isListErrors };
+};
 
-}
-
-export default checkDynamicInputValidations
+export default checkDynamicInputValidations;

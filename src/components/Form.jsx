@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { BillFrom, BillTo, ItemList } from "../components/FormComponents";
-import handleDateFormatting from "../reusableFunctions/dateFormatting";
 import getCreatedAtDateFormat from "../reusableFunctions/createdAtDateFormat";
-import { useUniqueId } from "../hooks";
 
 const Form = ({
   invoiceFormValues,
   setInvoiceFormValues,
   defaultTerms,
   setDefaultTerms,
+  listItemErrors,
 }) => {
   //
   const handlePaymentDue = () => {
@@ -60,6 +59,7 @@ const Form = ({
       <ItemList
         setInvoiceFormValues={setInvoiceFormValues}
         items={invoiceFormValues?.items}
+        listItemErrors={listItemErrors}
       />
     </form>
   );

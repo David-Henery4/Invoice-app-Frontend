@@ -1,18 +1,20 @@
 import { useState, useEffect } from "react";
 import { BackBtn, Form, NewEditBtns } from "../components";
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import initialInvoiceValues from "../initialInvoiceValueData/initialInvoiceValues";
 import { useUniqueId } from "../hooks";
 import getCreatedAtDateFormat from "../reusableFunctions/createdAtDateFormat";
 import termsDropdownData from "../dropdowndata/termsDropdownData";
+import checkDynamicInputValidations from "../validations/checkDynamicInputValidations";
 
 const NewEditInvoice = () => {
+  const [isItemListErrors, setIsItemListErrors] = useState(false);
+  const [itemListErrorsList, setItemListErrorsList] = useState([]);
   const generateId = useUniqueId();
   const { isFormOpen } = useSelector((store) => store.formModal);
-  const {
-    isEditModeActive,
-    currentEditedInvoice,
-  } = useSelector((store) => store.invoiceData);
+  const { isEditModeActive, currentEditedInvoice } = useSelector(
+    (store) => store.invoiceData
+  );
   const [invoiceFormValues, setInvoiceFormValues] =
     useState(initialInvoiceValues);
   const [defaultTerms, setDefaultTerms] = useState({
@@ -28,6 +30,15 @@ const NewEditInvoice = () => {
         ...prevValues,
         id: generateId(),
         createdAt: getCreatedAtDateFormat(),
+        items: [
+          {
+            id: generateId(),
+            name: "",
+            quantity: 0,
+            price: 0,
+            total: 0,
+          },
+        ],
       };
     });
     setDefaultTerms({
@@ -37,16 +48,21 @@ const NewEditInvoice = () => {
     });
   };
   //
-  useEffect(() => {
-    if(isEditModeActive){
-      setInvoiceFormValues(currentEditedInvoice)
-      setDefaultTerms(termsDropdownData.find(terms => terms.days === currentEditedInvoice.paymentTerms))
-    }
-    if(!isEditModeActive){
-      handleDiscardResetFormValues()
-    }
 
-  }, [isEditModeActive])
+  //
+  useEffect(() => {
+    if (isEditModeActive) {
+      setInvoiceFormValues(currentEditedInvoice);
+      setDefaultTerms(
+        termsDropdownData.find(
+          (terms) => terms.days === currentEditedInvoice.paymentTerms
+        )
+      );
+    }
+    if (!isEditModeActive) {
+      handleDiscardResetFormValues();
+    }
+  }, [isEditModeActive]);
   //
   return (
     <main
@@ -67,6 +83,12 @@ const NewEditInvoice = () => {
           setInvoiceFormValues={setInvoiceFormValues}
           defaultTerms={defaultTerms}
           setDefaultTerms={setDefaultTerms}
+          listItemErrors={{
+            isItemListErrors,
+            setIsItemListErrors,
+            itemListErrorsList,
+            setItemListErrorsList,
+          }}
         />
       </section>
       <div className="w-full col-start-1 col-end-13 tab:sticky tab:bottom-0 tab:left-0 pointer-events-none">
@@ -74,6 +96,12 @@ const NewEditInvoice = () => {
         <NewEditBtns
           handleDiscardResetFormValues={handleDiscardResetFormValues}
           invoiceFormValues={invoiceFormValues}
+          listItemErrors={{
+            isItemListErrors,
+            setIsItemListErrors,
+            itemListErrorsList,
+            setItemListErrorsList,
+          }}
         />
       </div>
     </main>
