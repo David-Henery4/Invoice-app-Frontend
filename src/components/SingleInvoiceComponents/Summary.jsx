@@ -24,7 +24,7 @@ const Summary = ({items, total}) => {
                 </p>
               </div>
               <p className="text-shadedTextLight hidden mdTab:inline mdTab:flex-[1]">
-                1
+                {item?.quantity.toLocaleString()}
               </p>
               <p className="text-shadedTextLight hidden mdTab:inline mdTab:flex-[1]">
                 £ {item?.price.toLocaleString()}

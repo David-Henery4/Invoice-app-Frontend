@@ -58,7 +58,6 @@ const InvoiceDataSlice = createSlice({
       // MAYBE reset to empty if filter is not active anymore?
     },
     addNewInvoice: (state, {payload}) => {
-      console.log(payload)
       state.invoiceData = [...state.invoiceData, payload]
     },
     deleteInvoice: (state, {payload}) => {

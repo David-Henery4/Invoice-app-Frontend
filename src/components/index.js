@@ -8,6 +8,7 @@ import Overlay from "./Overlay";
 import FilterDropdown from "./FilterDropdown";
 import InvoiceCount from "./InvoiceCount";
 import Form from "./Form";
+import NewEditBtns from "./NewEditBtns";
 
 export {
   Navbar,
@@ -20,4 +21,5 @@ export {
   FilterDropdown,
   InvoiceCount,
   Form,
+  NewEditBtns,
 }
