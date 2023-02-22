@@ -7,9 +7,7 @@ const ItemList = ({ setInvoiceFormValues, items, listItemErrors }) => {
   const [] = useState(false)
   const {
     isItemListErrors,
-    setIsItemListErrors,
     itemListErrorsList,
-    setItemListErrorsList,
   } = listItemErrors;
   //
   const handleAddNewItem = () => {

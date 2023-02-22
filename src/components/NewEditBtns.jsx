@@ -15,12 +15,7 @@ const NewEditBtns = ({
 }) => {
   const dispatch = useDispatch();
   const { isEditModeActive } = useSelector((store) => store.invoiceData);
-  const {
-    isItemListErrors,
-    setIsItemListErrors,
-    itemListErrorsList,
-    setItemListErrorsList,
-  } = listItemErrors;
+  const { setIsItemListErrors, setItemListErrorsList } = listItemErrors;
   //
   const handlelistItemInputsValidation = () => {
     const { listErrorsList, isListErrors } = checkDynamicInputValidations(
@@ -29,10 +24,22 @@ const NewEditBtns = ({
     setIsItemListErrors(isListErrors);
     setItemListErrorsList(listErrorsList);
     if (!isListErrors) {
-      dispatch(setFormModalOpenToFalse());
-      dispatch(addNewInvoice(invoiceFormValues));
-      handleDiscardResetFormValues();
+      handleCreateNewInvoice();
     }
+    if (!isListErrors && isEditModeActive) {
+      handleEditInvoice()
+    }
+  };
+  //
+  const handleCreateNewInvoice = () => {
+    dispatch(setFormModalOpenToFalse());
+    dispatch(addNewInvoice(invoiceFormValues));
+    handleDiscardResetFormValues();
+  };
+  //
+  const handleEditInvoice = () => {
+    dispatch(setFormModalOpenToFalse());
+    dispatch(updateAndDeactivateEditInvoice(invoiceFormValues));
   };
   //
   return (
@@ -52,8 +59,9 @@ const NewEditBtns = ({
           <button
             className="w-[112px] h-12 rounded-3xl bg-primaryPurple text-basicWhite tab:w-[128px]"
             onClick={() => {
-              dispatch(setFormModalOpenToFalse());
-              dispatch(updateAndDeactivateEditInvoice(invoiceFormValues));
+              handlelistItemInputsValidation()
+              // dispatch(setFormModalOpenToFalse());
+              // dispatch(updateAndDeactivateEditInvoice(invoiceFormValues));
             }}
           >
             Save Changes

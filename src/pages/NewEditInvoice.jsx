@@ -5,7 +5,6 @@ import initialInvoiceValues from "../initialInvoiceValueData/initialInvoiceValue
 import { useUniqueId } from "../hooks";
 import getCreatedAtDateFormat from "../reusableFunctions/createdAtDateFormat";
 import termsDropdownData from "../dropdowndata/termsDropdownData";
-import checkDynamicInputValidations from "../validations/checkDynamicInputValidations";
 
 const NewEditInvoice = () => {
   const [isItemListErrors, setIsItemListErrors] = useState(false);
@@ -85,9 +84,7 @@ const NewEditInvoice = () => {
           setDefaultTerms={setDefaultTerms}
           listItemErrors={{
             isItemListErrors,
-            setIsItemListErrors,
             itemListErrorsList,
-            setItemListErrorsList,
           }}
         />
       </section>
@@ -97,9 +94,7 @@ const NewEditInvoice = () => {
           handleDiscardResetFormValues={handleDiscardResetFormValues}
           invoiceFormValues={invoiceFormValues}
           listItemErrors={{
-            isItemListErrors,
             setIsItemListErrors,
-            itemListErrorsList,
             setItemListErrorsList,
           }}
         />
