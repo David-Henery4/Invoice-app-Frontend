@@ -5,7 +5,9 @@ const generateId = useUniqueId();
 const initialInvoiceValues = {
   id: generateId(),
   createdAt: getCreatedAtDateFormat(),
-  paymentDue: "",
+  paymentDue: getCreatedAtDateFormat(
+    new Date(new Date().setDate(new Date().getDate() + 1))
+  ),
   description: "",
   paymentTerms: 1,
   clientName: "",

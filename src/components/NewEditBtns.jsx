@@ -7,12 +7,14 @@ import {
   addNewInvoice,
 } from "../features/invoiceData/invoiceDataSlice";
 import checkDynamicInputValidations from "../validations/checkDynamicInputValidations";
+import useCheckInputValidations from "../validations/useCheckInputValidations";
 
 const NewEditBtns = ({
   handleDiscardResetFormValues,
   invoiceFormValues,
   listItemErrors,
 }) => {
+  const {isInputErrors, validation} = useCheckInputValidations()
   const dispatch = useDispatch();
   const { isEditModeActive } = useSelector((store) => store.invoiceData);
   const { setIsItemListErrors, setItemListErrorsList } = listItemErrors;
@@ -23,6 +25,7 @@ const NewEditBtns = ({
     );
     setIsItemListErrors(isListErrors);
     setItemListErrorsList(listErrorsList);
+    validation(invoiceFormValues)
     if (!isListErrors) {
       handleCreateNewInvoice();
     }
