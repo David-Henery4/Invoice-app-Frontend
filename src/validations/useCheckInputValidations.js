@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const useCheckInputValidations = (callbackSubmit) => {
   const [isInputErrors, setIsInputErrors] = useState({});
@@ -197,10 +197,18 @@ const useCheckInputValidations = (callbackSubmit) => {
   };
   //
   const submitOnceValidated = () => {
-    if (Object.entries(isInputErrors).length <= 0) {
-      callbackSubmit(validatedValues)
+    if (
+      Object.entries(isInputErrors).length <= 0 &&
+      Object.entries(validatedValues).length >= 1
+    ) {
+      // callbackSubmit(validatedValues)
+      console.log("all values validated");
     }
   };
+  //
+  useEffect(() => {
+    submitOnceValidated()
+  },[isInputErrors])
   //
   return { validation, isInputErrors };
 };
