@@ -5,6 +5,7 @@ import {
   endAndDeactivateEditInvoice,
 } from "../features/invoiceData/invoiceDataSlice";
 import checkDynamicInputValidations from "../validations/checkDynamicInputValidations";
+import useCheckInputValidations from "../validations/useCheckInputValidations";
 
 
 const NewEditBtns = ({
@@ -13,7 +14,9 @@ const NewEditBtns = ({
   listItemErrors,
   validation,
   isInputErrors,
+  resetInputErrors,
 }) => {
+  // const {resetInputErrors} = useCheckInputValidations()
   const dispatch = useDispatch();
   const { isEditModeActive } = useSelector((store) => store.invoiceData);
   const { setIsItemListErrors, setItemListErrorsList } = listItemErrors;
@@ -37,6 +40,9 @@ const NewEditBtns = ({
               dispatch(setFormModalOpenToFalse());
               handleDiscardResetFormValues();
               dispatch(endAndDeactivateEditInvoice());
+              resetInputErrors()
+              setIsItemListErrors(false)
+              setItemListErrorsList([])
             }}
           >
             Cancel
@@ -57,6 +63,9 @@ const NewEditBtns = ({
             onClick={() => {
               dispatch(setFormModalOpenToFalse());
               handleDiscardResetFormValues();
+              resetInputErrors()
+              setIsItemListErrors(false);
+              setItemListErrorsList([]);
             }}
           >
             Discard
@@ -67,6 +76,9 @@ const NewEditBtns = ({
               dispatch(setFormModalOpenToFalse());
               dispatch(saveInvoiceAsDraft(invoiceFormValues));
               handleDiscardResetFormValues();
+              resetInputErrors();
+              setIsItemListErrors(false);
+              setItemListErrorsList([]);
             }}
           >
             Save as Draft

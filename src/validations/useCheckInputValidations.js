@@ -222,11 +222,15 @@ const useCheckInputValidations = (callbackSubmit) => {
     }
   };
   //
+  const resetInputErrors = () => {
+    setIsInputErrors({})
+  }
+  //
   useEffect(() => {
     submitOnceValidated();
   }, [isInputErrors]);
   //
-  return { validation, isInputErrors };
+  return { validation, isInputErrors, resetInputErrors };
 };
 
 export default useCheckInputValidations;

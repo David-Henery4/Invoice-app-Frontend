@@ -77,7 +77,7 @@ const NewEditInvoice = () => {
       dispatch(updateAndDeactivateEditInvoice(values));
     };
   //
-  const { isInputErrors, validation } =
+  const { isInputErrors, validation, resetInputErrors } =
     useCheckInputValidations(handleFinalSubmit);
   //
   useEffect(() => {
@@ -131,6 +131,7 @@ const NewEditInvoice = () => {
           }}
           validation={validation}
           isInputErrors={isInputErrors}
+          resetInputErrors={resetInputErrors}
         />
       </div>
     </main>

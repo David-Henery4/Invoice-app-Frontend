@@ -10,6 +10,11 @@
 
 fix z-index on terms dropdown
 
+// reset error message
+
+// delete notes afterward or
+// remove them from git.
+
 // MIGHT HAVE TO ADD IDs TO ITEMLIST ITEMS
 
 // in form when inputs are invalidated, reset them after exit or discard.

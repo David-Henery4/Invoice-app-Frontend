@@ -2,7 +2,9 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
   isFormOpen: false,
-}
+  isItemListErrors: false,
+  itemListErrorsList: [],
+};
 
 const FormModalSlice = createSlice({
   name: "formModal",
