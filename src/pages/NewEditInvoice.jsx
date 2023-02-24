@@ -5,8 +5,10 @@ import initialInvoiceValues from "../initialInvoiceValueData/initialInvoiceValue
 import { useUniqueId } from "../hooks";
 import getCreatedAtDateFormat from "../reusableFunctions/createdAtDateFormat";
 import termsDropdownData from "../dropdowndata/termsDropdownData";
+import useCheckInputValidations from "../validations/useCheckInputValidations";
 
 const NewEditInvoice = () => {
+  const {isInputErrors, validation} = useCheckInputValidations()
   const [isItemListErrors, setIsItemListErrors] = useState(false);
   const [itemListErrorsList, setItemListErrorsList] = useState([]);
   const generateId = useUniqueId();
@@ -86,6 +88,7 @@ const NewEditInvoice = () => {
             isItemListErrors,
             itemListErrorsList,
           }}
+          isInputErrors={isInputErrors}
         />
       </section>
       <div className="w-full col-start-1 col-end-13 tab:sticky tab:bottom-0 tab:left-0 pointer-events-none">
@@ -97,6 +100,7 @@ const NewEditInvoice = () => {
             setIsItemListErrors,
             setItemListErrorsList,
           }}
+          validation={validation}
         />
       </div>
     </main>

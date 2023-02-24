@@ -7,14 +7,15 @@ import {
   addNewInvoice,
 } from "../features/invoiceData/invoiceDataSlice";
 import checkDynamicInputValidations from "../validations/checkDynamicInputValidations";
-import useCheckInputValidations from "../validations/useCheckInputValidations";
+// import useCheckInputValidations from "../validations/useCheckInputValidations";
 
 const NewEditBtns = ({
   handleDiscardResetFormValues,
   invoiceFormValues,
   listItemErrors,
+  validation,
 }) => {
-  const {isInputErrors, validation} = useCheckInputValidations()
+  // const {isInputErrors, validation} = useCheckInputValidations()
   const dispatch = useDispatch();
   const { isEditModeActive } = useSelector((store) => store.invoiceData);
   const { setIsItemListErrors, setItemListErrorsList } = listItemErrors;

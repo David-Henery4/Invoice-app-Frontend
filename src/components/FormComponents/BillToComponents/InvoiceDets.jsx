@@ -5,7 +5,7 @@ import getCreatedAtDateFormat from "../../../reusableFunctions/createdAtDateForm
 import handleDateFormatting from "../../../reusableFunctions/dateFormatting";
 import useClickOffDropdown from "../../../hooks/useClickOffDropdown";
 
-const InvoiceDets = ({ invoiceDets }) => {
+const InvoiceDets = ({ invoiceDets, isInputErrors }) => {
   const {
     description,
     createdAt,
@@ -83,17 +83,30 @@ const InvoiceDets = ({ invoiceDets }) => {
           />
         </div>
       </div>
-      <div className="grid gap-2 col-start-1 col-end-7">
+      <div className="relative grid gap-2 col-start-1 col-end-7">
         <label
-          className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
+          className={`text-xs font-medium leading-heading4 tracking-heading4 ${
+            isInputErrors?.description?.isError
+              ? "text-deleteBtn"
+              : "text-shadedTextLight"
+          }`}
           htmlFor="projectDescription"
         >
           Project Description
         </label>
+        {isInputErrors?.description?.isError && (
+          <p className="text-xs text-deleteBtn absolute top-0 right-0">
+            {isInputErrors?.description?.msg}
+          </p>
+        )}
         <input
           id="projectDescription"
           name="description"
-          className="w-full rounded-md border-2 border-shadedTextDark outline-none px-5 py-3"
+          className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
+            isInputErrors?.description?.isError
+              ? "border-deleteBtn"
+              : "border-shadedTextDark"
+          }`}
           type="text"
           value={description}
           onChange={(e) => {
