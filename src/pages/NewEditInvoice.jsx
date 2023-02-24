@@ -1,14 +1,22 @@
 import { useState, useEffect } from "react";
 import { BackBtn, Form, NewEditBtns } from "../components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import initialInvoiceValues from "../initialInvoiceValueData/initialInvoiceValues";
 import { useUniqueId } from "../hooks";
 import getCreatedAtDateFormat from "../reusableFunctions/createdAtDateFormat";
 import termsDropdownData from "../dropdowndata/termsDropdownData";
 import useCheckInputValidations from "../validations/useCheckInputValidations";
+import { setFormModalOpenToFalse } from "../features/formModal/formModalSlice";
+import {
+  saveInvoiceAsDraft,
+  endAndDeactivateEditInvoice,
+  updateAndDeactivateEditInvoice,
+  addNewInvoice,
+} from "../features/invoiceData/invoiceDataSlice";
 
 const NewEditInvoice = () => {
-  const {isInputErrors, validation} = useCheckInputValidations()
+  // const {isInputErrors, validation} = useCheckInputValidations(handleFinalSubmit)
+  const dispatch = useDispatch()
   const [isItemListErrors, setIsItemListErrors] = useState(false);
   const [itemListErrorsList, setItemListErrorsList] = useState([]);
   const generateId = useUniqueId();
@@ -49,7 +57,28 @@ const NewEditInvoice = () => {
     });
   };
   //
-
+  const handleFinalSubmit = (finalValues) => {
+    if (!isEditModeActive){
+      handleCreateNewInvoice(finalValues)
+    }
+    if (isEditModeActive){
+      handleEditInvoice(finalValues)
+    }
+  }
+  //
+    const handleCreateNewInvoice = (values) => {
+      dispatch(setFormModalOpenToFalse());
+      dispatch(addNewInvoice(values));
+      handleDiscardResetFormValues();
+    };
+    //
+    const handleEditInvoice = (values) => {
+      dispatch(setFormModalOpenToFalse());
+      dispatch(updateAndDeactivateEditInvoice(values));
+    };
+  //
+  const { isInputErrors, validation } =
+    useCheckInputValidations(handleFinalSubmit);
   //
   useEffect(() => {
     if (isEditModeActive) {
@@ -101,6 +130,7 @@ const NewEditInvoice = () => {
             setItemListErrorsList,
           }}
           validation={validation}
+          isInputErrors={isInputErrors}
         />
       </div>
     </main>

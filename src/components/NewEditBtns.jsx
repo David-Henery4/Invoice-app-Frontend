@@ -3,19 +3,17 @@ import { setFormModalOpenToFalse } from "../features/formModal/formModalSlice";
 import {
   saveInvoiceAsDraft,
   endAndDeactivateEditInvoice,
-  updateAndDeactivateEditInvoice,
-  addNewInvoice,
 } from "../features/invoiceData/invoiceDataSlice";
 import checkDynamicInputValidations from "../validations/checkDynamicInputValidations";
-// import useCheckInputValidations from "../validations/useCheckInputValidations";
+
 
 const NewEditBtns = ({
   handleDiscardResetFormValues,
   invoiceFormValues,
   listItemErrors,
   validation,
+  isInputErrors,
 }) => {
-  // const {isInputErrors, validation} = useCheckInputValidations()
   const dispatch = useDispatch();
   const { isEditModeActive } = useSelector((store) => store.invoiceData);
   const { setIsItemListErrors, setItemListErrorsList } = listItemErrors;
@@ -26,24 +24,7 @@ const NewEditBtns = ({
     );
     setIsItemListErrors(isListErrors);
     setItemListErrorsList(listErrorsList);
-    validation(invoiceFormValues)
-    if (!isListErrors) {
-      handleCreateNewInvoice();
-    }
-    if (!isListErrors && isEditModeActive) {
-      handleEditInvoice()
-    }
-  };
-  //
-  const handleCreateNewInvoice = () => {
-    dispatch(setFormModalOpenToFalse());
-    dispatch(addNewInvoice(invoiceFormValues));
-    handleDiscardResetFormValues();
-  };
-  //
-  const handleEditInvoice = () => {
-    dispatch(setFormModalOpenToFalse());
-    dispatch(updateAndDeactivateEditInvoice(invoiceFormValues));
+    validation(invoiceFormValues, isListErrors);
   };
   //
   return (
@@ -63,9 +44,7 @@ const NewEditBtns = ({
           <button
             className="w-[112px] h-12 rounded-3xl bg-primaryPurple text-basicWhite tab:w-[128px]"
             onClick={() => {
-              handlelistItemInputsValidation()
-              // dispatch(setFormModalOpenToFalse());
-              // dispatch(updateAndDeactivateEditInvoice(invoiceFormValues));
+              handlelistItemInputsValidation();
             }}
           >
             Save Changes
@@ -96,11 +75,6 @@ const NewEditBtns = ({
             className="w-[112px] h-12 rounded-3xl bg-primaryPurple text-basicWhite tab:w-[128px]"
             onClick={() => {
               handlelistItemInputsValidation();
-              // if (!isItemListErrors) {
-              //   dispatch(setFormModalOpenToFalse());
-              //   dispatch(addNewInvoice(invoiceFormValues));
-              //   handleDiscardResetFormValues();
-              // }
             }}
           >
             Save & Send

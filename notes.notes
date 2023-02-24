@@ -8,7 +8,11 @@
 // (currency)
 // RESEARCH: Intl.NumberFormat = for total & price
 
+fix z-index on terms dropdown
+
 // MIGHT HAVE TO ADD IDs TO ITEMLIST ITEMS
+
+// in form when inputs are invalidated, reset them after exit or discard.
 
 // check accessability in some areas like a custom dropdown (aria-labels)
 

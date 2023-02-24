@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 const useCheckInputValidations = (callbackSubmit) => {
+  const [isListErrorsHere,setIsListErrorsHere] = useState(false)
   const [isInputErrors, setIsInputErrors] = useState({});
   const [validatedValues, setValidatedValues] = useState({});
   //
@@ -51,12 +52,15 @@ const useCheckInputValidations = (callbackSubmit) => {
         delete noError[`${addressType}Street`];
         return noError;
       });
-        setValidatedValues((prevValues) => {
-          return {
-            ...prevValues,
-            [`${addressType}Address`]: { ...prevValues[`${addressType}Address`], street },
-          };
-        });
+      setValidatedValues((prevValues) => {
+        return {
+          ...prevValues,
+          [`${addressType}Address`]: {
+            ...prevValues[`${addressType}Address`],
+            street,
+          },
+        };
+      });
     }
     if (city.length <= 0) {
       setIsInputErrors((prevValues) => {
@@ -74,12 +78,15 @@ const useCheckInputValidations = (callbackSubmit) => {
         delete noError[`${addressType}City`];
         return noError;
       });
-        setValidatedValues((prevValues) => {
-          return {
-            ...prevValues,
-            [`${addressType}Address`]: { ...prevValues[`${addressType}Address`], city },
-          };
-        });
+      setValidatedValues((prevValues) => {
+        return {
+          ...prevValues,
+          [`${addressType}Address`]: {
+            ...prevValues[`${addressType}Address`],
+            city,
+          },
+        };
+      });
     }
     if (postCode.length <= 0) {
       setIsInputErrors((prevValues) => {
@@ -97,12 +104,15 @@ const useCheckInputValidations = (callbackSubmit) => {
         delete noError[`${addressType}PostCode`];
         return noError;
       });
-        setValidatedValues((prevValues) => {
-          return {
-            ...prevValues,
-            [`${addressType}Address`]: { ...prevValues[`${addressType}Address`], postCode },
-          };
-        });
+      setValidatedValues((prevValues) => {
+        return {
+          ...prevValues,
+          [`${addressType}Address`]: {
+            ...prevValues[`${addressType}Address`],
+            postCode,
+          },
+        };
+      });
     }
     if (country.length <= 0) {
       setIsInputErrors((prevValues) => {
@@ -120,12 +130,15 @@ const useCheckInputValidations = (callbackSubmit) => {
         delete noError[`${addressType}Country`];
         return noError;
       });
-        setValidatedValues((prevValues) => {
-          return {
-            ...prevValues,
-            [`${addressType}Address`]: { ...prevValues[`${addressType}Address`], country },
-          };
-        });
+      setValidatedValues((prevValues) => {
+        return {
+          ...prevValues,
+          [`${addressType}Address`]: {
+            ...prevValues[`${addressType}Address`],
+            country,
+          },
+        };
+      });
     }
   };
   //
@@ -158,7 +171,7 @@ const useCheckInputValidations = (callbackSubmit) => {
     }
   };
   //
-  const validation = (inputValues) => {
+  const validation = (inputValues, isListErrors) => {
     const {
       clientEmail,
       description,
@@ -182,6 +195,8 @@ const useCheckInputValidations = (callbackSubmit) => {
     //
     checkEmailValidation("clientEmail", clientEmail);
     //
+    setIsListErrorsHere(isListErrors)
+    //
     setValidatedValues((prevValues) => {
       return {
         ...prevValues,
@@ -199,16 +214,17 @@ const useCheckInputValidations = (callbackSubmit) => {
   const submitOnceValidated = () => {
     if (
       Object.entries(isInputErrors).length <= 0 &&
-      Object.entries(validatedValues).length >= 1
+      Object.entries(validatedValues).length >= 1 &&
+      !isListErrorsHere
     ) {
-      // callbackSubmit(validatedValues)
+      callbackSubmit(validatedValues)
       console.log("all values validated");
     }
   };
   //
   useEffect(() => {
-    submitOnceValidated()
-  },[isInputErrors])
+    submitOnceValidated();
+  }, [isInputErrors]);
   //
   return { validation, isInputErrors };
 };
