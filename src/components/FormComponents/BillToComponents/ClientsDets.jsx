@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const ClientsDets = ({
   clientDets,
@@ -6,8 +7,8 @@ const ClientsDets = ({
   city,
   postCode,
   country,
-  isInputErrors,
 }) => {
+  const { inputErrors } = useSelector((store) => store.formModal);
   const { clientName, clientEmail, setInvoiceFormValues } = clientDets;
   //
   const handleClientAddressValueChange = (prevValues, e) => {
@@ -25,7 +26,7 @@ const ClientsDets = ({
       <div className="relative grid gap-2 col-start-1 col-end-7">
         <label
           className={`text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4 ${
-            isInputErrors?.clientName?.isError
+            inputErrors?.clientName?.isError
               ? "text-deleteBtn"
               : "text-shadedTextLight"
           }`}
@@ -33,16 +34,16 @@ const ClientsDets = ({
         >
           Client's Name
         </label>
-        {isInputErrors?.clientName?.isError && (
+        {inputErrors?.clientName?.isError && (
           <p className="text-xs text-deleteBtn absolute top-0 right-0">
-            {isInputErrors?.clientName?.msg}
+            {inputErrors?.clientName?.msg}
           </p>
         )}
         <input
           id="clientName"
           name="clientName"
-          className={`w-full rounded-md border-2 border-shadedTextDark outline-none px-5 py-3 ${
-            isInputErrors?.clientName?.isError
+          className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
+            inputErrors?.clientName?.isError
               ? "border-deleteBtn"
               : "border-shadedTextDark"
           }`}
@@ -58,7 +59,7 @@ const ClientsDets = ({
       <div className="relative grid gap-2 col-start-1 col-end-7">
         <label
           className={`text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4 ${
-            isInputErrors?.clientEmail?.isError
+            inputErrors?.clientEmail?.isError
               ? "text-deleteBtn"
               : "text-shadedTextLight"
           }`}
@@ -66,16 +67,16 @@ const ClientsDets = ({
         >
           Clients's Email
         </label>
-        {isInputErrors?.clientEmail?.isError && (
+        {inputErrors?.clientEmail?.isError && (
           <p className="text-xs text-deleteBtn absolute top-0 right-0">
-            {isInputErrors?.clientEmail?.msg}
+            {inputErrors?.clientEmail?.msg}
           </p>
         )}
         <input
           id="clientEmail"
           name="clientEmail"
-          className={`w-full rounded-md border-2 border-shadedTextDark outline-none px-5 py-3 ${
-            isInputErrors?.clientEmail?.isError
+          className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
+            inputErrors?.clientEmail?.isError
               ? "border-deleteBtn"
               : "border-shadedTextDark"
           }`}
@@ -91,7 +92,7 @@ const ClientsDets = ({
       <div className="relative grid gap-2 col-start-1 col-end-7">
         <label
           className={`text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4 ${
-            isInputErrors?.clientStreet?.isError
+            inputErrors?.clientStreet?.isError
               ? "text-deleteBtn"
               : "text-shadedTextLight"
           }`}
@@ -99,16 +100,16 @@ const ClientsDets = ({
         >
           Street Address
         </label>
-        {isInputErrors?.clientStreet?.isError && (
+        {inputErrors?.clientStreet?.isError && (
           <p className="text-xs text-deleteBtn absolute top-0 right-0">
-            {isInputErrors?.clientStreet?.msg}
+            {inputErrors?.clientStreet?.msg}
           </p>
         )}
         <input
           id="clientStreet"
           name="street"
-          className={`w-full rounded-md border-2 border-shadedTextDark outline-none px-5 py-3 ${
-            isInputErrors?.clientStreet?.isError
+          className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
+            inputErrors?.clientStreet?.isError
               ? "border-deleteBtn"
               : "border-shadedTextDark"
           }`}
@@ -124,7 +125,7 @@ const ClientsDets = ({
       <div className="relative grid gap-2 col-start-1 col-end-4 tab:col-start-1 tab:col-end-3">
         <label
           className={`text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4 ${
-            isInputErrors?.clientCity?.isError
+            inputErrors?.clientCity?.isError
               ? "text-deleteBtn"
               : "text-shadedTextLight"
           }`}
@@ -132,16 +133,16 @@ const ClientsDets = ({
         >
           City
         </label>
-        {isInputErrors?.clientCity?.isError && (
+        {inputErrors?.clientCity?.isError && (
           <p className="text-xs text-deleteBtn absolute top-0 right-0">
-            {isInputErrors?.clientCity?.msg}
+            {inputErrors?.clientCity?.msg}
           </p>
         )}
         <input
           id="clientCity"
           name="city"
           className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
-            isInputErrors?.clientCity?.isError
+            inputErrors?.clientCity?.isError
               ? "border-deleteBtn"
               : "border-shadedTextDark"
           }`}
@@ -158,7 +159,7 @@ const ClientsDets = ({
       <div className="relative grid gap-2 col-start-4 col-end-7 tab:col-start-3 tab:col-end-5">
         <label
           className={`text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4 ${
-            isInputErrors?.clientPostCode?.isError
+            inputErrors?.clientPostCode?.isError
               ? "text-deleteBtn"
               : "text-shadedTextLight"
           }`}
@@ -166,16 +167,16 @@ const ClientsDets = ({
         >
           Post Code
         </label>
-        {isInputErrors?.clientPostCode?.isError && (
+        {inputErrors?.clientPostCode?.isError && (
           <p className="text-xs text-deleteBtn absolute top-0 right-0">
-            {isInputErrors?.clientPostCode?.msg}
+            {inputErrors?.clientPostCode?.msg}
           </p>
         )}
         <input
           id="clientPostCode"
           name="postCode"
           className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
-            isInputErrors?.clientPostCode?.isError
+            inputErrors?.clientPostCode?.isError
               ? "border-deleteBtn"
               : "border-shadedTextDark"
           }`}
@@ -192,7 +193,7 @@ const ClientsDets = ({
       <div className="relative grid gap-2 col-start-1 col-end-7 tab:col-start-5 tab:col-end-7">
         <label
           className={`text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4 ${
-            isInputErrors?.clientCountry?.isError
+            inputErrors?.clientCountry?.isError
               ? "text-deleteBtn"
               : "text-shadedTextLight"
           }`}
@@ -200,16 +201,16 @@ const ClientsDets = ({
         >
           Country
         </label>
-        {isInputErrors?.clientCountry?.isError && (
+        {inputErrors?.clientCountry?.isError && (
           <p className="text-xs text-deleteBtn absolute top-0 right-0">
-            {isInputErrors?.clientCountry?.msg}
+            {inputErrors?.clientCountry?.msg}
           </p>
         )}
         <input
           id="clientCountry"
           name="country"
           className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
-            isInputErrors?.clientCountry?.isError
+            inputErrors?.clientCountry?.isError
               ? "border-deleteBtn"
               : "border-shadedTextDark"
           }`}

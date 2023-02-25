@@ -7,8 +7,6 @@ const Form = ({
   setInvoiceFormValues,
   defaultTerms,
   setDefaultTerms,
-  listItemErrors,
-  isInputErrors,
 }) => {
   const handlePaymentDue = () => {
     setInvoiceFormValues((prevValues) => {
@@ -49,19 +47,16 @@ const Form = ({
       <BillFrom
         setInvoiceFormValues={setInvoiceFormValues}
         {...invoiceFormValues?.senderAddress}
-        isInputErrors={isInputErrors}
       />
       <BillTo
         setInvoiceFormValues={setInvoiceFormValues}
         {...invoiceFormValues}
         setDefaultTerms={setDefaultTerms}
         defaultTerms={defaultTerms}
-        isInputErrors={isInputErrors}
       />
       <ItemList
         setInvoiceFormValues={setInvoiceFormValues}
         items={invoiceFormValues?.items}
-        listItemErrors={listItemErrors}
       />
     </form>
   );

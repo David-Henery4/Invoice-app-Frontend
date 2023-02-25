@@ -11,7 +11,6 @@ const BillTo = ({
   paymentTerms,
   defaultTerms,
   setDefaultTerms,
-  isInputErrors,
 }) => {
   return (
     <div className="grid grid-cols-6 pb-16">
@@ -21,7 +20,6 @@ const BillTo = ({
       <ClientsDets
         clientDets={{ setInvoiceFormValues, clientName, clientEmail }}
         {...clientAddress}
-        isInputErrors={isInputErrors}
       />
       <InvoiceDets
         invoiceDets={{
@@ -32,7 +30,6 @@ const BillTo = ({
           defaultTerms,
           setDefaultTerms,
         }}
-        isInputErrors={isInputErrors}
       />
     </div>
   );

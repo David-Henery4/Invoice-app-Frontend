@@ -6,19 +6,14 @@ import { useUniqueId } from "../hooks";
 import getCreatedAtDateFormat from "../reusableFunctions/createdAtDateFormat";
 import termsDropdownData from "../dropdowndata/termsDropdownData";
 import useCheckInputValidations from "../validations/useCheckInputValidations";
-import { setFormModalOpenToFalse } from "../features/formModal/formModalSlice";
+import { setFormModalOpenToFalse, resetInputErrors, setInputErrors } from "../features/formModal/formModalSlice";
 import {
-  saveInvoiceAsDraft,
-  endAndDeactivateEditInvoice,
   updateAndDeactivateEditInvoice,
   addNewInvoice,
 } from "../features/invoiceData/invoiceDataSlice";
 
 const NewEditInvoice = () => {
-  // const {isInputErrors, validation} = useCheckInputValidations(handleFinalSubmit)
   const dispatch = useDispatch()
-  const [isItemListErrors, setIsItemListErrors] = useState(false);
-  const [itemListErrorsList, setItemListErrorsList] = useState([]);
   const generateId = useUniqueId();
   const { isFormOpen } = useSelector((store) => store.formModal);
   const { isEditModeActive, currentEditedInvoice } = useSelector(
@@ -81,6 +76,10 @@ const NewEditInvoice = () => {
     useCheckInputValidations(handleFinalSubmit);
   //
   useEffect(() => {
+    dispatch(setInputErrors(isInputErrors))
+  },[isInputErrors])
+  //
+  useEffect(() => {
     if (isEditModeActive) {
       setInvoiceFormValues(currentEditedInvoice);
       setDefaultTerms(
@@ -113,11 +112,6 @@ const NewEditInvoice = () => {
           setInvoiceFormValues={setInvoiceFormValues}
           defaultTerms={defaultTerms}
           setDefaultTerms={setDefaultTerms}
-          listItemErrors={{
-            isItemListErrors,
-            itemListErrorsList,
-          }}
-          isInputErrors={isInputErrors}
         />
       </section>
       <div className="w-full col-start-1 col-end-13 tab:sticky tab:bottom-0 tab:left-0 pointer-events-none">
@@ -125,13 +119,8 @@ const NewEditInvoice = () => {
         <NewEditBtns
           handleDiscardResetFormValues={handleDiscardResetFormValues}
           invoiceFormValues={invoiceFormValues}
-          listItemErrors={{
-            setIsItemListErrors,
-            setItemListErrorsList,
-          }}
           validation={validation}
-          isInputErrors={isInputErrors}
-          resetInputErrors={resetInputErrors}
+          // resetInputErrors={resetInputErrors}
         />
       </div>
     </main>

@@ -1,14 +1,12 @@
-import {useState} from "react";
 import { IconDelete } from "../../assets";
 import { useUniqueId } from "../../hooks";
+import { useSelector } from "react-redux";
 
 
-const ItemList = ({ setInvoiceFormValues, items, listItemErrors }) => {
-  const [] = useState(false)
-  const {
-    isItemListErrors,
-    itemListErrorsList,
-  } = listItemErrors;
+const ItemList = ({ setInvoiceFormValues, items }) => {
+  const { isItemListErrors, itemListErrorsList } = useSelector(
+    (store) => store.formModal
+  );
   //
   const handleAddNewItem = () => {
     const generateId = useUniqueId();
@@ -82,13 +80,17 @@ const ItemList = ({ setInvoiceFormValues, items, listItemErrors }) => {
           >
             <div className="relative w-full col-start-1 col-end-13 tab:col-start-1 tab:col-end-2">
               <label
-                className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
+                className={`text-xs font-medium leading-heading4 tracking-heading4 ${
+                  isErrorName?.isError
+                    ? "text-deleteBtn"
+                    : "text-shadedTextLight"
+                }`}
                 htmlFor="itemName"
               >
                 Item Name
               </label>
               <input
-                className={`w-full rounded-md border-2 border-shadedTextDark outline-none px-5 py-3 ${
+                className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
                   isErrorName?.isError
                     ? "border-deleteBtn"
                     : "border-shadedTextDark"
@@ -108,13 +110,17 @@ const ItemList = ({ setInvoiceFormValues, items, listItemErrors }) => {
             </div>
             <div className="w-full col-start-1 col-end-4 tab:col-start-2 tab:col-end-3">
               <label
-                className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
+                className={`text-xs font-medium leading-heading4 tracking-heading4 ${
+                  isErrorQuantity?.isError
+                    ? "text-deleteBtn"
+                    : "text-shadedTextLight"
+                }`}
                 htmlFor="itemQuantity"
               >
                 Qty
               </label>
               <input
-                className={`w-full rounded-md border-2 border-shadedTextDark outline-none p-3 ${
+                className={`w-full rounded-md border-2  outline-none p-3 ${
                   isErrorQuantity?.isError
                     ? "border-deleteBtn"
                     : "border-shadedTextDark"
@@ -134,13 +140,17 @@ const ItemList = ({ setInvoiceFormValues, items, listItemErrors }) => {
             </div>
             <div className="w-full col-start-4 col-end-8 tab:col-start-3 tab:col-end-4">
               <label
-                className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
+                className={`text-xs font-medium leading-heading4 tracking-heading4 ${
+                  isErrorPrice?.isError
+                    ? "text-deleteBtn"
+                    : "text-shadedTextLight"
+                }`}
                 htmlFor="itemPrice"
               >
                 Price
               </label>
               <input
-                className={`w-full rounded-md border-2 border-shadedTextDark outline-none px-5 py-3 ${
+                className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
                   isErrorPrice?.isError
                     ? "border-deleteBtn"
                     : "border-shadedTextDark"

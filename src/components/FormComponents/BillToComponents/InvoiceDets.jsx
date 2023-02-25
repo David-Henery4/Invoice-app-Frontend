@@ -1,11 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 import { ArrowDown } from "../../../assets";
+import { useDispatch, useSelector } from "react-redux";
 import PaymentTermsDroptdown from "./PaymentTermsDroptdown";
 import getCreatedAtDateFormat from "../../../reusableFunctions/createdAtDateFormat";
 import handleDateFormatting from "../../../reusableFunctions/dateFormatting";
 import useClickOffDropdown from "../../../hooks/useClickOffDropdown";
 
-const InvoiceDets = ({ invoiceDets, isInputErrors }) => {
+const InvoiceDets = ({ invoiceDets }) => {
+  const dispatch = useDispatch()
+  const { inputErrors } = useSelector((store) => store.formModal);
   const {
     description,
     createdAt,
@@ -86,7 +89,7 @@ const InvoiceDets = ({ invoiceDets, isInputErrors }) => {
       <div className="relative grid gap-2 col-start-1 col-end-7">
         <label
           className={`text-xs font-medium leading-heading4 tracking-heading4 ${
-            isInputErrors?.description?.isError
+            inputErrors?.description?.isError
               ? "text-deleteBtn"
               : "text-shadedTextLight"
           }`}
@@ -94,16 +97,16 @@ const InvoiceDets = ({ invoiceDets, isInputErrors }) => {
         >
           Project Description
         </label>
-        {isInputErrors?.description?.isError && (
+        {inputErrors?.description?.isError && (
           <p className="text-xs text-deleteBtn absolute top-0 right-0">
-            {isInputErrors?.description?.msg}
+            {inputErrors?.description?.msg}
           </p>
         )}
         <input
           id="projectDescription"
           name="description"
           className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
-            isInputErrors?.description?.isError
+            inputErrors?.description?.isError
               ? "border-deleteBtn"
               : "border-shadedTextDark"
           }`}

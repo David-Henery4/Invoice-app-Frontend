@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 
 const BillFrom = ({
   street,
@@ -6,8 +7,8 @@ const BillFrom = ({
   postCode,
   country,
   setInvoiceFormValues,
-  isInputErrors
 }) => {
+  const { inputErrors } = useSelector((store) => store.formModal);
   //
   const handleSenderAddressValueChange = (prevValues,e) => {
     return {
@@ -25,7 +26,7 @@ const BillFrom = ({
       <div className="relative grid gap-2 col-start-1 col-end-7">
         <label
           className={`text-xs font-medium leading-heading4 tracking-heading4 ${
-            isInputErrors?.senderStreet?.isError
+            inputErrors?.senderStreet?.isError
               ? "text-deleteBtn"
               : "text-shadedTextLight"
           }`}
@@ -33,16 +34,16 @@ const BillFrom = ({
         >
           Street Address
         </label>
-        {isInputErrors?.senderStreet?.isError && (
+        {inputErrors?.senderStreet?.isError && (
           <p className="text-xs text-deleteBtn absolute top-0 right-0">
-            {isInputErrors?.senderStreet?.msg}
+            {inputErrors?.senderStreet?.msg}
           </p>
         )}
         <input
           id="senderStreet"
           name="street"
           className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
-            isInputErrors?.senderStreet?.isError
+            inputErrors?.senderStreet?.isError
               ? "border-deleteBtn"
               : "border-shadedTextDark"
           }`}
@@ -58,7 +59,7 @@ const BillFrom = ({
       <div className="relative grid gap-2 col-start-1 col-end-4 tab:col-start-1 tab:col-end-3">
         <label
           className={`text-xs font-medium leading-heading4 tracking-heading4 ${
-            isInputErrors?.senderCity?.isError
+            inputErrors?.senderCity?.isError
               ? "text-deleteBtn"
               : "text-shadedTextLight"
           }`}
@@ -66,16 +67,16 @@ const BillFrom = ({
         >
           City
         </label>
-        {isInputErrors?.senderCity?.isError && (
+        {inputErrors?.senderCity?.isError && (
           <p className="text-xs text-deleteBtn absolute top-0 right-0">
-            {isInputErrors?.senderCity?.msg}
+            {inputErrors?.senderCity?.msg}
           </p>
         )}
         <input
           id="senderCity"
           name="city"
           className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
-            isInputErrors?.senderCity?.isError
+            inputErrors?.senderCity?.isError
               ? "border-deleteBtn"
               : "border-shadedTextDark"
           }`}
@@ -92,7 +93,7 @@ const BillFrom = ({
       <div className="relative grid gap-2 col-start-4 col-end-7 tab:col-start-3 tab:col-end-5">
         <label
           className={`text-xs font-medium leading-heading4 tracking-heading4 ${
-            isInputErrors?.senderPostCode?.isError
+            inputErrors?.senderPostCode?.isError
               ? "text-deleteBtn"
               : "text-shadedTextLight"
           }`}
@@ -100,16 +101,16 @@ const BillFrom = ({
         >
           Post Code
         </label>
-        {isInputErrors?.senderPostCode?.isError && (
+        {inputErrors?.senderPostCode?.isError && (
           <p className="text-xs text-deleteBtn absolute top-0 right-0">
-            {isInputErrors?.senderPostCode?.msg}
+            {inputErrors?.senderPostCode?.msg}
           </p>
         )}
         <input
           id="senderPostcode"
           name="postCode"
           className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
-            isInputErrors?.senderPostCode?.isError
+            inputErrors?.senderPostCode?.isError
               ? "border-deleteBtn"
               : "border-shadedTextDark"
           }`}
@@ -126,7 +127,7 @@ const BillFrom = ({
       <div className="relative grid gap-2 col-start-1 col-end-7 tab:col-start-5 tab:col-end-7">
         <label
           className={`text-xs font-medium leading-heading4 tracking-heading4 ${
-            isInputErrors?.senderCountry?.isError
+            inputErrors?.senderCountry?.isError
               ? "text-deleteBtn"
               : "text-shadedTextLight"
           }`}
@@ -134,16 +135,16 @@ const BillFrom = ({
         >
           Country
         </label>
-        {isInputErrors?.senderCountry?.isError && (
+        {inputErrors?.senderCountry?.isError && (
           <p className="text-xs text-deleteBtn absolute top-0 right-0">
-            {isInputErrors?.senderCountry?.msg}
+            {inputErrors?.senderCountry?.msg}
           </p>
         )}
         <input
           id="senderCountry"
           name="country"
           className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
-            isInputErrors?.senderCountry?.isError
+            inputErrors?.senderCountry?.isError
               ? "border-deleteBtn"
               : "border-shadedTextDark"
           }`}

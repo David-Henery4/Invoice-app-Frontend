@@ -7,7 +7,7 @@ const PaymentTermsDroptdown = ({
   //
   return (
     <div
-      className={`w-full bg-basicWhite absolute top-14 left-0 shadow-filterShadow rounded-lg font-bold text-xs leading-heading4 tracking-heading4 ${
+      className={`w-full bg-basicWhite absolute top-14 left-0 z-10 shadow-filterShadow rounded-lg font-bold text-xs leading-heading4 tracking-heading4 ${
         isTermsDropdownActive ? "block" : "hidden"
       }`}
     >
