@@ -1,21 +1,21 @@
 import { useEffect, useState, useRef } from "react";
 import { ArrowDown } from "../../../assets";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  updateInvoiceFormValuesPaymentTerms,
+  handleValueChange,
+} from "../../../features/formModal/formModalSlice";
 import PaymentTermsDroptdown from "./PaymentTermsDroptdown";
 import getCreatedAtDateFormat from "../../../reusableFunctions/createdAtDateFormat";
-import handleDateFormatting from "../../../reusableFunctions/dateFormatting";
 import useClickOffDropdown from "../../../hooks/useClickOffDropdown";
 
 const InvoiceDets = ({ invoiceDets }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { inputErrors } = useSelector((store) => store.formModal);
   const {
     description,
     createdAt,
-    paymentTerms,
-    setInvoiceFormValues,
     defaultTerms,
-    setDefaultTerms,
   } = invoiceDets;
   const [isTermsDropdownActive, setIsTermsDropdownActive] = useState(false);
   const termsDropDownRef = useRef();
@@ -26,15 +26,11 @@ const InvoiceDets = ({ invoiceDets }) => {
   );
   //
   const handleValueChanges = (e) => {
-    setInvoiceFormValues((prevValues) => {
-      return { ...prevValues, [e.target.name]: e.target.value };
-    });
+    dispatch(handleValueChange({ [e.target.name]: e.target.value }));
   };
   //
   useEffect(() => {
-    setInvoiceFormValues((prevValues) => {
-      return { ...prevValues, paymentTerms: defaultTerms?.days };
-    });
+    dispatch(updateInvoiceFormValuesPaymentTerms(defaultTerms?.days));
   }, [defaultTerms]);
   //
   return (
@@ -81,7 +77,7 @@ const InvoiceDets = ({ invoiceDets }) => {
           <ArrowDown className="absolute -translate-y-1/2 top-1/2 right-5 pointer-events-none hover:cursor-pointer" />
           {/* Dropdown */}
           <PaymentTermsDroptdown
-            setDefaultTerms={setDefaultTerms}
+            // setDefaultTerms={setDefaultTerms}
             isTermsDropdownActive={isTermsDropdownActive}
           />
         </div>

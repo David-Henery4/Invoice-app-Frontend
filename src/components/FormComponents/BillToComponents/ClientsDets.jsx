@@ -1,25 +1,15 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  handleClientAddressValueChange,
+  handleClientEmailValueChange,
+  handleClientNameValueChange,
+} from "../../../features/formModal/formModalSlice";
 
-const ClientsDets = ({
-  clientDets,
-  street,
-  city,
-  postCode,
-  country,
-}) => {
+const ClientsDets = ({ clientDets, street, city, postCode, country }) => {
+  const dispatch = useDispatch();
   const { inputErrors } = useSelector((store) => store.formModal);
-  const { clientName, clientEmail, setInvoiceFormValues } = clientDets;
-  //
-  const handleClientAddressValueChange = (prevValues, e) => {
-    return {
-      ...prevValues,
-      clientAddress: {
-        ...prevValues.clientAddress,
-        [e.target.name]: e.target.value,
-      },
-    };
-  };
+  const { clientName, clientEmail } = clientDets;
   //
   return (
     <div className="w-full grid gap-6 grid-cols-6 pb-10 col-start-1 col-end-7">
@@ -50,9 +40,7 @@ const ClientsDets = ({
           type="text"
           value={clientName}
           onChange={(e) => {
-            setInvoiceFormValues((prevValues) => {
-              return { ...prevValues, clientName: e.target.value };
-            });
+            dispatch(handleClientNameValueChange(e.target.value))
           }}
         />
       </div>
@@ -83,9 +71,7 @@ const ClientsDets = ({
           type="text"
           value={clientEmail}
           onChange={(e) => {
-            setInvoiceFormValues((prevValues) => {
-              return { ...prevValues, clientEmail: e.target.value };
-            });
+            dispatch(handleClientEmailValueChange(e.target.value))
           }}
         />
       </div>
@@ -116,9 +102,7 @@ const ClientsDets = ({
           type="text"
           value={street}
           onChange={(e) => {
-            setInvoiceFormValues((prevValues) =>
-              handleClientAddressValueChange(prevValues, e)
-            );
+            dispatch(handleClientAddressValueChange({[e.target.name]: e.target.value}));
           }}
         />
       </div>
@@ -149,8 +133,10 @@ const ClientsDets = ({
           type="text"
           value={city}
           onChange={(e) => {
-            setInvoiceFormValues((prevValues) =>
-              handleClientAddressValueChange(prevValues, e)
+            dispatch(
+              handleClientAddressValueChange({
+                [e.target.name]: e.target.value,
+              })
             );
           }}
         />
@@ -183,8 +169,10 @@ const ClientsDets = ({
           type="text"
           value={postCode}
           onChange={(e) => {
-            setInvoiceFormValues((prevValues) =>
-              handleClientAddressValueChange(prevValues, e)
+            dispatch(
+              handleClientAddressValueChange({
+                [e.target.name]: e.target.value,
+              })
             );
           }}
         />
@@ -217,8 +205,10 @@ const ClientsDets = ({
           type="text"
           value={country}
           onChange={(e) => {
-            setInvoiceFormValues((prevValues) =>
-              handleClientAddressValueChange(prevValues, e)
+            dispatch(
+              handleClientAddressValueChange({
+                [e.target.name]: e.target.value,
+              })
             );
           }}
         />

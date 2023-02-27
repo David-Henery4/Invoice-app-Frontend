@@ -2,15 +2,12 @@ import React from "react";
 import {InvoiceDets, ClientsDets} from "./BillToComponents"
 
 const BillTo = ({
-  setInvoiceFormValues,
   clientAddress,
   clientName,
   clientEmail,
   description,
   createdAt,
-  paymentTerms,
   defaultTerms,
-  setDefaultTerms,
 }) => {
   return (
     <div className="grid grid-cols-6 pb-16">
@@ -18,17 +15,14 @@ const BillTo = ({
         Bill To
       </h3>
       <ClientsDets
-        clientDets={{ setInvoiceFormValues, clientName, clientEmail }}
+        clientDets={{ clientName, clientEmail }}
         {...clientAddress}
       />
       <InvoiceDets
         invoiceDets={{
           description,
           createdAt,
-          paymentTerms,
-          setInvoiceFormValues,
           defaultTerms,
-          setDefaultTerms,
         }}
       />
     </div>

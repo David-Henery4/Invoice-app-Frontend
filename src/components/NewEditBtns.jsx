@@ -1,27 +1,44 @@
 import { useSelector, useDispatch } from "react-redux";
-import { setFormModalOpenToFalse,  setIsItemListErrors, resetIsItemListErrors, resetItemListErrorsList, setItemListErrorsList, resetInputErrors} from "../features/formModal/formModalSlice";
+import {
+  setFormModalOpenToFalse,
+  setIsItemListErrors,
+  resetIsItemListErrors,
+  resetItemListErrorsList,
+  setItemListErrorsList,
+  resetInputErrors,
+  setDefaultTerms,
+  setInvoiceFormValues,
+} from "../features/formModal/formModalSlice";
 import {
   saveInvoiceAsDraft,
   endAndDeactivateEditInvoice,
 } from "../features/invoiceData/invoiceDataSlice";
 import checkDynamicInputValidations from "../validations/checkDynamicInputValidations";
 
-
-const NewEditBtns = ({
-  handleDiscardResetFormValues,
-  invoiceFormValues,
-  validation,
-}) => {
+const NewEditBtns = ({ validation }) => {
   const dispatch = useDispatch();
   const { isEditModeActive } = useSelector((store) => store.invoiceData);
+  const { invoiceFormValues } = useSelector((store) => store.formModal);
   //
   const handlelistItemInputsValidation = () => {
     const { listErrorsList, isListErrors } = checkDynamicInputValidations(
       invoiceFormValues?.items
     );
-    dispatch(setIsItemListErrors(isListErrors))
-    dispatch(setItemListErrorsList(listErrorsList))
+    dispatch(setIsItemListErrors(isListErrors));
+    dispatch(setItemListErrorsList(listErrorsList));
     validation(invoiceFormValues, isListErrors);
+  };
+  //
+  const handleValueAndErrorReset = () => {
+    dispatch(setInvoiceFormValues());
+    dispatch(setDefaultTerms());
+    dispatch(resetInputErrors());
+    dispatch(resetIsItemListErrors(false));
+    dispatch(resetItemListErrorsList([]));
+    dispatch(setFormModalOpenToFalse());
+    if (isEditModeActive){
+      dispatch(endAndDeactivateEditInvoice());
+    }
   };
   //
   return (
@@ -31,13 +48,7 @@ const NewEditBtns = ({
           <button
             className="w-[84px] h-12 rounded-3xl bg-shadedContentLight text-shadedTextLight tab:w-24"
             onClick={() => {
-              dispatch(setFormModalOpenToFalse());
-              handleDiscardResetFormValues();
-              dispatch(endAndDeactivateEditInvoice());
-              // resetInputErrors()
-              dispatch(resetInputErrors())
-              dispatch(resetIsItemListErrors(false));
-              dispatch(resetItemListErrorsList([]))
+              handleValueAndErrorReset()
             }}
           >
             Cancel
@@ -56,12 +67,7 @@ const NewEditBtns = ({
           <button
             className="w-[84px] h-12 rounded-3xl bg-shadedContentLight text-shadedTextLight tab:w-24 tab:mr-auto"
             onClick={() => {
-              dispatch(setFormModalOpenToFalse());
-              handleDiscardResetFormValues();
-              // resetInputErrors()
-              dispatch(resetInputErrors());
-              dispatch(resetIsItemListErrors(false));
-              dispatch(resetItemListErrorsList([]));
+              handleValueAndErrorReset()
             }}
           >
             Discard
@@ -69,13 +75,8 @@ const NewEditBtns = ({
           <button
             className="w-[117px] h-12 rounded-3xl bg-navbarLight text-textReallyDark tab:w-[113px]"
             onClick={() => {
-              dispatch(setFormModalOpenToFalse());
+              handleValueAndErrorReset()
               dispatch(saveInvoiceAsDraft(invoiceFormValues));
-              handleDiscardResetFormValues();
-              // resetInputErrors();
-              dispatch(resetInputErrors());
-              dispatch(resetIsItemListErrors(false));
-              dispatch(resetItemListErrorsList([]));
             }}
           >
             Save as Draft

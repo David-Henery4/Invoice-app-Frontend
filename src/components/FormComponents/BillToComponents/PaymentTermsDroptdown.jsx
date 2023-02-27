@@ -1,9 +1,11 @@
 import termsDropdownData from "../../../dropdowndata/termsDropdownData";
+import { useDispatch } from "react-redux";
+import { updateDefaultTerms } from "../../../features/formModal/formModalSlice";
 
 const PaymentTermsDroptdown = ({
   isTermsDropdownActive,
-  setDefaultTerms,
 }) => {
+  const dispatch = useDispatch()
   //
   return (
     <div
@@ -14,7 +16,7 @@ const PaymentTermsDroptdown = ({
       {termsDropdownData.map((option, i) => {
         return (
           <div key={i} onClick={() => {
-            setDefaultTerms(option)
+            dispatch(updateDefaultTerms(option))
           }}>
             <p className="px-5 py-3 border-b border-b-shadedTextDark hover:cursor-pointer hover:text-primaryPurple">
               {option.label}

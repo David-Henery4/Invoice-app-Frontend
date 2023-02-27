@@ -1,12 +1,8 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { BackBtn, Form, NewEditBtns } from "../components";
 import { useSelector, useDispatch } from "react-redux";
-import initialInvoiceValues from "../initialInvoiceValueData/initialInvoiceValues";
-import { useUniqueId } from "../hooks";
-import getCreatedAtDateFormat from "../reusableFunctions/createdAtDateFormat";
-import termsDropdownData from "../dropdowndata/termsDropdownData";
 import useCheckInputValidations from "../validations/useCheckInputValidations";
-import { setFormModalOpenToFalse, resetInputErrors, setInputErrors } from "../features/formModal/formModalSlice";
+import { setFormModalOpenToFalse, setInputErrors, setDefaultTerms, setInvoiceFormValues, updateEditedDefaultTerms, updateEditedInvoiceFormValues } from "../features/formModal/formModalSlice";
 import {
   updateAndDeactivateEditInvoice,
   addNewInvoice,
@@ -14,43 +10,13 @@ import {
 
 const NewEditInvoice = () => {
   const dispatch = useDispatch()
-  const generateId = useUniqueId();
   const { isFormOpen } = useSelector((store) => store.formModal);
   const { isEditModeActive, currentEditedInvoice } = useSelector(
     (store) => store.invoiceData
   );
-  const [invoiceFormValues, setInvoiceFormValues] =
-    useState(initialInvoiceValues);
-  const [defaultTerms, setDefaultTerms] = useState({
-    id: 1,
-    label: "Net 1 day",
-    days: 1,
-  });
-  //
-  const handleDiscardResetFormValues = () => {
-    setInvoiceFormValues(initialInvoiceValues);
-    setInvoiceFormValues((prevValues) => {
-      return {
-        ...prevValues,
-        id: generateId(),
-        createdAt: getCreatedAtDateFormat(),
-        items: [
-          {
-            id: generateId(),
-            name: "",
-            quantity: 0,
-            price: 0,
-            total: 0,
-          },
-        ],
-      };
-    });
-    setDefaultTerms({
-      id: 1,
-      label: "Net 1 day",
-      days: 1,
-    });
-  };
+  const { invoiceFormValues, defaultTerms} = useSelector(
+    (store) => store.formModal
+  );
   //
   const handleFinalSubmit = (finalValues) => {
     if (!isEditModeActive){
@@ -64,7 +30,8 @@ const NewEditInvoice = () => {
     const handleCreateNewInvoice = (values) => {
       dispatch(setFormModalOpenToFalse());
       dispatch(addNewInvoice(values));
-      handleDiscardResetFormValues();
+      dispatch(setInvoiceFormValues());
+      dispatch(setDefaultTerms());
     };
     //
     const handleEditInvoice = (values) => {
@@ -72,7 +39,7 @@ const NewEditInvoice = () => {
       dispatch(updateAndDeactivateEditInvoice(values));
     };
   //
-  const { isInputErrors, validation, resetInputErrors } =
+  const { isInputErrors, validation } =
     useCheckInputValidations(handleFinalSubmit);
   //
   useEffect(() => {
@@ -81,15 +48,16 @@ const NewEditInvoice = () => {
   //
   useEffect(() => {
     if (isEditModeActive) {
-      setInvoiceFormValues(currentEditedInvoice);
-      setDefaultTerms(
-        termsDropdownData.find(
-          (terms) => terms.days === currentEditedInvoice.paymentTerms
-        )
-      );
+      dispatch(
+        updateEditedInvoiceFormValues(currentEditedInvoice)
+      )
+      dispatch(
+        updateEditedDefaultTerms(currentEditedInvoice)
+      )
     }
     if (!isEditModeActive) {
-      handleDiscardResetFormValues();
+      dispatch(setInvoiceFormValues());
+      dispatch(setDefaultTerms());
     }
   }, [isEditModeActive]);
   //
@@ -109,18 +77,13 @@ const NewEditInvoice = () => {
         </h2>
         <Form
           invoiceFormValues={invoiceFormValues}
-          setInvoiceFormValues={setInvoiceFormValues}
           defaultTerms={defaultTerms}
-          setDefaultTerms={setDefaultTerms}
         />
       </section>
       <div className="w-full col-start-1 col-end-13 tab:sticky tab:bottom-0 tab:left-0 pointer-events-none">
         <div className="w-full h-16 bg-gradient-to-t from-basicBlack to-basicBlack/10 opacity-10"></div>
         <NewEditBtns
-          handleDiscardResetFormValues={handleDiscardResetFormValues}
-          invoiceFormValues={invoiceFormValues}
           validation={validation}
-          // resetInputErrors={resetInputErrors}
         />
       </div>
     </main>

@@ -68,8 +68,8 @@ const InvoiceDataSlice = createSlice({
       state.invoiceData.find(invoice => invoice.id === payload).status = "paid"
     },
     saveInvoiceAsDraft: (state, {payload}) => {
-      payload.status= "draft"
-      state.invoiceData = [...state.invoiceData, payload]
+      const newDraft = {...payload, status: "draft"}
+      state.invoiceData = [...state.invoiceData, newDraft]
     },
     getAndActivateEditInvoice: (state, {payload}) => {
       state.isEditModeActive = true

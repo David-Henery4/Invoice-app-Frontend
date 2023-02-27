@@ -1,21 +1,15 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { handleSenderAddressValueChange } from '../../features/formModal/formModalSlice';
 
 const BillFrom = ({
   street,
   city,
   postCode,
   country,
-  setInvoiceFormValues,
 }) => {
+  const dispatch = useDispatch()
   const { inputErrors } = useSelector((store) => store.formModal);
-  //
-  const handleSenderAddressValueChange = (prevValues,e) => {
-    return {
-      ...prevValues,
-      senderAddress: { ...prevValues.senderAddress, [e.target.name]: e.target.value },
-    };
-  }
   //
   return (
     <div className="grid gap-6 grid-cols-6 pb-10">
@@ -50,8 +44,10 @@ const BillFrom = ({
           type="text"
           value={street}
           onChange={(e) => {
-            setInvoiceFormValues((prevValues) =>
-              handleSenderAddressValueChange(prevValues, e)
+            dispatch(
+              handleSenderAddressValueChange({
+                [e.target.name]: e.target.value,
+              })
             );
           }}
         />
@@ -83,8 +79,10 @@ const BillFrom = ({
           type="text"
           value={city}
           onChange={(e) => {
-            setInvoiceFormValues((prevValues) =>
-              handleSenderAddressValueChange(prevValues, e)
+            dispatch(
+              handleSenderAddressValueChange({
+                [e.target.name]: e.target.value,
+              })
             );
           }}
         />
@@ -117,8 +115,10 @@ const BillFrom = ({
           type="text"
           value={postCode}
           onChange={(e) => {
-            setInvoiceFormValues((prevValues) =>
-              handleSenderAddressValueChange(prevValues, e)
+            dispatch(
+              handleSenderAddressValueChange({
+                [e.target.name]: e.target.value,
+              })
             );
           }}
         />
@@ -151,8 +151,10 @@ const BillFrom = ({
           type="text"
           value={country}
           onChange={(e) => {
-            setInvoiceFormValues((prevValues) =>
-              handleSenderAddressValueChange(prevValues, e)
+            dispatch(
+              handleSenderAddressValueChange({
+                [e.target.name]: e.target.value,
+              })
             );
           }}
         />

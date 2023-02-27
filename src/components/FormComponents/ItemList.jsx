@@ -1,51 +1,15 @@
 import { IconDelete } from "../../assets";
 import { useUniqueId } from "../../hooks";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { updateInvoiceFormValuesAddNewItem, updateInvoiceFormValuesDeleteItem, handleItemValuesChange } from "../../features/formModal/formModalSlice";
+
 
 
 const ItemList = ({ setInvoiceFormValues, items }) => {
+  const dispatch = useDispatch()
   const { isItemListErrors, itemListErrorsList } = useSelector(
     (store) => store.formModal
   );
-  //
-  const handleAddNewItem = () => {
-    const generateId = useUniqueId();
-    setInvoiceFormValues((prevValues) => {
-      return {
-        ...prevValues,
-        items: [
-          ...prevValues.items,
-          {
-            id: generateId(),
-            name: "",
-            quantity: 0,
-            price: 0,
-            total: 0,
-          },
-        ],
-      };
-    });
-  };
-  //
-  const handleItemsValueChanges = (items, i, e) => {
-    return items
-      .map((item, index) => {
-        if (i === index) {
-          return { ...item, [e.target.name]: e.target.value };
-        }
-        return item;
-      })
-      .map((item, index) => {
-        if (i === index) {
-          return { ...item, total: +item.price * +item.quantity };
-        }
-        return item;
-      });
-  };
-  //
-  const handleDeleteItem = (items, i) => {
-    return items.filter((_, index) => index !== i);
-  };
   //
   return (
     <div>
@@ -100,11 +64,13 @@ const ItemList = ({ setInvoiceFormValues, items }) => {
                 type="text"
                 value={item?.name}
                 onChange={(e) => {
-                  setInvoiceFormValues((prevValues) => {
-                    const { items } = prevValues;
-                    const newItems = handleItemsValueChanges(items, i, e);
-                    return { ...prevValues, items: newItems };
-                  });
+                  const id = item?.id
+                  dispatch(
+                    handleItemValuesChange({
+                      id,
+                      nameValue: { [e.target.name]: e.target.value },
+                    })
+                  );
                 }}
               />
             </div>
@@ -130,11 +96,8 @@ const ItemList = ({ setInvoiceFormValues, items }) => {
                 type="number"
                 value={item?.quantity}
                 onChange={(e) => {
-                  setInvoiceFormValues((prevValues) => {
-                    const { items } = prevValues;
-                    const newItems = handleItemsValueChanges(items, i, e);
-                    return { ...prevValues, items: newItems };
-                  });
+                  const id = item?.id;
+                  dispatch(handleItemValuesChange({ id, nameValue: {[e.target.name] : e.target.value} }));
                 }}
               />
             </div>
@@ -160,11 +123,13 @@ const ItemList = ({ setInvoiceFormValues, items }) => {
                 type="number"
                 value={item?.price}
                 onChange={(e) => {
-                  setInvoiceFormValues((prevValues) => {
-                    const { items } = prevValues;
-                    const newItems = handleItemsValueChanges(items, i, e);
-                    return { ...prevValues, items: newItems };
-                  });
+                  const id = item?.id;
+                  dispatch(
+                    handleItemValuesChange({
+                      id,
+                      nameValue: { [e.target.name]: e.target.value },
+                    })
+                  );
                 }}
               />
             </div>
@@ -177,11 +142,7 @@ const ItemList = ({ setInvoiceFormValues, items }) => {
                   className="hover:cursor-pointer"
                   disabled={items.length <= 1}
                   onClick={() => {
-                    setInvoiceFormValues((prevItems) => {
-                      const { items } = prevItems;
-                      const newItems = handleDeleteItem(items, i);
-                      return { ...prevItems, items: newItems };
-                    });
+                    dispatch(updateInvoiceFormValuesDeleteItem(item.id))
                   }}
                 >
                   <IconDelete />
@@ -196,7 +157,7 @@ const ItemList = ({ setInvoiceFormValues, items }) => {
         className="w-full py-4 bg-shadedContentLight rounded-3xl mt-12 text-xs font-bold text-shadedTextLight leading-body1 tracking-body1"
         onClick={(e) => {
           e.preventDefault();
-          handleAddNewItem();
+          dispatch(updateInvoiceFormValuesAddNewItem())
         }}
       >
         + Add New Item
