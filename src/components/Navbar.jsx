@@ -1,6 +1,10 @@
+// import { useContext } from "react";
 import { Logo, avatarIcon, MoonIcon } from "../assets";
+// import { ThemeContext } from "../themeContext/themeContext";
 
 const Navbar = () => {
+  // const {theme,setTheme} = useContext(ThemeContext)
+  //
   return (
     <nav className="w-full bg-navbarLight h-[72px] sticky top-0 z-[5] flex justify-between items-center col-start-1 col-end-13 md:h-20 lg:col-start-1 lg:col-end-2 lg:h-full lg:flex-col lg:rounded-r-[20px] lg:fixed lg:w-[101px]">
       {/* Left/Top */}
