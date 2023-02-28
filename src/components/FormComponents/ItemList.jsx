@@ -1,5 +1,4 @@
 import { IconDelete } from "../../assets";
-import { useUniqueId } from "../../hooks";
 import { useSelector, useDispatch } from "react-redux";
 import { updateInvoiceFormValuesAddNewItem, updateInvoiceFormValuesDeleteItem, handleItemValuesChange } from "../../features/formModal/formModalSlice";
 

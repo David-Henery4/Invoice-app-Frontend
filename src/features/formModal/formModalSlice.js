@@ -23,7 +23,6 @@ const FormModalSlice = createSlice({
   initialState,
   reducers: {
     setInvoiceFormValues: (state, { payload }) => {
-      // state.invoiceFormValues = initialInvoiceValues
       state.invoiceFormValues = {
         ...initialInvoiceValues,
         id: generateId(),

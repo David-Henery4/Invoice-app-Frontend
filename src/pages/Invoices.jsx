@@ -4,7 +4,6 @@ import {
   InvoiceBar,
   EmptyInvoices,
   InvoicesContainer,
-  BackBtn,
 } from "../components";
 
 const Invoices = () => {

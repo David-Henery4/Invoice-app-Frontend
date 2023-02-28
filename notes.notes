@@ -12,6 +12,10 @@ fix z-index on terms dropdown
 
 // add ltem list label on bigger screens
 
+Users should receive a confirmation modal when trying to delete invoices.
+
+disable mark as paid, when invoice is a draft!!!!!!!
+
 // reset error message
 
 // delete notes afterward or

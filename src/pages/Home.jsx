@@ -1,9 +1,19 @@
-import React from 'react'
+import {useState, useEffect} from 'react'
 import { Navbar, Overlay } from "../components";
 import { NewEditInvoice } from "../pages";
 import { Outlet } from 'react-router-dom';
 
 const Home = () => {
+  const [isDarkModeActive,setIsDarkModeActive] = useState(false)
+  //
+  const handleThemeChange = () => {
+    
+  }
+  //
+  useEffect(() => {
+    
+  },[])
+  //
   return (
     <div className="App bg-bgColourLight font-spartan min-h-screen w-full grid grid-cols-mainMob grid-rows-firstRowMinContent md:grid-cols-invoiceTab lg:grid-cols-mainDesk lg:grid-rows-[auto] lg:gap-x-[30px]">
       <Overlay/>
