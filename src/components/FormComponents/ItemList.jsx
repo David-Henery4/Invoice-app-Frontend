@@ -46,24 +46,24 @@ const ItemList = ({ setInvoiceFormValues, items }) => {
                 className={`text-xs font-medium leading-heading4 tracking-heading4 ${
                   isErrorName?.isError
                     ? "text-deleteBtn"
-                    : "text-shadedTextLight"
+                    : "text-shadedTextLight dark:text-shadedTextDark"
                 }`}
                 htmlFor="itemName"
               >
                 Item Name
               </label>
               <input
-                className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
+                className={`w-full rounded-md border-2 outline-none px-5 py-3 dark:bg-shadedContentDark ${
                   isErrorName?.isError
                     ? "border-deleteBtn"
-                    : "border-shadedTextDark"
+                    : "border-shadedTextDark dark:border-none"
                 }`}
                 name="name"
                 id="itemName"
                 type="text"
                 value={item?.name}
                 onChange={(e) => {
-                  const id = item?.id
+                  const id = item?.id;
                   dispatch(
                     handleItemValuesChange({
                       id,
@@ -78,17 +78,17 @@ const ItemList = ({ setInvoiceFormValues, items }) => {
                 className={`text-xs font-medium leading-heading4 tracking-heading4 ${
                   isErrorQuantity?.isError
                     ? "text-deleteBtn"
-                    : "text-shadedTextLight"
+                    : "text-shadedTextLight dark:text-shadedTextDark"
                 }`}
                 htmlFor="itemQuantity"
               >
                 Qty
               </label>
               <input
-                className={`w-full rounded-md border-2  outline-none p-3 ${
+                className={`w-full rounded-md border-2  outline-none p-3 dark:bg-shadedContentDark ${
                   isErrorQuantity?.isError
                     ? "border-deleteBtn"
-                    : "border-shadedTextDark"
+                    : "border-shadedTextDark dark:border-none"
                 }`}
                 name="quantity"
                 id="itemQuantity"
@@ -96,7 +96,12 @@ const ItemList = ({ setInvoiceFormValues, items }) => {
                 value={item?.quantity}
                 onChange={(e) => {
                   const id = item?.id;
-                  dispatch(handleItemValuesChange({ id, nameValue: {[e.target.name] : e.target.value} }));
+                  dispatch(
+                    handleItemValuesChange({
+                      id,
+                      nameValue: { [e.target.name]: e.target.value },
+                    })
+                  );
                 }}
               />
             </div>
@@ -105,17 +110,17 @@ const ItemList = ({ setInvoiceFormValues, items }) => {
                 className={`text-xs font-medium leading-heading4 tracking-heading4 ${
                   isErrorPrice?.isError
                     ? "text-deleteBtn"
-                    : "text-shadedTextLight"
+                    : "text-shadedTextLight dark:text-shadedTextDark"
                 }`}
                 htmlFor="itemPrice"
               >
                 Price
               </label>
               <input
-                className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
+                className={`w-full rounded-md border-2 outline-none px-5 py-3 dark:bg-shadedContentDark ${
                   isErrorPrice?.isError
                     ? "border-deleteBtn"
-                    : "border-shadedTextDark"
+                    : "border-shadedTextDark dark:border-none"
                 }`}
                 name="price"
                 id="itemPrice"
@@ -134,14 +139,16 @@ const ItemList = ({ setInvoiceFormValues, items }) => {
             </div>
             {/* Item Total */}
             <div className="w-full col-start-8 col-end-13 tab:col-start-4 tab:col-end-5">
-              <h4>Total</h4>
+              <h4 className="dark:text-shadedTextDark">Total</h4>
               <div className="flex justify-between items-center py-3">
-                <p>{item.total?.toLocaleString()}</p>
+                <p className="dark:text-shadedTextDark">
+                  {item.total?.toLocaleString()}
+                </p>
                 <button
                   className="hover:cursor-pointer"
                   disabled={items.length <= 1}
                   onClick={() => {
-                    dispatch(updateInvoiceFormValuesDeleteItem(item.id))
+                    dispatch(updateInvoiceFormValuesDeleteItem(item.id));
                   }}
                 >
                   <IconDelete />
@@ -153,10 +160,10 @@ const ItemList = ({ setInvoiceFormValues, items }) => {
       })}
       {/* ADD NEW ITEM BUTTON */}
       <button
-        className="w-full py-4 bg-shadedContentLight rounded-3xl mt-12 text-xs font-bold text-shadedTextLight leading-body1 tracking-body1"
+        className="w-full py-4 bg-shadedContentLight rounded-3xl mt-12 text-xs font-bold text-shadedTextLight leading-body1 tracking-body1 dark:text-shadedTextDark dark:bg-shadedContentDark"
         onClick={(e) => {
           e.preventDefault();
-          dispatch(updateInvoiceFormValuesAddNewItem())
+          dispatch(updateInvoiceFormValuesAddNewItem());
         }}
       >
         + Add New Item
@@ -164,7 +171,9 @@ const ItemList = ({ setInvoiceFormValues, items }) => {
       {isItemListErrors && (
         <div className="text-xs text-deleteBtn py-8">
           <p>- All fields must be added</p>
-          <p className={`${items.length <= 1 ? "block" : "hidden"}`}>- An item must be added</p>
+          <p className={`${items.length <= 1 ? "block" : "hidden"}`}>
+            - An item must be added
+          </p>
         </div>
       )}
     </div>

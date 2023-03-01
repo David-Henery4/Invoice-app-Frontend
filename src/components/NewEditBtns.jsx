@@ -44,11 +44,11 @@ const NewEditBtns = ({ validation }) => {
   return (
     <>
       {isEditModeActive ? (
-        <div className="w-full px-6 py-5 flex  justify-end items-center gap-[7px] bg-basicWhite pointer-events-auto tab:px-14 tab:py-8">
+        <div className="w-full px-6 py-5 flex  justify-end items-center gap-[7px] bg-basicWhite pointer-events-auto dark:bg-bgColourDark tab:px-14 tab:py-8">
           <button
-            className="w-[84px] h-12 rounded-3xl bg-shadedContentLight text-shadedTextLight tab:w-24"
+            className="w-[84px] h-12 rounded-3xl bg-shadedContentLight text-shadedTextLight dark:bg-shadedContentDark tab:w-24"
             onClick={() => {
-              handleValueAndErrorReset()
+              handleValueAndErrorReset();
             }}
           >
             Cancel
@@ -63,19 +63,19 @@ const NewEditBtns = ({ validation }) => {
           </button>
         </div>
       ) : (
-        <div className="w-full px-6 py-5 flex flex-wrap justify-center items-center gap-[7px] bg-basicWhite pointer-events-auto tab:px-14 tab:py-8">
+        <div className="w-full px-6 py-5 flex flex-wrap justify-center items-center gap-[7px] bg-basicWhite pointer-events-auto dark:bg-bgColourDark tab:px-14 tab:py-8">
           <button
             className="w-[84px] h-12 rounded-3xl bg-shadedContentLight text-shadedTextLight tab:w-24 tab:mr-auto"
             onClick={() => {
-              handleValueAndErrorReset()
+              handleValueAndErrorReset();
             }}
           >
             Discard
           </button>
           <button
-            className="w-[117px] h-12 rounded-3xl bg-navbarLight text-textReallyDark tab:w-[113px]"
+            className="w-[117px] h-12 rounded-3xl bg-navbarLight text-textReallyDark dark:text-shadedTextDark tab:w-[113px]"
             onClick={() => {
-              handleValueAndErrorReset()
+              handleValueAndErrorReset();
               dispatch(saveInvoiceAsDraft(invoiceFormValues));
             }}
           >

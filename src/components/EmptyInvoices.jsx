@@ -9,8 +9,10 @@ const EmptyInvoices = () => {
           <EmptyIllustration className="w-full h-full" />
         </div>
         <div className="grid gap-6">
-          <h2 className="text-xl font-bold">There is nothing here</h2>
-          <p className="text-xs leading-body1 tracking-body1 font-medium text-textReallyDark max-w-[179px]">
+          <h2 className="text-textLight text-xl font-bold dark:text-basicWhite">
+            There is nothing here
+          </h2>
+          <p className="text-xs leading-body1 tracking-body1 font-medium text-textReallyDark max-w-[179px] dark:text-shadedTextDark">
             Create an invoice by clicking the{" "}
             <span className="font-bold">
               New <span className="hidden md:inline">invoice</span>

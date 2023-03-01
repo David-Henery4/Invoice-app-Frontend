@@ -8,15 +8,14 @@ import {
 import PaymentTermsDroptdown from "./PaymentTermsDroptdown";
 import getCreatedAtDateFormat from "../../../reusableFunctions/createdAtDateFormat";
 import useClickOffDropdown from "../../../hooks/useClickOffDropdown";
+import { useContext } from "react";
+import { ThemeContext } from "../../../themeContext/themeContext";
 
 const InvoiceDets = ({ invoiceDets }) => {
   const dispatch = useDispatch();
+  const { theme } = useContext(ThemeContext);
   const { inputErrors } = useSelector((store) => store.formModal);
-  const {
-    description,
-    createdAt,
-    defaultTerms,
-  } = invoiceDets;
+  const { description, createdAt, defaultTerms } = invoiceDets;
   const [isTermsDropdownActive, setIsTermsDropdownActive] = useState(false);
   const termsDropDownRef = useRef();
   useClickOffDropdown(
@@ -37,7 +36,7 @@ const InvoiceDets = ({ invoiceDets }) => {
     <div className="w-full grid gap-6 grid-cols-6 col-start-1 col-end-7">
       <div className="grid gap-2 col-start-1 col-end-7 tab:col-start-1 tab:col-end-4">
         <label
-          className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
+          className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4 dark:text-shadedTextDark"
           htmlFor="invoiceDate"
         >
           Invoice Date
@@ -45,8 +44,9 @@ const InvoiceDets = ({ invoiceDets }) => {
         <input
           id="invoiceDate"
           name="createdAt"
-          className="w-full rounded-md border-2 border-shadedTextDark outline-none px-5 py-3"
+          className="w-full rounded-md border-2 border-shadedTextDark outline-none px-5 py-3 dark:bg-shadedContentDark dark:border-none"
           type="date"
+          style={{colorScheme: `${theme === "dark" ? "dark" : ""}`}}
           min={getCreatedAtDateFormat(new Date())}
           value={createdAt}
           onChange={(e) => {
@@ -56,7 +56,7 @@ const InvoiceDets = ({ invoiceDets }) => {
       </div>
       <div className="grid gap-2 col-start-1 col-end-7 tab:col-start-4 tab:col-end-7">
         <label
-          className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4"
+          className="text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4 dark:text-shadedTextDark"
           htmlFor="paymentTerms"
         >
           Payment Terms
@@ -67,7 +67,7 @@ const InvoiceDets = ({ invoiceDets }) => {
             id="paymentTerms"
             name="paymentTerms"
             readOnly={true}
-            className="w-full rounded-md border-2 border-shadedTextDark outline-none px-5 py-3 hover:cursor-pointer"
+            className="w-full rounded-md border-2 border-shadedTextDark outline-none px-5 py-3 dark:bg-shadedContentDark hover:cursor-pointer dark:border-none"
             type="text"
             value={defaultTerms.label}
             onClick={() => {
@@ -87,7 +87,7 @@ const InvoiceDets = ({ invoiceDets }) => {
           className={`text-xs font-medium leading-heading4 tracking-heading4 ${
             inputErrors?.description?.isError
               ? "text-deleteBtn"
-              : "text-shadedTextLight"
+              : "text-shadedTextLight dark:text-shadedTextDark"
           }`}
           htmlFor="projectDescription"
         >
@@ -101,10 +101,10 @@ const InvoiceDets = ({ invoiceDets }) => {
         <input
           id="projectDescription"
           name="description"
-          className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
+          className={`w-full rounded-md border-2 outline-none px-5 py-3 dark:bg-shadedContentDark ${
             inputErrors?.description?.isError
               ? "border-deleteBtn"
-              : "border-shadedTextDark"
+              : "border-shadedTextDark dark:border-none"
           }`}
           type="text"
           value={description}

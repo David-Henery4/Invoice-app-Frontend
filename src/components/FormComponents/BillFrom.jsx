@@ -22,7 +22,7 @@ const BillFrom = ({
           className={`text-xs font-medium leading-heading4 tracking-heading4 ${
             inputErrors?.senderStreet?.isError
               ? "text-deleteBtn"
-              : "text-shadedTextLight"
+              : "text-shadedTextLight dark:text-shadedTextDark"
           }`}
           htmlFor="senderStreet"
         >
@@ -36,10 +36,10 @@ const BillFrom = ({
         <input
           id="senderStreet"
           name="street"
-          className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
+          className={`w-full rounded-md border-2 outline-none px-5 py-3 dark:bg-shadedContentDark ${
             inputErrors?.senderStreet?.isError
               ? "border-deleteBtn"
-              : "border-shadedTextDark"
+              : "border-shadedTextDark dark:border-none"
           }`}
           type="text"
           value={street}
@@ -57,7 +57,7 @@ const BillFrom = ({
           className={`text-xs font-medium leading-heading4 tracking-heading4 ${
             inputErrors?.senderCity?.isError
               ? "text-deleteBtn"
-              : "text-shadedTextLight"
+              : "text-shadedTextLight dark:text-shadedTextDark"
           }`}
           htmlFor="senderCity"
         >
@@ -71,10 +71,10 @@ const BillFrom = ({
         <input
           id="senderCity"
           name="city"
-          className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
+          className={`w-full rounded-md border-2 outline-none px-5 py-3 dark:bg-shadedContentDark ${
             inputErrors?.senderCity?.isError
               ? "border-deleteBtn"
-              : "border-shadedTextDark"
+              : "border-shadedTextDark dark:border-none"
           }`}
           type="text"
           value={city}
@@ -93,7 +93,7 @@ const BillFrom = ({
           className={`text-xs font-medium leading-heading4 tracking-heading4 ${
             inputErrors?.senderPostCode?.isError
               ? "text-deleteBtn"
-              : "text-shadedTextLight"
+              : "text-shadedTextLight dark:text-shadedTextDark"
           }`}
           htmlFor="senderPostcode"
         >
@@ -107,10 +107,10 @@ const BillFrom = ({
         <input
           id="senderPostcode"
           name="postCode"
-          className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
+          className={`w-full rounded-md border-2 outline-none px-5 py-3 dark:bg-shadedContentDark ${
             inputErrors?.senderPostCode?.isError
               ? "border-deleteBtn"
-              : "border-shadedTextDark"
+              : "border-shadedTextDark dark:border-none"
           }`}
           type="text"
           value={postCode}
@@ -129,7 +129,7 @@ const BillFrom = ({
           className={`text-xs font-medium leading-heading4 tracking-heading4 ${
             inputErrors?.senderCountry?.isError
               ? "text-deleteBtn"
-              : "text-shadedTextLight"
+              : "text-shadedTextLight dark:text-shadedTextDark"
           }`}
           htmlFor="senderCountry"
         >
@@ -143,10 +143,10 @@ const BillFrom = ({
         <input
           id="senderCountry"
           name="country"
-          className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
+          className={`w-full rounded-md border-2 outline-none px-5 py-3 dark:bg-shadedContentDark ${
             inputErrors?.senderCountry?.isError
               ? "border-deleteBtn"
-              : "border-shadedTextDark"
+              : "border-shadedTextDark dark:border-none"
           }`}
           type="text"
           value={country}

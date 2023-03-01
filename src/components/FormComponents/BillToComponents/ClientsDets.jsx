@@ -18,7 +18,7 @@ const ClientsDets = ({ clientDets, street, city, postCode, country }) => {
           className={`text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4 ${
             inputErrors?.clientName?.isError
               ? "text-deleteBtn"
-              : "text-shadedTextLight"
+              : "text-shadedTextLight dark:text-shadedTextDark"
           }`}
           htmlFor="clientName"
         >
@@ -32,15 +32,15 @@ const ClientsDets = ({ clientDets, street, city, postCode, country }) => {
         <input
           id="clientName"
           name="clientName"
-          className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
+          className={`w-full rounded-md border-2 outline-none px-5 py-3 dark:bg-shadedContentDark ${
             inputErrors?.clientName?.isError
               ? "border-deleteBtn"
-              : "border-shadedTextDark"
+              : "border-shadedTextDark dark:border-none"
           }`}
           type="text"
           value={clientName}
           onChange={(e) => {
-            dispatch(handleClientNameValueChange(e.target.value))
+            dispatch(handleClientNameValueChange(e.target.value));
           }}
         />
       </div>
@@ -49,7 +49,7 @@ const ClientsDets = ({ clientDets, street, city, postCode, country }) => {
           className={`text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4 ${
             inputErrors?.clientEmail?.isError
               ? "text-deleteBtn"
-              : "text-shadedTextLight"
+              : "text-shadedTextLight dark:text-shadedTextDark"
           }`}
           htmlFor="clientEmail"
         >
@@ -63,15 +63,15 @@ const ClientsDets = ({ clientDets, street, city, postCode, country }) => {
         <input
           id="clientEmail"
           name="clientEmail"
-          className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
+          className={`w-full rounded-md border-2 outline-none px-5 py-3 dark:bg-shadedContentDark ${
             inputErrors?.clientEmail?.isError
               ? "border-deleteBtn"
-              : "border-shadedTextDark"
+              : "border-shadedTextDark dark:border-none"
           }`}
           type="text"
           value={clientEmail}
           onChange={(e) => {
-            dispatch(handleClientEmailValueChange(e.target.value))
+            dispatch(handleClientEmailValueChange(e.target.value));
           }}
         />
       </div>
@@ -80,7 +80,7 @@ const ClientsDets = ({ clientDets, street, city, postCode, country }) => {
           className={`text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4 ${
             inputErrors?.clientStreet?.isError
               ? "text-deleteBtn"
-              : "text-shadedTextLight"
+              : "text-shadedTextLight dark:text-shadedTextDark"
           }`}
           htmlFor="clientStreet"
         >
@@ -94,15 +94,19 @@ const ClientsDets = ({ clientDets, street, city, postCode, country }) => {
         <input
           id="clientStreet"
           name="street"
-          className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
+          className={`w-full rounded-md border-2 outline-none px-5 py-3 dark:bg-shadedContentDark ${
             inputErrors?.clientStreet?.isError
               ? "border-deleteBtn"
-              : "border-shadedTextDark"
+              : "border-shadedTextDark dark:border-none"
           }`}
           type="text"
           value={street}
           onChange={(e) => {
-            dispatch(handleClientAddressValueChange({[e.target.name]: e.target.value}));
+            dispatch(
+              handleClientAddressValueChange({
+                [e.target.name]: e.target.value,
+              })
+            );
           }}
         />
       </div>
@@ -111,7 +115,7 @@ const ClientsDets = ({ clientDets, street, city, postCode, country }) => {
           className={`text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4 ${
             inputErrors?.clientCity?.isError
               ? "text-deleteBtn"
-              : "text-shadedTextLight"
+              : "text-shadedTextLight dark:text-shadedTextDark"
           }`}
           htmlFor="clientCity"
         >
@@ -125,10 +129,10 @@ const ClientsDets = ({ clientDets, street, city, postCode, country }) => {
         <input
           id="clientCity"
           name="city"
-          className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
+          className={`w-full rounded-md border-2 outline-none px-5 py-3 dark:bg-shadedContentDark ${
             inputErrors?.clientCity?.isError
               ? "border-deleteBtn"
-              : "border-shadedTextDark"
+              : "border-shadedTextDark dark:border-none"
           }`}
           type="text"
           value={city}
@@ -147,7 +151,7 @@ const ClientsDets = ({ clientDets, street, city, postCode, country }) => {
           className={`text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4 ${
             inputErrors?.clientPostCode?.isError
               ? "text-deleteBtn"
-              : "text-shadedTextLight"
+              : "text-shadedTextLight dark:text-shadedTextDark"
           }`}
           htmlFor="clientPostCode"
         >
@@ -161,10 +165,10 @@ const ClientsDets = ({ clientDets, street, city, postCode, country }) => {
         <input
           id="clientPostCode"
           name="postCode"
-          className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
+          className={`w-full rounded-md border-2 outline-none px-5 py-3 dark:bg-shadedContentDark ${
             inputErrors?.clientPostCode?.isError
               ? "border-deleteBtn"
-              : "border-shadedTextDark"
+              : "border-shadedTextDark dark:border-none"
           }`}
           type="text"
           value={postCode}
@@ -183,7 +187,7 @@ const ClientsDets = ({ clientDets, street, city, postCode, country }) => {
           className={`text-xs text-shadedTextLight font-medium leading-heading4 tracking-heading4 ${
             inputErrors?.clientCountry?.isError
               ? "text-deleteBtn"
-              : "text-shadedTextLight"
+              : "text-shadedTextLight dark:text-shadedTextDark"
           }`}
           htmlFor="clientCountry"
         >
@@ -197,10 +201,10 @@ const ClientsDets = ({ clientDets, street, city, postCode, country }) => {
         <input
           id="clientCountry"
           name="country"
-          className={`w-full rounded-md border-2 outline-none px-5 py-3 ${
+          className={`w-full rounded-md border-2 outline-none px-5 py-3 dark:bg-shadedContentDark ${
             inputErrors?.clientCountry?.isError
               ? "border-deleteBtn"
-              : "border-shadedTextDark"
+              : "border-shadedTextDark dark:border-none"
           }`}
           type="text"
           value={country}

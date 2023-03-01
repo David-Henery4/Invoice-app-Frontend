@@ -7,7 +7,7 @@ const InvoiceCount = () => {
   );
   //
   return (
-    <h4 className="text-xs text-textReallyDark leading-heading4 -tracking-heading4 md:text-med">
+    <h4 className="text-xs text-textReallyDark leading-heading4 -tracking-heading4 dark:text-shadedTextDark md:text-med">
       {isFilterActive ? (
         <>
           {filteredInvoiceData?.length <= 0 ? (

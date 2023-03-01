@@ -19,7 +19,7 @@ const ActionBtns = ({ isOnLargerScreens = false, id }) => {
       }`}
     >
       <button
-        className="w-[73px] h-12 rounded-3xl bg-shadedContentLight text-shadedTextLight"
+        className="w-[73px] h-12 rounded-3xl bg-shadedContentLight text-shadedTextLight dark:bg-shadedContentDark dark:text-shadedTextDark"
         onClick={() => {
           dispatch(setFormModalOpenToTrue());
           dispatch(getAndActivateEditInvoice(id));

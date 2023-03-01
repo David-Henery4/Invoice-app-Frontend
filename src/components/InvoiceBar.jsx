@@ -19,7 +19,7 @@ const InvoiceBar = () => {
     <div className="flex justify-between items-center col-start-1 col-end-13 md:py-1">
       {/* LEFT */}
       <div>
-        <h1 className="text-xl font-bold tracking-heading2 md:text-lrgHeading md:tracking-heading1">
+        <h1 className="text-xl font-bold tracking-heading2 dark:text-basicWhite md:text-lrgHeading md:tracking-heading1">
           Invoices
         </h1>
         {/*  */}
@@ -37,7 +37,7 @@ const InvoiceBar = () => {
           >
             {/* dropdown */}
 
-            <h4 className="text-xs text-textLight leading-heading4 -tracking-heading4 font-bold md:text-med">
+            <h4 className="text-xs text-textLight leading-heading4 -tracking-heading4 font-bold dark:text-basicWhite md:text-med">
               Filter <span className="hidden md:inline">by status</span>
             </h4>
             <ArrowDown />

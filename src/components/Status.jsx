@@ -9,9 +9,9 @@ const Status = ({status = "draft"}) => {
       text: "text-paidStatus",
     };
     if (status === "draft") return {
-      dot: "bg-navbarLight",
-      bg: "bg-navbarLight/10",
-      text: "text-navbarLight",
+      dot: "bg-navbarLight dark:bg-shadedTextDark",
+      bg: "bg-navbarLight/10 dark:bg-shadedTextDark/10",
+      text: "text-navbarLight dark:text-shadedTextDark",
     };
     if (status === "pending") return {
       dot: "bg-pendingStatus",
