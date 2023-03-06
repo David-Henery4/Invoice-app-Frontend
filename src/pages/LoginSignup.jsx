@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 const LoginSignup = () => {
+  const [isSignUp,setIsSignUp] = useState(false)
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isUsernameInputActive, setIsUsernameInputActive] = useState(false);
@@ -20,7 +21,9 @@ const LoginSignup = () => {
   return (
     <div className="w-full min-h-screen grid place-items-center bg-bgColourLight text-textLight dark:bg-bgColourDark dark:text-basicWhite">
       <div className="w-11/12 max-w-lg pt-10 pb-6 px-6 rounded-lg bg-basicWhite flex flex-col justify-center items-center gap-6 dark:bg-contentBgDark">
-        <h2 className="font-light text-4xl mb-6">Login</h2>
+        <h2 className="font-light text-4xl mb-6">
+          {isSignUp ? "Sign up" : "Login"}
+        </h2>
         {/**/}
         <div className="w-full grid gap-6">
           <div className="relative w-full grid gap-3">
@@ -70,17 +73,24 @@ const LoginSignup = () => {
         </div>
         {/**/}
         <div className="w-full flex flex-col justify-center items-center gap-6 mt-4">
-          <button className="w-32 h-12 rounded-3xl bg-primaryPurple text-basicWhite">
-            Login
+          <button className="relative w-32 h-12 rounded-3xl bg-primaryPurple text-basicWhite overflow-hidden active:before:absolute active:before:w-full active:before:h-full active:before:bg-basicWhite/50 active:before:top-0 active:before:left-0">
+            <span className="relative z-10">
+              {isSignUp ? "Sign up" : "Login"}
+            </span>
           </button>
           <p className="text-sm">
-            Don't have an Account?{" "}
-            <span className="text-primaryPurple cursor-pointer">Sign up</span>
+            {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
+            <span
+              className="text-primaryPurple cursor-pointer"
+              onClick={() => setIsSignUp(!isSignUp)}
+            >
+              {isSignUp ? "Login" : "Sign up"}
+            </span>
           </p>
         </div>
         <p className="text-center text-xtraSm">
           Click here to sign into{" "}
-          <span className="text-primaryPurple">demo account</span>
+          <span className="text-primaryPurple cursor-pointer">demo account</span>
         </p>
       </div>
     </div>
