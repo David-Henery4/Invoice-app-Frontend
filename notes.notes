@@ -10,7 +10,13 @@
 // (currency)
 // RESEARCH: Intl.NumberFormat = for total & price
 
+remove notes.notes from git
+
 fix z-index on terms dropdown
+
+favicons
+
+fix columns spacing on the item list
 
 // add ltem list label on bigger screens
 
