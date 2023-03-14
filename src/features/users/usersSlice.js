@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import usersPost from "../axios/baseInstance";
+import { addInvoicesFromLogin } from "../invoiceData/invoiceDataSlice";
 
 const initialState = {
   user: null,
@@ -32,7 +33,8 @@ export const register = createAsyncThunk(
 export const login = createAsyncThunk("login/user", async (user, thunkAPI) => {
   try {
     const loggedInUser = await usersPost.post("/auth", user);
-    return loggedInUser.data;
+    thunkAPI.dispatch(addInvoicesFromLogin(loggedInUser.data.invoices));
+    return loggedInUser.data.user;
   } catch (error) {
     const message =
       (error.response && error.response.data && error.response.data.message) ||

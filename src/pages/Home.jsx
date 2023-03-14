@@ -18,7 +18,7 @@ const Home = () => {
       // dispatch(getInvoices(userAccessToken))
       // 
       // WORKING
-      dispatch(getInvoices())
+      // dispatch(getInvoices())
     }
   }, [user])
   //

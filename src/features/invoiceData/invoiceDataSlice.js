@@ -65,6 +65,9 @@ const InvoiceDataSlice = createSlice({
   name: "invoiceData",
   initialState,
   reducers: {
+    addInvoicesFromLogin: (state, {payload}) => {
+      state.invoiceData = payload
+    },
     getActiveSingleInvoice: (state, { payload }) => {
       state.activeSingleInvoice = state.invoiceData.find(
         (item) => item.id === payload
@@ -164,5 +167,6 @@ export const {
   endAndDeactivateEditInvoice,
   updateAndDeactivateEditInvoice,
   addNewInvoice,
+  addInvoicesFromLogin,
 } = InvoiceDataSlice.actions;
 export default InvoiceDataSlice.reducer;
