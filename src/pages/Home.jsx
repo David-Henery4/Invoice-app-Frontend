@@ -15,9 +15,10 @@ const Home = () => {
       navigate("/login")
     }
     if (user){
-      console.log(userAccessToken);
       // dispatch(getInvoices(userAccessToken))
-      dispatch(getInvoices())
+      // 
+      // WORKING
+      // dispatch(getInvoices())
     }
   }, [user])
   //

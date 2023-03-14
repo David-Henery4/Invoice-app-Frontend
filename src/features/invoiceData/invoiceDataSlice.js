@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import invoiceData from "../../../data.json";
 // import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { axiosPrivate } from "../axios/baseInstance";
-import { updateAccessToken } from "../users/usersSlice";
+import { updateAccessToken, resetUser } from "../users/usersSlice";
 import axios from "axios";
 
 const initialState = {
@@ -30,7 +30,7 @@ const initialState = {
   ],
   isEditModeActive: false,
   currentEditedInvoice: {},
-  isLoading: false,
+  isInvoiceLoading: false,
   isError: false,
 };
 
@@ -79,15 +79,10 @@ const handleInterceptors = (thunkAPI) => {
 export const getInvoices = createAsyncThunk(
   "getInvoices/invoiceData",
   async (accessToken, thunkAPI) => {
-    // const axiosPrivate = useAxiosPrivate();
     try {
-      // {
-      //   headers: {
-      //     "Authorization": `Bearer ${accessToken}`
-      //   }
-      // }
       handleInterceptors(thunkAPI);
       const userInvoices = await axiosPrivate.get("/invoices");
+      console.log("fulfiled")
       return userInvoices.data;
     } catch (error) {
       const message =
@@ -99,6 +94,10 @@ export const getInvoices = createAsyncThunk(
       console.error(error);
       console.log(message);
       thunkAPI.rejectWithValue(message);
+      console.log("refresh-expired")
+      thunkAPI.dispatch(resetUser())
+      throw new Error(message)
+      // return message
     }
   }
 );
@@ -179,16 +178,18 @@ const InvoiceDataSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getInvoices.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
+        state.isInvoiceLoading = false;
         state.isError = false;
         state.invoiceData = payload;
       })
       .addCase(getInvoices.rejected, (state, { payload }) => {
         state.isError = true;
-        state.isLoading = false;
+        state.isInvoiceLoading = false;
+        console.log("rejected")
+        state.invoiceData = []
       })
       .addCase(getInvoices.pending, (state, { payload }) => {
-        state.isLoading = true;
+        state.isInvoiceLoading = true;
         state.isError = false;
       });
   },
