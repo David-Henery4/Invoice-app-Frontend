@@ -1,11 +1,16 @@
-import { useState, useRef} from "react";
-import { useDispatch } from "react-redux";
+import { useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { ArrowDown, PlusIcon } from "../assets";
 import { setFormModalOpenToTrue } from "../features/formModal/formModalSlice";
 import { FilterDropdown, InvoiceCount } from "../components";
 import useClickOffDropdown from "../hooks/useClickOffDropdown";
+// TEST
+import { getInvoices } from "../features/invoiceData/invoiceDataSlice";
 
 const InvoiceBar = () => {
+  // TEST
+  const { userAccessToken } = useSelector((store) => store.users);
+  //
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState(false);
   const dispatch = useDispatch();
   const filterDropDownRef = useRef();
@@ -19,7 +24,12 @@ const InvoiceBar = () => {
     <div className="flex justify-between items-center col-start-1 col-end-13 md:py-1">
       {/* LEFT */}
       <div>
-        <h1 className="text-xl font-bold tracking-heading2 dark:text-basicWhite md:text-lrgHeading md:tracking-heading1">
+        <h1
+          className="text-xl font-bold tracking-heading2 dark:text-basicWhite md:text-lrgHeading md:tracking-heading1"
+          // onClick={() => {
+          //   dispatch(getInvoices())
+          // }}
+        >
           Invoices
         </h1>
         {/*  */}

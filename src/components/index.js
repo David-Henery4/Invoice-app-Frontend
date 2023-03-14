@@ -9,6 +9,7 @@ import FilterDropdown from "./FilterDropdown";
 import InvoiceCount from "./InvoiceCount";
 import Form from "./Form";
 import NewEditBtns from "./NewEditBtns";
+import SignOut from "./SignOut";
 
 export {
   Navbar,
@@ -22,4 +23,5 @@ export {
   InvoiceCount,
   Form,
   NewEditBtns,
+  SignOut
 }

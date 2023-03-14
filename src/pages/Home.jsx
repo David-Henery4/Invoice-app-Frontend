@@ -1,16 +1,23 @@
 import {useState, useEffect} from 'react'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Outlet, useNavigate } from "react-router-dom";
 import { Navbar, Overlay } from "../components";
 import { NewEditInvoice } from "../pages";
+import { getInvoices } from '../features/invoiceData/invoiceDataSlice';
 
 const Home = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
-  const {user} = useSelector(store => store.users)
+  const { user, userAccessToken } = useSelector((store) => store.users);
   //
   useEffect(() => {
     if (!user){
       navigate("/login")
+    }
+    if (user){
+      console.log(userAccessToken);
+      // dispatch(getInvoices(userAccessToken))
+      dispatch(getInvoices())
     }
   }, [user])
   //

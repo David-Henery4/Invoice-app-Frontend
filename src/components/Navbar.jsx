@@ -1,8 +1,10 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ThemeContext } from "../themeContext/themeContext";
 import { Logo, avatarIcon, MoonIcon, SunIcon } from "../assets";
+import {SignOut} from "../components"
 
 const Navbar = () => {
+  const [isSignOutActive, setIsSignOutActive] = useState(false)
   const {theme,setTheme} = useContext(ThemeContext)
   //
   const handleThemeSwitch = () => {
@@ -52,10 +54,14 @@ const Navbar = () => {
         )}
         <div className="h-full px-6 grid place-items-center border-l border-avatarBorderColour md:pr-6 md:pl-8 lg:px-0 lg:py-6 lg:border-l-0 lg:border-t">
           <div
-            className="w-8 h-8 rounded-full overflow-hidden
+            className="relative w-8 h-8 rounded-full hover:cursor-pointer
             "
+            onClick={() => {
+              setIsSignOutActive(!isSignOutActive)
+            }}
           >
-            <img src={avatarIcon} alt="profile-avatar" />
+            <SignOut isSignOutActive={isSignOutActive}/>
+            <img src={avatarIcon} className="rounded-full" alt="profile-avatar" />
           </div>
         </div>
       </div>
