@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import invoiceData from "../../../data.json";
-// import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { axiosPrivate } from "../axios/baseInstance";
 import { updateAccessToken, resetUser } from "../users/usersSlice";
 import axios from "axios";
+import handleInterceptors from "../../reusableFunctions/axiosInterceptors";
 
 const initialState = {
   // invoiceData: invoiceData,
@@ -34,47 +34,6 @@ const initialState = {
   isError: false,
 };
 
-const getRefresh = async (thunkAPI) => {
-  try {
-    // const dispatch = thunkAPI.dispatch()
-    const res = await axios.get("http://localhost:3500/auth/refresh", {
-      withCredentials: true,
-    });
-    thunkAPI.dispatch(updateAccessToken(res.data.accessToken));
-    return res.data.accessToken;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const handleInterceptors = (thunkAPI) => {
-  axiosPrivate.interceptors.request.use(
-    (config) => {
-      if (!config.headers["Authorization"]) {
-        config.headers["Authorization"] = `Bearer ${
-          thunkAPI.getState().users.userAccessToken
-        }`;
-      }
-      return config;
-    },
-    (error) => Promise.reject(error)
-  );
-  //
-  axiosPrivate.interceptors.response.use(
-    (response) => response,
-    // Here we handle the logic for if the access token has expired
-    async (error) => {
-      const prevRequest = error?.config;
-      if (error?.response?.status === 403 && !prevRequest?.sent) {
-        prevRequest.sent = true;
-        const newAccessToken = await getRefresh(thunkAPI);
-        prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
-        return axiosPrivate(prevRequest);
-      }
-      return Promise.reject(error);
-    }
-  );
-};
 
 export const getInvoices = createAsyncThunk(
   "getInvoices/invoiceData",
