@@ -1,7 +1,7 @@
 import { Status } from "../components";
 import handleDateFormatting from "../reusableFunctions/dateFormatting";
 
-const Invoice = ({ clientName, id, status, total, paymentDue }) => {
+const Invoice = ({ clientName, invoiceId, status, total, paymentDue }) => {
   //
   return (
     <div className="bg-basicWhite w-full grid text-xs font-bold grid-cols-invoiceMax grid-rows-invoiceContainerMobRows p-6 dark:bg-contentBgDark tab:grid-cols-singleInvoiceContainer tab:grid-rows-none  tab:items-center ">
@@ -9,7 +9,7 @@ const Invoice = ({ clientName, id, status, total, paymentDue }) => {
         <span className="text-toggleColourDark dark:text-shadedTextLight">
           #
         </span>
-        {id}
+        {invoiceId}
       </p>
       <p className="text-shadedTextLight font-medium col-start-1 col-end-6 row-start-3 row-end-4 dark:text-shadedTextDark tab:col-start-2 tab:col-end-3 tab:row-auto md:text-med">
         Due {paymentDue && handleDateFormatting(paymentDue)}

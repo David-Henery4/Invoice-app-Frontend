@@ -33,7 +33,8 @@ export const register = createAsyncThunk(
 export const login = createAsyncThunk("login/user", async (user, thunkAPI) => {
   try {
     const loggedInUser = await usersPost.post("/auth", user);
-    thunkAPI.dispatch(addInvoicesFromLogin(loggedInUser.data.invoices));
+    // WILL NEED TO GET USERS INVOICES!
+    // thunkAPI.dispatch(addInvoicesFromLogin(loggedInUser.data.invoices));
     return loggedInUser.data.user;
   } catch (error) {
     const message =

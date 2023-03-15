@@ -3,7 +3,8 @@ import getCreatedAtDateFormat from "../reusableFunctions/createdAtDateFormat";
 const generateId = useUniqueId();
 
 const initialInvoiceValues = {
-  id: generateId(),
+  invoiceId: generateId(), // will be invoiceId
+  userId: "",
   createdAt: getCreatedAtDateFormat(),
   paymentDue: getCreatedAtDateFormat(
     new Date(new Date().setDate(new Date().getDate() + 1))

@@ -19,6 +19,7 @@ const NewEditBtns = ({ validation }) => {
   const dispatch = useDispatch();
   const { isEditModeActive } = useSelector((store) => store.invoiceData);
   const { invoiceFormValues } = useSelector((store) => store.formModal);
+  const { user } = useSelector((store) => store.users);
   //
   const handlelistItemInputsValidation = () => {
     const { listErrorsList, isListErrors } = checkDynamicInputValidations(
@@ -76,7 +77,7 @@ const NewEditBtns = ({ validation }) => {
             className="w-[117px] h-12 rounded-3xl bg-navbarLight text-textReallyDark dark:text-shadedTextDark tab:w-[113px]"
             onClick={() => {
               handleValueAndErrorReset();
-              dispatch(saveInvoiceAsDraft(invoiceFormValues));
+              dispatch(saveInvoiceAsDraft({...invoiceFormValues, userId: user._id}));
             }}
           >
             Save as Draft

@@ -20,6 +20,7 @@ const NewEditInvoice = () => {
   //
   const handleFinalSubmit = (finalValues) => {
     if (!isEditModeActive){
+      console.log(finalValues)
       handleCreateNewInvoice(finalValues)
     }
     if (isEditModeActive){
@@ -76,7 +77,7 @@ const NewEditInvoice = () => {
           {isEditModeActive ? (
             <>
               Edit <span className="text-textReallyDark">#</span>
-              {invoiceFormValues.id}
+              {invoiceFormValues?.invoiceId}
             </>
           ) : (
             "New Invoice"

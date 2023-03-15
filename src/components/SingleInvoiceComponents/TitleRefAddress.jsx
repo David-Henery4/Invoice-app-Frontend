@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TitleRefAddress = ({ id,description, senderAddress }) => {
+const TitleRefAddress = ({ invoiceId,description, senderAddress }) => {
   return (
     <div className="w-full flex justify-between items-start flex-col gap-8 mdTab:flex-row">
       <div className="text-xs font-bold tracking-heading4 leading-heading4 md:text-med">
@@ -8,7 +8,7 @@ const TitleRefAddress = ({ id,description, senderAddress }) => {
           <span className="text-shadedTextLight dark:text-textReallyDark">
             #
           </span>
-          {id}
+          {invoiceId}
         </h4>
         <p className="font-medium text-shadedTextLight dark:text-shadedTextDark">
           {description}

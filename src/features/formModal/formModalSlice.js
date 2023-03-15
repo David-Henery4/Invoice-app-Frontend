@@ -25,7 +25,7 @@ const FormModalSlice = createSlice({
     setInvoiceFormValues: (state, { payload }) => {
       state.invoiceFormValues = {
         ...initialInvoiceValues,
-        id: generateId(),
+        invoiceId: generateId(),
         createdAt: getCreatedAtDateFormat(),
         items: [
           {
@@ -127,7 +127,7 @@ const FormModalSlice = createSlice({
     },
     updateEditedDefaultTerms: (state, { payload }) => {
       state.defaultTerms = termsDropdownData.find(
-        (terms) => terms.days === payload.paymentTerms
+        (terms) => terms.days === payload?.paymentTerms
       );
     },
     setFormModalOpenToFalse: (state, { payload }) => {

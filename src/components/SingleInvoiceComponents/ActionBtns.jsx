@@ -8,21 +8,21 @@ import {
 } from "../../features/invoiceData/invoiceDataSlice";
 import { setFormModalOpenToTrue } from "../../features/formModal/formModalSlice";
 
-const ActionBtns = ({ isOnLargerScreens = false, id }) => {
+const ActionBtns = ({ isOnLargerScreens = false, invoiceId }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {isEditModeActive} = useSelector((store) => store.invoiceData)
   return (
     <div
       className={`flex flex-wrap justify-center items-center gap-2 ${
-        isOnLargerScreens && "hidden flex-nowrap mdTab:flex"
+        isOnLargerScreens && "hidden flex-nowrap mdTab:flex bg-none"
       }`}
     >
       <button
         className="w-[73px] h-12 rounded-3xl bg-shadedContentLight text-shadedTextLight dark:bg-shadedContentDark dark:text-shadedTextDark"
         onClick={() => {
           dispatch(setFormModalOpenToTrue());
-          dispatch(getAndActivateEditInvoice(id));
+          dispatch(getAndActivateEditInvoice(invoiceId));
         }}
       >
         Edit
@@ -30,7 +30,7 @@ const ActionBtns = ({ isOnLargerScreens = false, id }) => {
       <button
         className="w-[89px] h-12 rounded-3xl bg-deleteBtn text-basicWhite"
         onClick={() => {
-          dispatch(deleteInvoice(id));
+          dispatch(deleteInvoice(invoiceId));
           navigate("/");
         }}
       >
@@ -39,7 +39,7 @@ const ActionBtns = ({ isOnLargerScreens = false, id }) => {
       <button
         className="w-[149px] h-12 rounded-3xl bg-primaryPurple text-basicWhite mdTab:w-[131px]"
         onClick={() => {
-          dispatch(markInvoiceAsPaid(id));
+          dispatch(markInvoiceAsPaid(invoiceId));
         }}
       >
         Mark as Paid

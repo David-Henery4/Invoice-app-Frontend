@@ -2,7 +2,7 @@ import React from 'react'
 import {Status} from "../../components";
 import ActionBtns from './ActionBtns';
 
-const StatusAndActionBar = ({status, id}) => {
+const StatusAndActionBar = ({status, invoiceId}) => {
   return (
     <div className="w-full bg-basicWhite p-6 rounded-lg mdTab:flex items-center justify-between dark:bg-contentBgDark md:p-8">
       <div className="flex justify-between items-center mdTab:justify-start mdTab:gap-4">
@@ -11,7 +11,7 @@ const StatusAndActionBar = ({status, id}) => {
         </p>
         <Status status={status} />
       </div>
-      <ActionBtns id={id} isOnLargerScreens={true} />
+      <ActionBtns invoiceId={invoiceId} isOnLargerScreens={true} />
     </div>
   );
 }

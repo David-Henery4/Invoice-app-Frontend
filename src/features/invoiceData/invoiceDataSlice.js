@@ -6,8 +6,8 @@ import axios from "axios";
 import handleInterceptors from "../../reusableFunctions/axiosInterceptors";
 
 const initialState = {
-  // invoiceData: invoiceData,
-  invoiceData: [],
+  invoiceData: invoiceData,
+  // invoiceData: [],
   activeSingleInvoice: {},
   isFilterActive: false,
   filteredInvoiceData: [],
@@ -61,6 +61,18 @@ export const getInvoices = createAsyncThunk(
   }
 );
 
+export const updateEditedInvoice = createAsyncThunk("updateEditedInvoice/invoiceData", async (_, thunkAPI) => {
+  
+});
+
+export const createNewInvoice = createAsyncThunk("createNewInvoice/invoiceData", async (_, thunkAPI) => {
+  
+});
+
+export const removeInvoice = createAsyncThunk("removeInvoice/invoiceData", async (_, thunkAPI) => {
+  
+});
+
 const InvoiceDataSlice = createSlice({
   name: "invoiceData",
   initialState,
@@ -70,7 +82,7 @@ const InvoiceDataSlice = createSlice({
     },
     getActiveSingleInvoice: (state, { payload }) => {
       state.activeSingleInvoice = state.invoiceData.find(
-        (item) => item.id === payload
+        (item) => item.invoiceId === payload
       );
     },
     filterInvoices: (state, { payload }) => {
@@ -104,13 +116,14 @@ const InvoiceDataSlice = createSlice({
     },
     deleteInvoice: (state, { payload }) => {
       const newInvoiceData = state.invoiceData.filter(
-        (invoice) => invoice.id !== payload
+        (invoice) => invoice.invoiceId !== payload
       );
       state.invoiceData = newInvoiceData;
     },
     markInvoiceAsPaid: (state, { payload }) => {
-      state.invoiceData.find((invoice) => invoice.id === payload).status =
-        "paid";
+      state.invoiceData.find(
+        (invoice) => invoice.invoiceId === payload
+      ).status = "paid";
     },
     saveInvoiceAsDraft: (state, { payload }) => {
       const newDraft = { ...payload, status: "draft" };
@@ -119,7 +132,7 @@ const InvoiceDataSlice = createSlice({
     getAndActivateEditInvoice: (state, { payload }) => {
       state.isEditModeActive = true;
       state.currentEditedInvoice = state.invoiceData.find(
-        (item) => item.id === payload
+        (item) => item.invoiceId === payload
       );
     },
     endAndDeactivateEditInvoice: (state, { payload }) => {
@@ -133,7 +146,7 @@ const InvoiceDataSlice = createSlice({
         payload.status = "pending";
       }
       state.invoiceData = state.invoiceData.map((invoice) =>
-        invoice.id === payload.id ? (invoice = payload) : invoice
+        invoice.invoiceId === payload.invoiceId ? (invoice = payload) : invoice
       );
     },
   },
@@ -147,7 +160,6 @@ const InvoiceDataSlice = createSlice({
       .addCase(getInvoices.rejected, (state, { payload }) => {
         state.isError = true;
         state.isInvoiceLoading = false;
-        console.log("rejected")
         state.invoiceData = []
       })
       .addCase(getInvoices.pending, (state, { payload }) => {

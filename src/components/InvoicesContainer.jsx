@@ -17,7 +17,7 @@ const InvoicesContainer = () => {
               <Link
                 key={i}
                 className="w-full"
-                to={`singleInvoice/${invoice.id}`}
+                to={`singleInvoice/${invoice.invoiceId}`}
               >
                 <Invoice {...invoice} />
               </Link>
@@ -31,7 +31,7 @@ const InvoicesContainer = () => {
               <Link
                 key={i}
                 className="w-full"
-                to={`singleInvoice/${invoice.id}`}
+                to={`singleInvoice/${invoice.invoiceId}`}
               >
                 <Invoice {...invoice} />
               </Link>

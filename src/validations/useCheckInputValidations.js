@@ -183,7 +183,7 @@ const useCheckInputValidations = (callbackSubmit) => {
       createdAt,
       paymentDue,
       total,
-      id,
+      invoiceId,
       status,
     } = inputValues;
     //
@@ -200,7 +200,7 @@ const useCheckInputValidations = (callbackSubmit) => {
     setValidatedValues((prevValues) => {
       return {
         ...prevValues,
-        id,
+        invoiceId,
         createdAt,
         paymentDue,
         paymentTerms,
