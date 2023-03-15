@@ -34,16 +34,13 @@ const initialState = {
   isError: false,
 };
 
-
 export const getInvoices = createAsyncThunk(
   "getInvoices/invoiceData",
   async (userId, thunkAPI) => {
     try {
       handleInterceptors(thunkAPI);
-      const userInvoices = await axiosPrivate.get(
-        `/invoices/${userId}`
-      );
-      console.log("fulfiled")
+      const userInvoices = await axiosPrivate.get(`/invoices/${userId}`);
+      console.log("fulfiled");
       return userInvoices.data;
     } catch (error) {
       const message =
@@ -55,32 +52,56 @@ export const getInvoices = createAsyncThunk(
       console.error(error);
       console.log(message);
       thunkAPI.rejectWithValue(message);
-      console.log("refresh-expired")
-      thunkAPI.dispatch(resetUser())
-      throw new Error(message)
+      thunkAPI.dispatch(resetUser());
+      throw new Error(message);
       // return message
     }
   }
 );
 
-export const updateEditedInvoice = createAsyncThunk("updateEditedInvoice/invoiceData", async (_, thunkAPI) => {
-  
-});
+export const createNewInvoice = createAsyncThunk(
+  "createNewInvoice/invoiceData",
+  async (newInvoice, thunkAPI) => {
+    try {
+      handleInterceptors(thunkAPI);
+      const res = await axiosPrivate.post("/invoices", newInvoice);
+      return res.data.invoices;
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      console.error(error);
+      console.log(message);
+      thunkAPI.rejectWithValue(message);
+      thunkAPI.dispatch(resetUser());
+      throw new Error(message);
+      // return message
+    }
+  }
+);
 
-export const createNewInvoice = createAsyncThunk("createNewInvoice/invoiceData", async (_, thunkAPI) => {
-  
-});
+export const updateEditedInvoice = createAsyncThunk(
+  "updateEditedInvoice/invoiceData",
+  async (_, thunkAPI) => {}
+);
 
-export const removeInvoice = createAsyncThunk("removeInvoice/invoiceData", async (_, thunkAPI) => {
-  
-});
+export const removeInvoice = createAsyncThunk(
+  "removeInvoice/invoiceData",
+  async (_, thunkAPI) => {}
+);
 
 const InvoiceDataSlice = createSlice({
   name: "invoiceData",
   initialState,
   reducers: {
-    addInvoicesFromLogin: (state, {payload}) => {
-      state.invoiceData = payload
+    clearInvoicesAfterLogout: (state, {payload}) => {
+      state.invoiceData = []
+    },
+    addInvoicesFromLogin: (state, { payload }) => {
+      state.invoiceData = payload;
     },
     getActiveSingleInvoice: (state, { payload }) => {
       state.activeSingleInvoice = state.invoiceData.find(
@@ -154,6 +175,8 @@ const InvoiceDataSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+
+      // Get all users invoices 
       .addCase(getInvoices.fulfilled, (state, { payload }) => {
         state.isInvoiceLoading = false;
         state.isError = false;
@@ -162,12 +185,28 @@ const InvoiceDataSlice = createSlice({
       .addCase(getInvoices.rejected, (state, { payload }) => {
         state.isError = true;
         state.isInvoiceLoading = false;
-        state.invoiceData = []
+        state.invoiceData = [];
       })
       .addCase(getInvoices.pending, (state, { payload }) => {
         state.isInvoiceLoading = true;
         state.isError = false;
-      });
+      })
+
+      // Create new Invoice & get Updated invoices
+      .addCase(createNewInvoice.fulfilled, (state, { payload }) => {
+        state.isInvoiceLoading = false;
+        state.isError = false;
+        state.invoiceData = payload;
+      })
+      .addCase(createNewInvoice.rejected, (state, { payload }) => {
+        state.isError = true;
+        state.isInvoiceLoading = false;
+        state.invoiceData = [];
+      })
+      .addCase(createNewInvoice.pending, (state, { payload }) => {
+        state.isInvoiceLoading = true;
+        state.isError = false;
+      })
   },
 });
 
@@ -182,5 +221,6 @@ export const {
   updateAndDeactivateEditInvoice,
   addNewInvoice,
   addInvoicesFromLogin,
+  clearInvoicesAfterLogout
 } = InvoiceDataSlice.actions;
 export default InvoiceDataSlice.reducer;

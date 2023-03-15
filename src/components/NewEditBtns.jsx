@@ -14,6 +14,7 @@ import {
   endAndDeactivateEditInvoice,
 } from "../features/invoiceData/invoiceDataSlice";
 import checkDynamicInputValidations from "../validations/checkDynamicInputValidations";
+import { createNewInvoice } from "../features/invoiceData/invoiceDataSlice";
 
 const NewEditBtns = ({ validation }) => {
   const dispatch = useDispatch();
@@ -79,6 +80,13 @@ const NewEditBtns = ({ validation }) => {
               handleValueAndErrorReset();
               dispatch(
                 saveInvoiceAsDraft({ ...invoiceFormValues, userId: user._id })
+              );
+              dispatch(
+                createNewInvoice({
+                  ...invoiceFormValues,
+                  userId: user._id,
+                  status: "draft",
+                })
               );
             }}
           >

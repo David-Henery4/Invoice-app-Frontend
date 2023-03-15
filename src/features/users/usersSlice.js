@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import usersPost from "../axios/baseInstance";
-import { addInvoicesFromLogin } from "../invoiceData/invoiceDataSlice";
+import { addInvoicesFromLogin, clearInvoicesAfterLogout } from "../invoiceData/invoiceDataSlice";
 
 const initialState = {
   user: null,
@@ -52,6 +52,7 @@ export const logout = createAsyncThunk(
   async (user, thunkAPI) => {
     try {
       const userLoggedOut = await usersPost.post("/auth/logout")
+      thunkAPI.dispatch(clearInvoicesAfterLogout())
       return userLoggedOut.data;
     } catch (error) {
       const message =
