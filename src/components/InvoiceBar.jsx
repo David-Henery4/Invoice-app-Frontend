@@ -9,7 +9,7 @@ import { getInvoices } from "../features/invoiceData/invoiceDataSlice";
 
 const InvoiceBar = () => {
   // TEST
-  const { userAccessToken } = useSelector((store) => store.users);
+  const { user } = useSelector((store) => store.users);
   //
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState(false);
   const dispatch = useDispatch();
@@ -26,9 +26,9 @@ const InvoiceBar = () => {
       <div>
         <h1
           className="text-xl font-bold tracking-heading2 dark:text-basicWhite md:text-lrgHeading md:tracking-heading1"
-          // onClick={() => {
-          //   dispatch(getInvoices())
-          // }}
+          onClick={() => {
+            dispatch(getInvoices(user._id))
+          }}
         >
           Invoices
         </h1>

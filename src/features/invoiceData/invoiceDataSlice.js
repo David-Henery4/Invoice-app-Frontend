@@ -37,10 +37,12 @@ const initialState = {
 
 export const getInvoices = createAsyncThunk(
   "getInvoices/invoiceData",
-  async (accessToken, thunkAPI) => {
+  async (userId, thunkAPI) => {
     try {
       handleInterceptors(thunkAPI);
-      const userInvoices = await axiosPrivate.get("/invoices");
+      const userInvoices = await axiosPrivate.get(
+        `/invoices/${userId}`
+      );
       console.log("fulfiled")
       return userInvoices.data;
     } catch (error) {
