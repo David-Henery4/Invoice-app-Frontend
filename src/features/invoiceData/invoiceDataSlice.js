@@ -6,8 +6,8 @@ import axios from "axios";
 import handleInterceptors from "../../reusableFunctions/axiosInterceptors";
 
 const initialState = {
-  invoiceData: invoiceData,
-  // invoiceData: [],
+  // invoiceData: invoiceData,
+  invoiceData: [],
   activeSingleInvoice: {},
   isFilterActive: false,
   filteredInvoiceData: [],

@@ -17,14 +17,16 @@ const NewEditInvoice = () => {
   const { invoiceFormValues, defaultTerms} = useSelector(
     (store) => store.formModal
   );
+  const { user} = useSelector(
+    (store) => store.users
+  );
   //
   const handleFinalSubmit = (finalValues) => {
     if (!isEditModeActive){
-      console.log(finalValues)
-      handleCreateNewInvoice(finalValues)
+      handleCreateNewInvoice({ ...finalValues, userId: user._id });
     }
     if (isEditModeActive){
-      handleEditInvoice(finalValues)
+      handleEditInvoice({ ...finalValues, userId: user._id });
     }
   }
   //
@@ -88,7 +90,7 @@ const NewEditInvoice = () => {
           defaultTerms={defaultTerms}
         />
       </section>
-      <div className="w-full col-start-1 col-end-13 tab:sticky tab:bottom-0 tab:left-0 pointer-events-none">
+      <div className="relative z-50 w-full col-start-1 col-end-13 tab:sticky tab:bottom-0 tab:left-0 pointer-events-none">
         <div className="w-full h-16 bg-gradient-to-t from-basicBlack to-basicBlack/10 opacity-10 dark:opacity-30"></div>
         <NewEditBtns validation={validation} />
       </div>

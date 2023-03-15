@@ -34,7 +34,7 @@ export const login = createAsyncThunk("login/user", async (user, thunkAPI) => {
   try {
     const loggedInUser = await usersPost.post("/auth", user);
     // WILL NEED TO GET USERS INVOICES!
-    // thunkAPI.dispatch(addInvoicesFromLogin(loggedInUser.data.invoices));
+    thunkAPI.dispatch(addInvoicesFromLogin(loggedInUser.data.invoices));
     return loggedInUser.data.user;
   } catch (error) {
     const message =
