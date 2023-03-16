@@ -185,6 +185,7 @@ const useCheckInputValidations = (callbackSubmit) => {
       total,
       invoiceId,
       status,
+      _id,
     } = inputValues;
     //
     checkIfInputEmpty("description", description);
@@ -201,6 +202,7 @@ const useCheckInputValidations = (callbackSubmit) => {
       return {
         ...prevValues,
         invoiceId,
+        _id,
         createdAt,
         paymentDue,
         paymentTerms,

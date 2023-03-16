@@ -12,9 +12,10 @@ import {
 import {
   saveInvoiceAsDraft,
   endAndDeactivateEditInvoice,
+  // apis
+  createNewInvoice,
 } from "../features/invoiceData/invoiceDataSlice";
 import checkDynamicInputValidations from "../validations/checkDynamicInputValidations";
-import { createNewInvoice } from "../features/invoiceData/invoiceDataSlice";
 
 const NewEditBtns = ({ validation }) => {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ const NewEditBtns = ({ validation }) => {
     dispatch(resetIsItemListErrors(false));
     dispatch(resetItemListErrorsList([]));
     dispatch(setFormModalOpenToFalse());
-    if (isEditModeActive){
+    if (isEditModeActive) {
       dispatch(endAndDeactivateEditInvoice());
     }
   };

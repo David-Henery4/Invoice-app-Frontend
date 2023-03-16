@@ -5,7 +5,9 @@ import {
   deleteInvoice,
   markInvoiceAsPaid,
   getAndActivateEditInvoice,
+  // apis
   removeInvoice,
+  updateEditedInvoice
 } from "../../features/invoiceData/invoiceDataSlice";
 import { setFormModalOpenToTrue } from "../../features/formModal/formModalSlice";
 
@@ -52,6 +54,12 @@ const ActionBtns = ({ isOnLargerScreens = false }) => {
         className="w-[149px] h-12 rounded-3xl bg-primaryPurple text-basicWhite mdTab:w-[131px]"
         onClick={() => {
           dispatch(markInvoiceAsPaid(activeSingleInvoice.invoiceId));
+          dispatch(
+            updateEditedInvoice({
+              ...activeSingleInvoice,
+              status: "paid",
+            })
+          );
         }}
       >
         Mark as Paid

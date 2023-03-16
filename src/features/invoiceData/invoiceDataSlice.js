@@ -85,7 +85,26 @@ export const createNewInvoice = createAsyncThunk(
 
 export const updateEditedInvoice = createAsyncThunk(
   "updateEditedInvoice/invoiceData",
-  async (_, thunkAPI) => {}
+  async (invoiceToEdit, thunkAPI) => {
+    try {
+      handleInterceptors(thunkAPI);
+      const res = await axiosPrivate.patch("/invoices", invoiceToEdit);
+      return res.data;
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      console.error(error);
+      console.log(message);
+      thunkAPI.rejectWithValue(message);
+      thunkAPI.dispatch(resetUser());
+      throw new Error(message);
+      // return message
+    }
+  }
 );
 
 export const removeInvoice = createAsyncThunk(
@@ -96,7 +115,7 @@ export const removeInvoice = createAsyncThunk(
       const res = await axiosPrivate.delete("/invoices", {
         data: deletedInvoiceInfo,
       });
-      return res.data.invoices
+      return res.data.invoices;
     } catch (error) {
       const message =
         (error.response &&
@@ -118,8 +137,8 @@ const InvoiceDataSlice = createSlice({
   name: "invoiceData",
   initialState,
   reducers: {
-    clearInvoicesAfterLogout: (state, {payload}) => {
-      state.invoiceData = []
+    clearInvoicesAfterLogout: (state, { payload }) => {
+      state.invoiceData = [];
     },
     addInvoicesFromLogin: (state, { payload }) => {
       state.invoiceData = payload;
@@ -197,7 +216,7 @@ const InvoiceDataSlice = createSlice({
   extraReducers: (builder) => {
     builder
 
-      // Get all users invoices 
+      // Get all users invoices
       .addCase(getInvoices.fulfilled, (state, { payload }) => {
         state.isInvoiceLoading = false;
         state.isError = false;
@@ -244,6 +263,27 @@ const InvoiceDataSlice = createSlice({
         state.isInvoiceLoading = true;
         state.isError = false;
       })
+
+      // Edit invoice
+      .addCase(updateEditedInvoice.fulfilled, (state, { payload }) => {
+        state.isInvoiceLoading = false;
+        state.isError = false;
+        state.activeSingleInvoice = payload;
+        state.invoiceData = state.invoiceData.map((invoice) =>
+          invoice._id === payload._id
+            ? (invoice = payload)
+            : invoice
+        );
+      })
+      .addCase(updateEditedInvoice.rejected, (state, { payload }) => {
+        state.isError = true;
+        state.isInvoiceLoading = false;
+        // state.invoiceData = [];
+      })
+      .addCase(updateEditedInvoice.pending, (state, { payload }) => {
+        state.isInvoiceLoading = true;
+        state.isError = false;
+      });
   },
 });
 
@@ -258,6 +298,6 @@ export const {
   updateAndDeactivateEditInvoice,
   addNewInvoice,
   addInvoicesFromLogin,
-  clearInvoicesAfterLogout
+  clearInvoicesAfterLogout,
 } = InvoiceDataSlice.actions;
 export default InvoiceDataSlice.reducer;

@@ -13,7 +13,9 @@ import {
 import {
   updateAndDeactivateEditInvoice,
   addNewInvoice,
+  // APIs
   createNewInvoice,
+  updateEditedInvoice,
 } from "../features/invoiceData/invoiceDataSlice";
 
 const NewEditInvoice = () => {
@@ -40,7 +42,17 @@ const NewEditInvoice = () => {
       );
     }
     if (isEditModeActive) {
+      // MIGHT DELETE "updateAndDeactivateEditInvoice"
+      // NEED TO KEEP the deactivate edit part though!
       handleEditInvoice({ ...finalValues, userId: user._id });
+      //
+      dispatch(
+        updateEditedInvoice({
+          ...finalValues,
+          userId: user._id,
+          status: "pending",
+        })
+      );
     }
   };
   //
