@@ -30,7 +30,6 @@ const SingleInvoice = () => {
         <section className="w-full grid gap-4">
           {/* Status */}
           <StatusAndActionBar
-            invoiceId={activeSingleInvoice?.invoiceId}
             status={activeSingleInvoice?.status}
           />
 
@@ -52,7 +51,7 @@ const SingleInvoice = () => {
 
       {/* Mobile Bottom Btns */}
       <div className="col-start-1 col-end-13 w-full p-6 mt-14 bg-basicWhite mdTab:hidden dark:bg-contentBgDark">
-        <ActionBtns invoiceId={activeSingleInvoice?.invoiceId} />
+        <ActionBtns/>
       </div>
     </>
   );

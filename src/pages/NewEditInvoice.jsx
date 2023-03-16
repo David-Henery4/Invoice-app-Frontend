@@ -2,61 +2,71 @@ import { useEffect } from "react";
 import { BackBtn, Form, NewEditBtns } from "../components";
 import { useSelector, useDispatch } from "react-redux";
 import useCheckInputValidations from "../validations/useCheckInputValidations";
-import { setFormModalOpenToFalse, setInputErrors, setDefaultTerms, setInvoiceFormValues, updateEditedDefaultTerms, updateEditedInvoiceFormValues } from "../features/formModal/formModalSlice";
+import {
+  setFormModalOpenToFalse,
+  setInputErrors,
+  setDefaultTerms,
+  setInvoiceFormValues,
+  updateEditedDefaultTerms,
+  updateEditedInvoiceFormValues,
+} from "../features/formModal/formModalSlice";
 import {
   updateAndDeactivateEditInvoice,
   addNewInvoice,
+  createNewInvoice,
 } from "../features/invoiceData/invoiceDataSlice";
 
 const NewEditInvoice = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { isFormOpen } = useSelector((store) => store.formModal);
   const { isEditModeActive, currentEditedInvoice } = useSelector(
     (store) => store.invoiceData
   );
-  const { invoiceFormValues, defaultTerms} = useSelector(
+  const { invoiceFormValues, defaultTerms } = useSelector(
     (store) => store.formModal
   );
-  const { user} = useSelector(
-    (store) => store.users
-  );
+  const { user } = useSelector((store) => store.users);
   //
   const handleFinalSubmit = (finalValues) => {
-    if (!isEditModeActive){
+    if (!isEditModeActive) {
+      // MIGHT DELETE "addNewInvoice"
       handleCreateNewInvoice({ ...finalValues, userId: user._id });
+      //
+      dispatch(
+        createNewInvoice({
+          ...finalValues,
+          userId: user._id,
+        })
+      );
     }
-    if (isEditModeActive){
+    if (isEditModeActive) {
       handleEditInvoice({ ...finalValues, userId: user._id });
     }
-  }
+  };
   //
-    const handleCreateNewInvoice = (values) => {
-      dispatch(setFormModalOpenToFalse());
-      dispatch(addNewInvoice(values));
-      dispatch(setInvoiceFormValues());
-      dispatch(setDefaultTerms());
-    };
-    //
-    const handleEditInvoice = (values) => {
-      dispatch(setFormModalOpenToFalse());
-      dispatch(updateAndDeactivateEditInvoice(values));
-    };
+  const handleCreateNewInvoice = (values) => {
+    dispatch(setFormModalOpenToFalse());
+    dispatch(addNewInvoice(values));
+    dispatch(setInvoiceFormValues());
+    dispatch(setDefaultTerms());
+  };
+  //
+  const handleEditInvoice = (values) => {
+    dispatch(setFormModalOpenToFalse());
+    dispatch(updateAndDeactivateEditInvoice(values));
+  };
   //
   const { isInputErrors, validation } =
     useCheckInputValidations(handleFinalSubmit);
   //
   useEffect(() => {
-    dispatch(setInputErrors(isInputErrors))
-  },[isInputErrors])
+    dispatch(setInputErrors(isInputErrors));
+  }, [isInputErrors]);
   //
   useEffect(() => {
     if (isEditModeActive) {
-      dispatch(
-        updateEditedInvoiceFormValues(currentEditedInvoice)
-      )
-      dispatch(
-        updateEditedDefaultTerms(currentEditedInvoice)
-      )
+      dispatch(updateEditedInvoiceFormValues(currentEditedInvoice));
+      dispatch(updateEditedDefaultTerms(currentEditedInvoice));
     }
     if (!isEditModeActive) {
       dispatch(setInvoiceFormValues());

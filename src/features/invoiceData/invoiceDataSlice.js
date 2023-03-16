@@ -90,7 +90,28 @@ export const updateEditedInvoice = createAsyncThunk(
 
 export const removeInvoice = createAsyncThunk(
   "removeInvoice/invoiceData",
-  async (_, thunkAPI) => {}
+  async (deletedInvoiceInfo, thunkAPI) => {
+    try {
+      handleInterceptors(thunkAPI);
+      const res = await axiosPrivate.delete("/invoices", {
+        data: deletedInvoiceInfo,
+      });
+      return res.data.invoices
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      console.error(error);
+      console.log(message);
+      thunkAPI.rejectWithValue(message);
+      thunkAPI.dispatch(resetUser());
+      throw new Error(message);
+      // return message
+    }
+  }
 );
 
 const InvoiceDataSlice = createSlice({
@@ -185,7 +206,7 @@ const InvoiceDataSlice = createSlice({
       .addCase(getInvoices.rejected, (state, { payload }) => {
         state.isError = true;
         state.isInvoiceLoading = false;
-        state.invoiceData = [];
+        // state.invoiceData = [];
       })
       .addCase(getInvoices.pending, (state, { payload }) => {
         state.isInvoiceLoading = true;
@@ -201,9 +222,25 @@ const InvoiceDataSlice = createSlice({
       .addCase(createNewInvoice.rejected, (state, { payload }) => {
         state.isError = true;
         state.isInvoiceLoading = false;
-        state.invoiceData = [];
+        // state.invoiceData = [];
       })
       .addCase(createNewInvoice.pending, (state, { payload }) => {
+        state.isInvoiceLoading = true;
+        state.isError = false;
+      })
+
+      // Create delete invoice
+      .addCase(removeInvoice.fulfilled, (state, { payload }) => {
+        state.isInvoiceLoading = false;
+        state.isError = false;
+        state.invoiceData = payload;
+      })
+      .addCase(removeInvoice.rejected, (state, { payload }) => {
+        state.isError = true;
+        state.isInvoiceLoading = false;
+        // state.invoiceData = [];
+      })
+      .addCase(removeInvoice.pending, (state, { payload }) => {
         state.isInvoiceLoading = true;
         state.isError = false;
       })

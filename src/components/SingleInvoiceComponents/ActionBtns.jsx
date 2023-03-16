@@ -5,13 +5,17 @@ import {
   deleteInvoice,
   markInvoiceAsPaid,
   getAndActivateEditInvoice,
+  removeInvoice,
 } from "../../features/invoiceData/invoiceDataSlice";
 import { setFormModalOpenToTrue } from "../../features/formModal/formModalSlice";
 
-const ActionBtns = ({ isOnLargerScreens = false, invoiceId }) => {
+const ActionBtns = ({ isOnLargerScreens = false }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const {isEditModeActive} = useSelector((store) => store.invoiceData)
+  const { user } = useSelector((store) => store.users);
+  const { activeSingleInvoice } = useSelector(
+    (store) => store.invoiceData
+  );
   return (
     <div
       className={`flex flex-wrap justify-center items-center gap-2 ${
@@ -22,7 +26,7 @@ const ActionBtns = ({ isOnLargerScreens = false, invoiceId }) => {
         className="w-[73px] h-12 rounded-3xl bg-shadedContentLight text-shadedTextLight dark:bg-shadedContentDark dark:text-shadedTextDark"
         onClick={() => {
           dispatch(setFormModalOpenToTrue());
-          dispatch(getAndActivateEditInvoice(invoiceId));
+          dispatch(getAndActivateEditInvoice(activeSingleInvoice.invoiceId));
         }}
       >
         Edit
@@ -30,7 +34,15 @@ const ActionBtns = ({ isOnLargerScreens = false, invoiceId }) => {
       <button
         className="w-[89px] h-12 rounded-3xl bg-deleteBtn text-basicWhite"
         onClick={() => {
-          dispatch(deleteInvoice(invoiceId));
+          // MIGHT GET RID OF "deleteInvoice"
+          dispatch(deleteInvoice(activeSingleInvoice.invoiceId));
+          //
+          dispatch(
+            removeInvoice({
+              userId: activeSingleInvoice.userId,
+              _id: activeSingleInvoice._id,
+            })
+          );
           navigate("/");
         }}
       >
@@ -39,7 +51,7 @@ const ActionBtns = ({ isOnLargerScreens = false, invoiceId }) => {
       <button
         className="w-[149px] h-12 rounded-3xl bg-primaryPurple text-basicWhite mdTab:w-[131px]"
         onClick={() => {
-          dispatch(markInvoiceAsPaid(invoiceId));
+          dispatch(markInvoiceAsPaid(activeSingleInvoice.invoiceId));
         }}
       >
         Mark as Paid

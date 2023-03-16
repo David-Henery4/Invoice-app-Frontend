@@ -78,6 +78,7 @@ const NewEditBtns = ({ validation }) => {
             className="w-[117px] h-12 rounded-3xl bg-navbarLight text-textReallyDark dark:text-shadedTextDark tab:w-[113px]"
             onClick={() => {
               handleValueAndErrorReset();
+              // MIGHT GET RID OF "saveInvoiceAsDraft"
               dispatch(
                 saveInvoiceAsDraft({ ...invoiceFormValues, userId: user._id })
               );

@@ -27,7 +27,7 @@ const InvoiceBar = () => {
         <h1
           className="text-xl font-bold tracking-heading2 dark:text-basicWhite md:text-lrgHeading md:tracking-heading1"
           onClick={() => {
-            dispatch(getInvoices(user._id))
+            // dispatch(getInvoices(user._id))
           }}
         >
           Invoices
