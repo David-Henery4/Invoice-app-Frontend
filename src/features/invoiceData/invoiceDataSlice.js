@@ -1,8 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import invoiceData from "../../../data.json";
 import { axiosPrivate } from "../axios/baseInstance";
-import { updateAccessToken, resetUser } from "../users/usersSlice";
-import axios from "axios";
+import { resetUser } from "../users/usersSlice";
 import handleInterceptors from "../../reusableFunctions/axiosInterceptors";
 
 const initialState = {
@@ -268,6 +267,8 @@ const InvoiceDataSlice = createSlice({
       .addCase(updateEditedInvoice.fulfilled, (state, { payload }) => {
         state.isInvoiceLoading = false;
         state.isError = false;
+        state.isEditModeActive = false;
+        state.currentEditedInvoice = {};
         state.activeSingleInvoice = payload;
         state.invoiceData = state.invoiceData.map((invoice) =>
           invoice._id === payload._id
@@ -278,6 +279,8 @@ const InvoiceDataSlice = createSlice({
       .addCase(updateEditedInvoice.rejected, (state, { payload }) => {
         state.isError = true;
         state.isInvoiceLoading = false;
+        state.isEditModeActive = false;
+        state.currentEditedInvoice = {};
         // state.invoiceData = [];
       })
       .addCase(updateEditedInvoice.pending, (state, { payload }) => {

@@ -1,5 +1,11 @@
 
+// CLEAN UP/ REFACTOR (DO LAST)
+
+// REMOVE REDUNDENT CRUD OPERATIONS
+
 // MIGHT BUILD PAGINATION
+
+// CHANGE API URLs when uploaded!!!!!!!!
 
 // SORT ITEMLIST LABEL ON BIGGER SCREENS!!!!
 
@@ -10,7 +16,7 @@
 // (currency)
 // RESEARCH: Intl.NumberFormat = for total & price
 
-remove notes.notes from git
+remove notes.notes from git (or delete when finished)
 
 fix z-index on terms dropdown
 

@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import usersPost from "../axios/baseInstance";
 import { addInvoicesFromLogin, clearInvoicesAfterLogout } from "../invoiceData/invoiceDataSlice";
 

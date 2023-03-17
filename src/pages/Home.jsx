@@ -1,25 +1,18 @@
-import {useState, useEffect} from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+import {useEffect} from 'react'
+import { useSelector } from 'react-redux';
 import { Outlet, useNavigate } from "react-router-dom";
 import { Navbar, Overlay } from "../components";
 import { NewEditInvoice } from "../pages";
-import { getInvoices } from '../features/invoiceData/invoiceDataSlice';
+
 
 const Home = () => {
-  const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { user, userAccessToken } = useSelector((store) => store.users);
+  const { user  } = useSelector((store) => store.users);
   const { isInvoiceLoading } = useSelector((store) => store.invoiceData);
   //
   useEffect(() => {
     if (!user){
       navigate("/login")
-    }
-    if (user){
-      // dispatch(getInvoices(userAccessToken))
-      // 
-      // WORKING
-      // dispatch(getInvoices())
     }
   }, [user])
   //

@@ -46,13 +46,20 @@ const NewEditInvoice = () => {
       // NEED TO KEEP the deactivate edit part though!
       handleEditInvoice({ ...finalValues, userId: user._id });
       //
-      dispatch(
-        updateEditedInvoice({
-          ...finalValues,
-          userId: user._id,
-          status: "pending",
-        })
-      );
+      finalValues.status === "draft"
+        ? dispatch(
+            updateEditedInvoice({
+              ...finalValues,
+              userId: user._id,
+              status: "pending",
+            })
+          )
+        : dispatch(
+            updateEditedInvoice({
+              ...finalValues,
+              userId: user._id,
+            })
+          );
     }
   };
   //

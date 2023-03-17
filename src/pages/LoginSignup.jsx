@@ -7,7 +7,6 @@ const LoginSignup = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const {user, isLoading} = useSelector(store => store.users)
-  // const { isInvoiceLoading} = useSelector(store => store.invoiceData)
   //
   const [isSignUp,setIsSignUp] = useState(false)
   const [username, setUsername] = useState("");
