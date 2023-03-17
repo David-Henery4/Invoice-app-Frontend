@@ -20,7 +20,11 @@ const Home = () => {
     <div className="App bg-bgColourLight font-spartan min-h-screen w-full grid grid-cols-mainMob grid-rows-firstRowMinContent dark:bg-bgColourDark md:grid-cols-invoiceTab lg:grid-cols-mainDesk lg:grid-rows-[auto] lg:gap-x-[30px]">
       <Overlay />
       <Navbar />
-      {isInvoiceLoading ? <div className="lds-dual-ring"></div> : <Outlet />}
+      {isInvoiceLoading ?
+      <div className='w-full min-h-screen grid place-items-center col-start-2 col-end-12'>
+      <div className="lds-dual-ring"></div>
+      </div>
+      : <Outlet />}
       <NewEditInvoice />
     </div>
   );

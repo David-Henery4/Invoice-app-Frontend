@@ -10,7 +10,6 @@ import {
   setInvoiceFormValues,
 } from "../features/formModal/formModalSlice";
 import {
-  saveInvoiceAsDraft,
   endAndDeactivateEditInvoice,
   // apis
   createNewInvoice,
@@ -79,10 +78,6 @@ const NewEditBtns = ({ validation }) => {
             className="w-[117px] h-12 rounded-3xl bg-navbarLight text-textReallyDark dark:text-shadedTextDark tab:w-[113px]"
             onClick={() => {
               handleValueAndErrorReset();
-              // MIGHT GET RID OF "saveInvoiceAsDraft"
-              dispatch(
-                saveInvoiceAsDraft({ ...invoiceFormValues, userId: user._id })
-              );
               dispatch(
                 createNewInvoice({
                   ...invoiceFormValues,

@@ -1,6 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import usersPost from "../axios/baseInstance";
-import { addInvoicesFromLogin, clearInvoicesAfterLogout } from "../invoiceData/invoiceDataSlice";
+import {
+  handleLogin,
+  handleLogout,
+  handleRegister,
+} from "./usersApiCallbacks/apiCallbacks";
 
 const initialState = {
   user: null,
@@ -9,78 +12,28 @@ const initialState = {
   isError: false,
 };
 
-export const register = createAsyncThunk(
-  "register/user",
-  async (userData, thunkAPI) => {
-    try {
-      const newUser = await usersPost.post("/users", userData);
-      return newUser.data;
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      console.error(error);
-      console.log(message);
-      thunkAPI.rejectWithValue(message);
-    }
-  }
-);
 
-export const login = createAsyncThunk("login/user", async (user, thunkAPI) => {
-  try {
-    const loggedInUser = await usersPost.post("/auth", user);
-    // WILL NEED TO GET USERS INVOICES!
-    thunkAPI.dispatch(addInvoicesFromLogin(loggedInUser.data.invoices));
-    return loggedInUser.data.user;
-  } catch (error) {
-    const message =
-      (error.response && error.response.data && error.response.data.message) ||
-      error.message ||
-      error.toString();
-    console.error(error);
-    console.log(message);
-    thunkAPI.rejectWithValue(message);
-  }
-});
+export const register = createAsyncThunk("register/user", handleRegister);
 
-export const logout = createAsyncThunk(
-  "logout/user",
-  async (user, thunkAPI) => {
-    try {
-      const userLoggedOut = await usersPost.post("/auth/logout")
-      thunkAPI.dispatch(clearInvoicesAfterLogout())
-      return userLoggedOut.data;
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      console.error(error);
-      console.log(message);
-      thunkAPI.rejectWithValue(message);
-    }
-  }
-);
+export const login = createAsyncThunk("login/user", handleLogin);
+
+export const logout = createAsyncThunk("logout/user", handleLogout);
+
 
 const usersSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
-    updateAccessToken: (state, {payload}) => {
+    updateAccessToken: (state, { payload }) => {
       // state.user?.accessToken = payload
-      state.userAccessToken = payload
+      state.userAccessToken = payload;
     },
-    resetUser: (state, {payload}) => {
-      state.user = null
-      state.userAccessToken = null
+    resetUser: (state, { payload }) => {
+      state.user = null;
+      state.userAccessToken = null;
     },
-    setUser: (state, {payload}) => {
-      state.user = payload
+    setUser: (state, { payload }) => {
+      state.user = payload;
     },
   },
   extraReducers: (builder) => {
@@ -91,7 +44,7 @@ const usersSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.user = payload;
-        state.userAccessToken = payload?.accessToken
+        state.userAccessToken = payload?.accessToken;
       })
       .addCase(register.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -124,9 +77,9 @@ const usersSlice = createSlice({
       .addCase(logout.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isError = false;
-        state.user = null
-        state.userAccessToken = null
-        console.log(payload)
+        state.user = null;
+        state.userAccessToken = null;
+        console.log(payload);
       })
       .addCase(logout.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -140,6 +93,6 @@ const usersSlice = createSlice({
   },
 });
 
-export const {updateAccessToken, resetUser, setUser} = usersSlice.actions;
+export const { updateAccessToken, resetUser, setUser } = usersSlice.actions;
 
 export default usersSlice.reducer;

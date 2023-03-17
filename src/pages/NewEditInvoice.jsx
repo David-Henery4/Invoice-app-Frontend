@@ -11,8 +11,6 @@ import {
   updateEditedInvoiceFormValues,
 } from "../features/formModal/formModalSlice";
 import {
-  updateAndDeactivateEditInvoice,
-  addNewInvoice,
   // APIs
   createNewInvoice,
   updateEditedInvoice,
@@ -31,48 +29,41 @@ const NewEditInvoice = () => {
   //
   const handleFinalSubmit = (finalValues) => {
     if (!isEditModeActive) {
-      // MIGHT DELETE "addNewInvoice"
-      handleCreateNewInvoice({ ...finalValues, userId: user._id });
-      //
-      dispatch(
-        createNewInvoice({
-          ...finalValues,
-          userId: user._id,
-        })
-      );
+      handleCreateNewInvoice(finalValues)
     }
     if (isEditModeActive) {
-      // MIGHT DELETE "updateAndDeactivateEditInvoice"
-      // NEED TO KEEP the deactivate edit part though!
-      handleEditInvoice({ ...finalValues, userId: user._id });
-      //
-      finalValues.status === "draft"
-        ? dispatch(
-            updateEditedInvoice({
-              ...finalValues,
-              userId: user._id,
-              status: "pending",
-            })
-          )
-        : dispatch(
-            updateEditedInvoice({
-              ...finalValues,
-              userId: user._id,
-            })
-          );
+      handleEditInvoice(finalValues);
     }
   };
   //
   const handleCreateNewInvoice = (values) => {
     dispatch(setFormModalOpenToFalse());
-    dispatch(addNewInvoice(values));
+    dispatch(
+      createNewInvoice({
+        ...values,
+        userId: user._id,
+      })
+    );
     dispatch(setInvoiceFormValues());
     dispatch(setDefaultTerms());
   };
   //
   const handleEditInvoice = (values) => {
     dispatch(setFormModalOpenToFalse());
-    dispatch(updateAndDeactivateEditInvoice(values));
+    values.status === "draft"
+      ? dispatch(
+          updateEditedInvoice({
+            ...values,
+            userId: user._id,
+            status: "pending",
+          })
+        )
+      : dispatch(
+          updateEditedInvoice({
+            ...values,
+            userId: user._id,
+          })
+        );
   };
   //
   const { isInputErrors, validation } =

@@ -1,8 +1,12 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import invoiceData from "../../../data.json";
-import { axiosPrivate } from "../axios/baseInstance";
-import { resetUser } from "../users/usersSlice";
-import handleInterceptors from "../../reusableFunctions/axiosInterceptors";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  getUserInvoices,
+  handleNewInvoice,
+  handleEditInvoice,
+  handleDeleteInvoice,
+} from "./invoiceApiCallbacks/apiCallbacks";
+
 
 const initialState = {
   // invoiceData: invoiceData,
@@ -35,101 +39,21 @@ const initialState = {
 
 export const getInvoices = createAsyncThunk(
   "getInvoices/invoiceData",
-  async (userId, thunkAPI) => {
-    try {
-      handleInterceptors(thunkAPI);
-      const userInvoices = await axiosPrivate.get(`/invoices/${userId}`);
-      console.log("fulfiled");
-      return userInvoices.data;
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      console.error(error);
-      console.log(message);
-      thunkAPI.rejectWithValue(message);
-      thunkAPI.dispatch(resetUser());
-      throw new Error(message);
-      // return message
-    }
-  }
+  getUserInvoices
 );
 
 export const createNewInvoice = createAsyncThunk(
   "createNewInvoice/invoiceData",
-  async (newInvoice, thunkAPI) => {
-    try {
-      handleInterceptors(thunkAPI);
-      const res = await axiosPrivate.post("/invoices", newInvoice);
-      return res.data.invoices;
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      console.error(error);
-      console.log(message);
-      thunkAPI.rejectWithValue(message);
-      thunkAPI.dispatch(resetUser());
-      throw new Error(message);
-      // return message
-    }
-  }
+  handleNewInvoice
 );
 
 export const updateEditedInvoice = createAsyncThunk(
   "updateEditedInvoice/invoiceData",
-  async (invoiceToEdit, thunkAPI) => {
-    try {
-      handleInterceptors(thunkAPI);
-      const res = await axiosPrivate.patch("/invoices", invoiceToEdit);
-      return res.data;
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      console.error(error);
-      console.log(message);
-      thunkAPI.rejectWithValue(message);
-      thunkAPI.dispatch(resetUser());
-      throw new Error(message);
-      // return message
-    }
-  }
+  handleEditInvoice
 );
 
 export const removeInvoice = createAsyncThunk(
-  "removeInvoice/invoiceData",
-  async (deletedInvoiceInfo, thunkAPI) => {
-    try {
-      handleInterceptors(thunkAPI);
-      const res = await axiosPrivate.delete("/invoices", {
-        data: deletedInvoiceInfo,
-      });
-      return res.data.invoices;
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      console.error(error);
-      console.log(message);
-      thunkAPI.rejectWithValue(message);
-      thunkAPI.dispatch(resetUser());
-      throw new Error(message);
-      // return message
-    }
-  }
+  "removeInvoice/invoiceData", handleDeleteInvoice
 );
 
 const InvoiceDataSlice = createSlice({
@@ -170,26 +94,7 @@ const InvoiceDataSlice = createSlice({
         (invoice) => invoice.status === currentActiveFilter.name
       );
       state.filteredInvoiceData = newFilteredArray;
-
       // MAYBE reset to empty if filter is not active anymore?
-    },
-    addNewInvoice: (state, { payload }) => {
-      state.invoiceData = [...state.invoiceData, payload];
-    },
-    deleteInvoice: (state, { payload }) => {
-      const newInvoiceData = state.invoiceData.filter(
-        (invoice) => invoice.invoiceId !== payload
-      );
-      state.invoiceData = newInvoiceData;
-    },
-    markInvoiceAsPaid: (state, { payload }) => {
-      state.invoiceData.find(
-        (invoice) => invoice.invoiceId === payload
-      ).status = "paid";
-    },
-    saveInvoiceAsDraft: (state, { payload }) => {
-      const newDraft = { ...payload, status: "draft" };
-      state.invoiceData = [...state.invoiceData, newDraft];
     },
     getAndActivateEditInvoice: (state, { payload }) => {
       state.isEditModeActive = true;
@@ -201,20 +106,9 @@ const InvoiceDataSlice = createSlice({
       state.isEditModeActive = false;
       state.currentEditedInvoice = {};
     },
-    updateAndDeactivateEditInvoice: (state, { payload }) => {
-      state.isEditModeActive = false;
-      state.currentEditedInvoice = {};
-      if (payload.status === "draft") {
-        payload.status = "pending";
-      }
-      state.invoiceData = state.invoiceData.map((invoice) =>
-        invoice.invoiceId === payload.invoiceId ? (invoice = payload) : invoice
-      );
-    },
   },
   extraReducers: (builder) => {
     builder
-
       // Get all users invoices
       .addCase(getInvoices.fulfilled, (state, { payload }) => {
         state.isInvoiceLoading = false;
@@ -271,9 +165,7 @@ const InvoiceDataSlice = createSlice({
         state.currentEditedInvoice = {};
         state.activeSingleInvoice = payload;
         state.invoiceData = state.invoiceData.map((invoice) =>
-          invoice._id === payload._id
-            ? (invoice = payload)
-            : invoice
+          invoice._id === payload._id ? (invoice = payload) : invoice
         );
       })
       .addCase(updateEditedInvoice.rejected, (state, { payload }) => {
@@ -293,13 +185,8 @@ const InvoiceDataSlice = createSlice({
 export const {
   getActiveSingleInvoice,
   filterInvoices,
-  deleteInvoice,
-  markInvoiceAsPaid,
-  saveInvoiceAsDraft,
   getAndActivateEditInvoice,
   endAndDeactivateEditInvoice,
-  updateAndDeactivateEditInvoice,
-  addNewInvoice,
   addInvoicesFromLogin,
   clearInvoicesAfterLogout,
 } = InvoiceDataSlice.actions;
