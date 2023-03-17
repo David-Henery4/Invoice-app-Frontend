@@ -9,6 +9,7 @@ const Home = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { user, userAccessToken } = useSelector((store) => store.users);
+  const { isInvoiceLoading } = useSelector((store) => store.invoiceData);
   //
   useEffect(() => {
     if (!user){
@@ -24,10 +25,10 @@ const Home = () => {
   //
   return (
     <div className="App bg-bgColourLight font-spartan min-h-screen w-full grid grid-cols-mainMob grid-rows-firstRowMinContent dark:bg-bgColourDark md:grid-cols-invoiceTab lg:grid-cols-mainDesk lg:grid-rows-[auto] lg:gap-x-[30px]">
-      <Overlay/>
+      <Overlay />
       <Navbar />
-      <Outlet/>
-      <NewEditInvoice/>
+      {isInvoiceLoading ? <div className="lds-dual-ring"></div> : <Outlet />}
+      <NewEditInvoice />
     </div>
   );
 }
