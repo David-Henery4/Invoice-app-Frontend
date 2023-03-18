@@ -11,7 +11,7 @@ const SignOut = ({ isSignOutActive }) => {
       } lg:-top-1 lg:left-12`}
     >
       <button
-        className="w-full h-full py-2 px-4 bg-primaryPurple text-basicWhite whitespace-nowrap"
+        className="w-full h-full py-2 px-4 bg-primaryPurple text-basicWhite whitespace-nowrap hover:bg-shadedPurple active:bg-primaryPurple"
         onClick={() => {
           dispatch(logout())
         }}

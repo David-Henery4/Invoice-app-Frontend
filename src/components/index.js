@@ -11,6 +11,7 @@ import Form from "./Form";
 import NewEditBtns from "./NewEditBtns";
 import SignOut from "./SignOut";
 import PersistLogin from "./persistLogin/PersistLogin";
+import InvoicesLoadingSpinner from "./InvoicesLoadingSpinner";
 
 export {
   Navbar,
@@ -25,5 +26,6 @@ export {
   Form,
   NewEditBtns,
   SignOut,
-  PersistLogin
+  PersistLogin,
+  InvoicesLoadingSpinner,
 }

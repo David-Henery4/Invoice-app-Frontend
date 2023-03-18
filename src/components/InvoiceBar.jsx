@@ -4,13 +4,9 @@ import { ArrowDown, PlusIcon } from "../assets";
 import { setFormModalOpenToTrue } from "../features/formModal/formModalSlice";
 import { FilterDropdown, InvoiceCount } from "../components";
 import useClickOffDropdown from "../hooks/useClickOffDropdown";
-// TEST
-import { getInvoices } from "../features/invoiceData/invoiceDataSlice";
+
 
 const InvoiceBar = () => {
-  // TEST
-  const { user } = useSelector((store) => store.users);
-  //
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState(false);
   const dispatch = useDispatch();
   const filterDropDownRef = useRef();
@@ -24,12 +20,7 @@ const InvoiceBar = () => {
     <div className="flex justify-between items-center col-start-1 col-end-13 md:py-1">
       {/* LEFT */}
       <div>
-        <h1
-          className="text-xl font-bold tracking-heading2 dark:text-basicWhite md:text-lrgHeading md:tracking-heading1"
-          onClick={() => {
-            // dispatch(getInvoices(user._id))
-          }}
-        >
+        <h1 className="text-xl font-bold tracking-heading2 dark:text-basicWhite md:text-lrgHeading md:tracking-heading1">
           Invoices
         </h1>
         {/*  */}
@@ -59,7 +50,7 @@ const InvoiceBar = () => {
         </div>
         {/* New Invoice Button */}
         <button
-          className="w-[90px] flex justify-start items-center p-[6px] bg-primaryPurple rounded-3xl gap-2 md:w-[150px] md:h-12 md:gap-4 md:p-2"
+          className="w-[90px] flex justify-start items-center p-[6px] bg-primaryPurple rounded-3xl gap-2 md:w-[150px] md:h-12 md:gap-4 md:p-2 hover:bg-shadedPurple active:bg-primaryPurple"
           onClick={() => {
             dispatch(setFormModalOpenToTrue());
           }}

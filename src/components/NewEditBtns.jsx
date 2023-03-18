@@ -75,7 +75,7 @@ const NewEditBtns = ({ validation }) => {
             Discard
           </button>
           <button
-            className="w-[117px] h-12 rounded-3xl bg-navbarLight text-textReallyDark dark:text-shadedTextDark tab:w-[113px]"
+            className="w-[117px] h-12 rounded-3xl bg-navbarLight text-textReallyDark hover:bg-textLight active:bg-navbarLight dark:text-shadedTextDark dark:hover:bg-contentBgDark tab:w-[113px]"
             onClick={() => {
               handleValueAndErrorReset();
               dispatch(
@@ -90,7 +90,7 @@ const NewEditBtns = ({ validation }) => {
             Save as Draft
           </button>
           <button
-            className="w-[112px] h-12 rounded-3xl bg-primaryPurple text-basicWhite tab:w-[128px]"
+            className="w-[112px] h-12 rounded-3xl bg-primaryPurple text-basicWhite hover:bg-shadedPurple active:bg-primaryPurple tab:w-[128px]"
             onClick={() => {
               handlelistItemInputsValidation();
             }}

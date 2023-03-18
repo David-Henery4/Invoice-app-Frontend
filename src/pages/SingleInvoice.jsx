@@ -9,12 +9,14 @@ import {
   TitleRefAddress,
   DatesClientsDets,
   Summary,
+  DeleteModal,
 } from "../components/SingleInvoiceComponents";
 
 const SingleInvoice = () => {
-  const { activeSingleInvoice, invoiceData, isInvoiceLoading } = useSelector(
-    (store) => store.invoiceData
-  );
+  const {
+    activeSingleInvoice,
+    invoiceData,
+  } = useSelector((store) => store.invoiceData);
   const dispatch = useDispatch();
   const { invoiceId } = useParams();
   //
@@ -25,26 +27,27 @@ const SingleInvoice = () => {
   return (
     <>
       <main className="relative w-full max-w-[730px] mx-auto col-start-2 col-end-12 row-start-2 lg:col-start-3 lg:col-end-[14] pt-8 mdTab:pt-12 mdTab:pb-[135px] lg:pt-16 lg:pb-[54px] lg:row-start-1">
+        <DeleteModal invoiceId={activeSingleInvoice?.invoiceId} />
         <BackBtn />
 
-          <section className="w-full grid gap-4">
-            {/* Status */}
-            <StatusAndActionBar status={activeSingleInvoice?.status} />
+        <section className="w-full grid gap-4">
+          {/* Status */}
+          <StatusAndActionBar status={activeSingleInvoice?.status} />
 
-            {/* Details */}
-            <div className="w-full p-6 bg-basicWhite rounded-lg dark:bg-contentBgDark md:p-8 lg:p-12">
-              <div className="w-full grid gap-8 pb-10">
-                {/* Title, Reference & Sender Address */}
-                <TitleRefAddress {...activeSingleInvoice} />
-                {/* Dates & Customer Address */}
-                <DatesClientsDets {...activeSingleInvoice} />
-              </div>
-
-              {/* Summary */}
-              {/* Services, Prices, Totals & Quanity */}
-              <Summary {...activeSingleInvoice} />
+          {/* Details */}
+          <div className="w-full p-6 bg-basicWhite rounded-lg dark:bg-contentBgDark md:p-8 lg:p-12">
+            <div className="w-full grid gap-8 pb-10">
+              {/* Title, Reference & Sender Address */}
+              <TitleRefAddress {...activeSingleInvoice} />
+              {/* Dates & Customer Address */}
+              <DatesClientsDets {...activeSingleInvoice} />
             </div>
-          </section>
+
+            {/* Summary */}
+            {/* Services, Prices, Totals & Quanity */}
+            <Summary {...activeSingleInvoice} />
+          </div>
+        </section>
       </main>
 
       {/* Mobile Bottom Btns */}

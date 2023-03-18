@@ -4,26 +4,41 @@ import { useSelector, useDispatch } from "react-redux";
 import { register, login } from "../features/users/usersSlice";
 
 const LoginSignup = () => {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const {user, isLoading} = useSelector(store => store.users)
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user, isLoading } = useSelector((store) => store.users);
   //
-  const [isSignUp,setIsSignUp] = useState(false)
+  const [isUsernameInvalid, setIsUsernameInvalid] = useState(false);
+  const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
+  //
+  const [isSignUp, setIsSignUp] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [demoUsername,setDemoUsername] = useState("testing1234")
-  const [demoPassword,setDemoPassword] = useState("123456")
+  const [demoUsername, setDemoUsername] = useState("testing1234");
+  const [demoPassword, setDemoPassword] = useState("123456");
   const [isUsernameInputActive, setIsUsernameInputActive] = useState(false);
   const [isPasswordInputActive, setIsPasswordInputActive] = useState(false);
   //
+  const signUpLoginInputValidation = () => {
+    if (username.trim().length <= 0 || password.trim().length <= 0) {
+      setIsPasswordInvalid(true);
+      setIsUsernameInvalid(true);
+    }
+    if (username.trim().length >= 1 || password.trim().length >= 1) {
+      setIsPasswordInvalid(false);
+      setIsUsernameInvalid(false);
+      handleSubmit();
+    }
+  };
+  //
   const handleSubmit = () => {
-    if (isSignUp){
-      dispatch(register({username,password}))
+    if (isSignUp) {
+      dispatch(register({ username, password }));
     }
-    if (!isSignUp){
-      dispatch(login({ username, password }))
+    if (!isSignUp) {
+      dispatch(login({ username, password }));
     }
-  }
+  };
   //
   const handleUsernameInputValue = () => {
     username.length
@@ -37,10 +52,10 @@ const LoginSignup = () => {
   };
   //
   useEffect(() => {
-    if (user){
-      navigate("/")
+    if (user) {
+      navigate("/");
     }
-  }, [user])
+  }, [user]);
   //
   return (
     <div className="w-full min-h-screen grid place-items-center bg-bgColourLight text-textLight dark:bg-bgColourDark dark:text-basicWhite">
@@ -52,7 +67,7 @@ const LoginSignup = () => {
             {isSignUp ? "Sign up" : "Login"}
           </h2>
           {/**/}
-          <div className="w-full grid gap-6">
+          <div className="relative w-full grid gap-6">
             <div className="relative w-full grid gap-3">
               <label
                 htmlFor="username"
@@ -68,7 +83,11 @@ const LoginSignup = () => {
                 name="username"
                 id="username"
                 type="text"
-                className="w-full outline-none border border-shadedTextDark p-2 dark:border-none dark:bg-[#181B2E]"
+                className={`w-full outline-none border p-2 dark:bg-[#181B2E] ${
+                  isPasswordInvalid || isUsernameInvalid
+                    ? "border-deleteBtn"
+                    : "border-shadedTextDark dark:border-none"
+                }`}
                 onFocus={() => setIsUsernameInputActive(true)}
                 onBlur={handleUsernameInputValue}
                 value={username}
@@ -90,20 +109,29 @@ const LoginSignup = () => {
                 name="password"
                 id="password"
                 type="text"
-                className="w-full outline-none border border-shadedTextDark p-2 dark:border-none dark:bg-[#181B2E]"
+                className={`w-full outline-none border p-2 dark:bg-[#181B2E] ${
+                  isPasswordInvalid || isUsernameInvalid
+                    ? "border-deleteBtn"
+                    : "border-shadedTextDark dark:border-none"
+                }`}
                 onFocus={() => setIsPasswordInputActive(true)}
                 onBlur={handlePasswordInputValue}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
+            {isPasswordInvalid || isUsernameInvalid ? (
+              <p className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xtraSm text-deleteBtn">
+                Inputs can't be empty!
+              </p>
+            ) : null}
           </div>
           {/**/}
           <div className="w-full flex flex-col justify-center items-center gap-6 mt-4">
             <button
               className="relative w-32 h-12 rounded-3xl bg-primaryPurple text-basicWhite overflow-hidden active:before:absolute active:before:w-full active:before:h-full active:before:bg-basicWhite/50 active:before:top-0 active:before:left-0"
               onClick={() => {
-                handleSubmit();
+                signUpLoginInputValidation();
               }}
             >
               <span className="relative z-10">
@@ -122,9 +150,14 @@ const LoginSignup = () => {
           </div>
           <p className="text-center text-xtraSm">
             Click here to sign into{" "}
-            <span className="text-primaryPurple cursor-pointer" onClick={() => {
-              dispatch(login({ username: demoUsername, password: demoPassword }));
-            }}>
+            <span
+              className="text-primaryPurple cursor-pointer"
+              onClick={() => {
+                dispatch(
+                  login({ username: demoUsername, password: demoPassword })
+                );
+              }}
+            >
               demo account
             </span>
           </p>

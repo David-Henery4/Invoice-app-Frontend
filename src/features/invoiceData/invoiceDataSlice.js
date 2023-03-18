@@ -35,6 +35,7 @@ const initialState = {
   currentEditedInvoice: {},
   isInvoiceLoading: false,
   isError: false,
+  isDeleteModalActive: false,
 };
 
 export const getInvoices = createAsyncThunk(
@@ -105,6 +106,9 @@ const InvoiceDataSlice = createSlice({
     endAndDeactivateEditInvoice: (state, { payload }) => {
       state.isEditModeActive = false;
       state.currentEditedInvoice = {};
+    },
+    toggleDeleteModal: (state, {payload}) => {
+      state.isDeleteModalActive = !state.isDeleteModalActive
     },
   },
   extraReducers: (builder) => {
@@ -189,5 +193,6 @@ export const {
   endAndDeactivateEditInvoice,
   addInvoicesFromLogin,
   clearInvoicesAfterLogout,
+  toggleDeleteModal,
 } = InvoiceDataSlice.actions;
 export default InvoiceDataSlice.reducer;

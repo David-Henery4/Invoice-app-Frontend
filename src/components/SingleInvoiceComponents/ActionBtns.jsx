@@ -1,16 +1,14 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAndActivateEditInvoice,
-  // apis
-  removeInvoice,
-  updateEditedInvoice
+  // APIs
+  updateEditedInvoice,
+  toggleDeleteModal
 } from "../../features/invoiceData/invoiceDataSlice";
 import { setFormModalOpenToTrue } from "../../features/formModal/formModalSlice";
 
 const ActionBtns = ({ isOnLargerScreens = false }) => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { activeSingleInvoice } = useSelector(
     (store) => store.invoiceData
@@ -22,7 +20,7 @@ const ActionBtns = ({ isOnLargerScreens = false }) => {
       }`}
     >
       <button
-        className="w-[73px] h-12 rounded-3xl bg-shadedContentLight text-shadedTextLight dark:bg-shadedContentDark dark:text-shadedTextDark"
+        className="w-[73px] h-12 rounded-3xl bg-shadedContentLight text-shadedTextLight hover:bg-shadedTextDark active:text-shadedTextLight active:bg-shadedContentLight dark:bg-shadedContentDark dark:text-shadedTextDark dark:hover:text-shadedTextLight dark:hover:bg-basicWhite active:dark:bg-shadedContentDark active:dark:text-shadedTextDark"
         onClick={() => {
           dispatch(setFormModalOpenToTrue());
           dispatch(getAndActivateEditInvoice(activeSingleInvoice.invoiceId));
@@ -31,21 +29,15 @@ const ActionBtns = ({ isOnLargerScreens = false }) => {
         Edit
       </button>
       <button
-        className="w-[89px] h-12 rounded-3xl bg-deleteBtn text-basicWhite"
+        className="w-[89px] h-12 rounded-3xl bg-deleteBtn text-basicWhite hover:bg-deleteBtnShaded active:bg-deleteBtn"
         onClick={() => {
-          dispatch(
-            removeInvoice({
-              userId: activeSingleInvoice.userId,
-              _id: activeSingleInvoice._id,
-            })
-          );
-          navigate("/");
+          dispatch(toggleDeleteModal());
         }}
       >
         Delete
       </button>
       <button
-        className="w-[149px] h-12 rounded-3xl bg-primaryPurple text-basicWhite mdTab:w-[131px]"
+        className="w-[149px] h-12 rounded-3xl bg-primaryPurple text-basicWhite mdTab:w-[131px] hover:bg-shadedPurple active:bg-primaryPurple"
         onClick={() => {
           dispatch(
             updateEditedInvoice({

@@ -4,7 +4,7 @@ import handleDateFormatting from "../reusableFunctions/dateFormatting";
 const Invoice = ({ clientName, invoiceId, status, total, paymentDue }) => {
   //
   return (
-    <div className="bg-basicWhite w-full grid text-xs font-bold grid-cols-invoiceMax grid-rows-invoiceContainerMobRows p-6 dark:bg-contentBgDark tab:grid-cols-singleInvoiceContainer tab:grid-rows-none  tab:items-center ">
+    <div className="bg-basicWhite w-full grid text-xs font-bold rounded-lg grid-cols-invoiceMax grid-rows-invoiceContainerMobRows p-6 hover:outline hover:outline-1 hover:outline-primaryPurple dark:bg-contentBgDark tab:grid-cols-singleInvoiceContainer tab:grid-rows-none  tab:items-center ">
       <p className="col-start-1 col-end-6 row-start-1 row-end-2 dark:text-basicWhite tab:row-auto tab:col-end-2 md:text-med">
         <span className="text-toggleColourDark dark:text-shadedTextLight">
           #
