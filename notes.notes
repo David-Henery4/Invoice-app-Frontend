@@ -1,6 +1,10 @@
 
 // CLEAN UP/ REFACTOR (DO LAST)
 
+// SET UP DUMMY ACCOUNT
+
+// ADD VALIDATION TO LOGIN (NO EMPTY LOGINS)
+
 // MIGHT BUILD PAGINATION (TBA)
 
 // CHANGE API URLs when uploaded!!!!!!!!
@@ -33,22 +37,12 @@ disable mark as paid, when invoice is a draft!!!!!!!
 // delete notes afterward or
 // remove them from git.
 
-// MIGHT HAVE TO ADD IDs TO ITEMLIST ITEMS
-
-// in form when inputs are invalidated, reset them after exit or discard.
 
 // check accessability in some areas like a custom dropdown (aria-labels)
-
-// click on window to close dropdowmn
 
 // add arrow to end of front page invoices.
 
 // add padEnd() on item total in the form
-
-// validation on all invoices BUT DRAFTS
-
-// ADD component for invoice create/delete.
-
 
 ## TEXT FOR APP ##
 

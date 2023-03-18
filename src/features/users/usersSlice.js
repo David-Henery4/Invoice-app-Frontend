@@ -25,7 +25,6 @@ const usersSlice = createSlice({
   initialState,
   reducers: {
     updateAccessToken: (state, { payload }) => {
-      // state.user?.accessToken = payload
       state.userAccessToken = payload;
     },
     resetUser: (state, { payload }) => {
@@ -49,7 +48,6 @@ const usersSlice = createSlice({
       .addCase(register.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.isError = true;
-        console.log(payload);
       })
       .addCase(register.pending, (state, { payload }) => {
         state.isLoading = true;
@@ -66,7 +64,6 @@ const usersSlice = createSlice({
       .addCase(login.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.isError = true;
-        console.log(payload);
       })
       .addCase(login.pending, (state, { payload }) => {
         state.isLoading = true;
@@ -79,12 +76,10 @@ const usersSlice = createSlice({
         state.isError = false;
         state.user = null;
         state.userAccessToken = null;
-        console.log(payload);
       })
       .addCase(logout.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.isError = true;
-        console.log(payload);
       })
       .addCase(logout.pending, (state, { payload }) => {
         state.isLoading = true;

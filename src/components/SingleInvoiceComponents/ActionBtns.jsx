@@ -54,6 +54,7 @@ const ActionBtns = ({ isOnLargerScreens = false }) => {
             })
           );
         }}
+        disabled={activeSingleInvoice.status === "draft"}
       >
         Mark as Paid
       </button>

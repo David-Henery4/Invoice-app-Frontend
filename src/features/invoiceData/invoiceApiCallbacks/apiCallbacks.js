@@ -7,7 +7,6 @@ const getUserInvoices = async (userId, thunkAPI) => {
   try {
     handleInterceptors(thunkAPI);
     const userInvoices = await axiosPrivate.get(`/invoices/${userId}`);
-    console.log("fulfiled");
     return userInvoices.data;
   } catch (error) {
     const message = formatErrorMsg(error);

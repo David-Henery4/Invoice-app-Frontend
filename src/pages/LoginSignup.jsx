@@ -11,6 +11,8 @@ const LoginSignup = () => {
   const [isSignUp,setIsSignUp] = useState(false)
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [demoUsername,setDemoUsername] = useState("testing1234")
+  const [demoPassword,setDemoPassword] = useState("123456")
   const [isUsernameInputActive, setIsUsernameInputActive] = useState(false);
   const [isPasswordInputActive, setIsPasswordInputActive] = useState(false);
   //
@@ -120,7 +122,9 @@ const LoginSignup = () => {
           </div>
           <p className="text-center text-xtraSm">
             Click here to sign into{" "}
-            <span className="text-primaryPurple cursor-pointer">
+            <span className="text-primaryPurple cursor-pointer" onClick={() => {
+              dispatch(login({ username: demoUsername, password: demoPassword }));
+            }}>
               demo account
             </span>
           </p>
