@@ -1,4 +1,3 @@
-import invoiceData from "../../../data.json";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   getUserInvoices,
@@ -9,7 +8,6 @@ import {
 
 
 const initialState = {
-  // invoiceData: invoiceData,
   invoiceData: [],
   activeSingleInvoice: {},
   isFilterActive: false,
@@ -122,7 +120,6 @@ const InvoiceDataSlice = createSlice({
       .addCase(getInvoices.rejected, (state, { payload }) => {
         state.isError = true;
         state.isInvoiceLoading = false;
-        // state.invoiceData = [];
       })
       .addCase(getInvoices.pending, (state, { payload }) => {
         state.isInvoiceLoading = true;
@@ -138,7 +135,6 @@ const InvoiceDataSlice = createSlice({
       .addCase(createNewInvoice.rejected, (state, { payload }) => {
         state.isError = true;
         state.isInvoiceLoading = false;
-        // state.invoiceData = [];
       })
       .addCase(createNewInvoice.pending, (state, { payload }) => {
         state.isInvoiceLoading = true;
@@ -154,7 +150,6 @@ const InvoiceDataSlice = createSlice({
       .addCase(removeInvoice.rejected, (state, { payload }) => {
         state.isError = true;
         state.isInvoiceLoading = false;
-        // state.invoiceData = [];
       })
       .addCase(removeInvoice.pending, (state, { payload }) => {
         state.isInvoiceLoading = true;
@@ -177,7 +172,6 @@ const InvoiceDataSlice = createSlice({
         state.isInvoiceLoading = false;
         state.isEditModeActive = false;
         state.currentEditedInvoice = {};
-        // state.invoiceData = [];
       })
       .addCase(updateEditedInvoice.pending, (state, { payload }) => {
         state.isInvoiceLoading = true;

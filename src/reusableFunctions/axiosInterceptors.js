@@ -16,7 +16,7 @@ const handleInterceptors = (thunkAPI) => {
   //
   axiosPrivate.interceptors.response.use(
     (response) => response,
-    // Here we handle the logic for if the access token has expired
+    // Handle the logic for if the access token has expired
     async (error) => {
       const prevRequest = error?.config;
       if (error?.response?.status === 403 && !prevRequest?.sent) {

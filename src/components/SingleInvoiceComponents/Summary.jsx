@@ -19,8 +19,11 @@ const Summary = ({items, total}) => {
               <div className="flex flex-col mdTab:text-left mdTab:flex-[1.5]">
                 <h4>{item?.name}</h4>
                 <p className="text-shadedTextLight dark:text-shadedTextDark mdTab:hidden">
-                  {item?.quantity.toLocaleString()} x £{" "}
-                  {item?.price.toLocaleString()}
+                  {item?.quantity.toLocaleString()} x {" "}
+                  {item?.price.toLocaleString(undefined, {
+                    style: "currency",
+                    currency: "GBP",
+                  })}
                 </p>
               </div>
               <p className="text-shadedTextLight hidden dark:text-shadedTextDark mdTab:inline mdTab:flex-[1]">

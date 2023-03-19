@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ArrowDown, PlusIcon } from "../assets";
 import { setFormModalOpenToTrue } from "../features/formModal/formModalSlice";
 import { FilterDropdown, InvoiceCount } from "../components";

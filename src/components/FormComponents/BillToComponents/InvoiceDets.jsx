@@ -77,7 +77,6 @@ const InvoiceDets = ({ invoiceDets }) => {
           <ArrowDown className="absolute -translate-y-1/2 top-1/2 right-5 pointer-events-none hover:cursor-pointer" />
           {/* Dropdown */}
           <PaymentTermsDroptdown
-            // setDefaultTerms={setDefaultTerms}
             isTermsDropdownActive={isTermsDropdownActive}
           />
         </div>
