@@ -29,7 +29,7 @@ const Status = ({status = "draft"}) => {
       <div
         className={`${handleStatusColourChanges()?.dot} w-2 h-2 rounded-full`}
       ></div>
-      <p className={`${handleStatusColourChanges()?.text} capitalize md:text-med`}>
+      <p className={`${handleStatusColourChanges()?.text} capitalize md:text-xs`}>
         {status}
       </p>
     </div>

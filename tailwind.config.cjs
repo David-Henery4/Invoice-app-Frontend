@@ -8,6 +8,7 @@ module.exports = {
     screens: {
       mdTab: "38.75em", // 620px
       tab: "42.5em", // 680px
+      tabLg: "52.18em", // 835px
       ...defaultTheme.screens,
     },
     fontFamily: {
@@ -66,13 +67,14 @@ module.exports = {
         formPageTab: "56px repeat(10,1fr) 56px",
         mainDesk: "101px .5fr repeat(12,1fr) 1fr",
         invoiceMob: "24px repeat(10,1fr) 24px",
-        singleInvoiceContainer: "15% 22% 22% 1fr",
+        singleInvoiceContainer: "13% 20% 20% 1fr min-content",
+        singleInvoiceContainerLg: "15% 23% 23% 1fr min-content",
         invoiceTab: "48px repeat(10,1fr) 48px",
         invoiceMax: "repeat(12,1fr)",
         datesAddressMob: "1fr 41px 1fr",
         datesAddressTab: "auto 41px auto 53px auto",
         datesAddressDesk: "max-content 100px 100px 110px auto",
-        itemListDesk: "214px 46px 100px 96px",
+        itemListDesk: "204px 46px 90px 1fr",
       },
       gridTemplateRows: {
         firstRowMinContent: "min-content",

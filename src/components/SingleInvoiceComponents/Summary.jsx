@@ -27,9 +27,17 @@ const Summary = ({items, total}) => {
                 {item?.quantity.toLocaleString()}
               </p>
               <p className="text-shadedTextLight hidden dark:text-shadedTextDark mdTab:inline mdTab:flex-[1]">
-                £ {item?.price.toLocaleString()}
+                {item?.price.toLocaleString(undefined, {
+                  style: "currency",
+                  currency: "GBP",
+                })}
               </p>
-              <p className="mdTab:flex-[1]">£ {item?.total.toLocaleString()}</p>
+              <p className="mdTab:flex-[1]">
+                {item?.total.toLocaleString(undefined, {
+                  style: "currency",
+                  currency: "GBP",
+                })}
+              </p>
             </div>
           );
         })}
@@ -41,7 +49,10 @@ const Summary = ({items, total}) => {
           Grand Total
         </p>
         <p className="text-xl leading-[32px] -tracking-[0.42px] md:text-2xl">
-          £ {total?.toLocaleString()}
+          {total?.toLocaleString(undefined, {
+            style: "currency",
+            currency: "GBP",
+          })}
         </p>
       </div>
     </div>
