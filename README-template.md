@@ -14,9 +14,7 @@ This is a solution to the [Invoice app challenge on Frontend Mentor](https://www
   - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ## Overview
 
@@ -31,22 +29,16 @@ Users should be able to:
 - Save draft invoices, and mark pending invoices as paid
 - Filter invoices by status (draft/pending/paid)
 - Toggle light and dark mode
-- **Bonus**: Keep track of any changes, even after refreshing the browser (`localStorage` could be used for this if you're not building out a full-stack app)
+- **Bonus**: Keep track of any changes, even after refreshing the browser
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![Desktop Screenshot](./screenshot/desktop-screenshot.png)
 
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it. 
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
 
 ### Links
 
+(TO BE ADDED!)
 - Solution URL: [Add solution URL here](https://your-solution-url.com)
 - Live Site URL: [Add live site URL here](https://your-live-site-url.com)
 
@@ -54,64 +46,146 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 
 ### Built with
 
-- Semantic HTML5 markup
-- CSS custom properties
+- HTML5
+- CSS/SASS
 - Flexbox
 - CSS Grid
 - Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
+- [React](https://reactjs.org) - JS library
+- [React-Router](https://reactrouter.com/en/main) - Page Routing
+- [Redux/Toolkit](https://redux-toolkit.js.org) - State Management
+- [Vite](https://v3.vitejs.dev) - Build Tool
+- [TailwindCSS](https://tailwindcss.com) - For styling
+- [Node.js](https://nodejs.org/en) - Backend Javascript Enviroment
+- [MongoDB](https://www.mongodb.com) - Database
+- [Express](https://expressjs.com) - Framework for Node.js
+- [Json Web Token](https://jwt.io) - Authorization + Authentication
+- [Axios](https://axios-http.com) - Promise Based HTTP Library
 
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+The main focus for me on this project was to learn how to build a full stack application for the first time, so I decided to use React, Express, MongoDB & Node.js in order to do this.
 
-To see how you can add code snippets, see below:
+One of the main things I wanted to takeaway from this project was how to host and build my own REST APIs on the backend and how to interact with them on the frontend.
 
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
+I did this with the help of node & express, which I used to set up the base URL and to set the different routes/endpoints the different APIs would call to.
+
+The different endpoints would be things like "auth" for the authentication, "users" for the sign, login & logout and "invoices" in order to interact with the invoices.
+
+I would then use different API methods to interact with them, such as, ".get()", in order to get the data from the API, ".post()" in order to post data to the API, ".patch()" with sends data to the API but indicates we want to update some data on the backend and ".delete()" which we use to delete a piece of data on the backend.
+
+When building the logic for the APIs on the backend, I used mongoose.js, which is a library which helps build a connection between node.js & the MongoDB database. I used this with MongoDB schemas, which mongoose provides, in order to build CRUD operations and send and retrieve the data, to and from the MongoDB database.
+
+I used Json Web Tokens in order to create authentication, autherization and signup/login capability to the app. This works by first issuing an access token and a refresh token to the user when they initially sign in.
+
+The access token has a short lifespan (10-15mins) and we use this to grab data from protected routes (EG- Access to a users invoices). The access token has a short lifespan for protection purposes, so no one can steal and access that users routes and it specificly has a short life span in order decrease the chances of this happening.
+
+The refresh token has a longer lifespan (5-7 days, somes longer). We store the refresh token in a "httpOnly" cookie so it has a very low chance of someone being able to access and steal it. We use the refresh token to refresh a new access token when the access token expires, so the user can still make requests to get things, like invoices, seemlessly.
+
+We use the refresh token to make sure the user is still signed in and we send this, along with the access token to every request the user makes to private routes. When the refresh token does expire, the user will be signed out and the user will have to sign in again in order to access the application.
+
+To conclude, I feel I understand the overall base concept of building the backend for an application but I feel I will need some more practice by building different and interesting applications in the future before things truly begin to stick and I can remember everything and also become more familiar with the syntax. 
+
+<br>
+<br>
+
+### Heres a small snippet showing the logic to create a new invoice, in the invoice controller file
+
+<br>
+
 ```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
-}
+const Invoice = require("../models/Invoices");
+
+const asyncHandler = require("express-async-handler");
+
+// createInvoice
+// post /invoices
+// access: private
+const createNewInvoice = asyncHandler(async (req, res) => {
+  const { invoiceId, userId } = req.body;
+
+  const newInvoiceData = { ...req.body };
+
+  const duplicate = await Invoice.findOne({ invoiceId }).lean().exec();
+  if (duplicate) {
+    return res.status(409).json({ message: "Invoice already exists" });
+  }
+
+  const newInvoice = await Invoice.create(newInvoiceData);
+  const allInvoices = await Invoice.find({userId}).lean();
+  if (newInvoice) {
+    // created
+    res.status(201).json({ message: `New invoice created`, invoices: allInvoices });
+  } else {
+    res.status(400).json({ message: "Invalid user data received" });
+  }
+});
+
+module.exports = {
+  getAllInvoices,
+  createNewInvoice,
+  editInvoice,
+  deleteInvoice,
+};
+```
+<br>
+
+### Heres the code I used to create the different methods going to the invoice route
+
+(Using the "verifyJWT" here protectes all the routes below it by checking for the access token and see if it's expired or not, the user will need a access & refresh token in order to make a request to "invoice" routes.)
+
+```js
+const express = require("express");
+const router = express.Router();
+const invoicesController = require("../controllers/invoicesController");
+const verifyJWT = require("../middleware/verifyJWT");
+
+//Applies it to all the routes below
+router.use(verifyJWT);
+
+router.route("/:userId").get(invoicesController.getAllInvoices);
+
+router.route("/")
+
+  .post(invoicesController.createNewInvoice)
+  .patch(invoicesController.editInvoice)
+  .delete(invoicesController.deleteInvoice)
+
+
+
+//*********//
+module.exports = router;
+
+
+// This is the code we used in the server.js file to connect this file to the "BASEURL/invoices" endpoint.
+app.use("/invoices", require("./routes/invoicesRoute"))
+
 ```
 
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
-
-**Note: Delete this note and the content within this section and replace with your own learnings.**
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+In the future I look forward to using the concepts and skills I've learnt in this project to build more interesting, full stack applications. I also want to practice using the mern stack as much possible so I can fully understand the concept of setting up and building a full stack application a lot more freely.
 
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
 
 ### Useful resources
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
+When I was learning about the mern stack I primarily used Dave Gray's youtube videos on the subject to help me understand the concept and how to implement them into my own project. If you want to check them out, I've left the links to these down below.
 
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
+### Dave Grays's videos
+
+- [MERN Stack Full Tutorial & Project](https://www.youtube.com/watch?v=CvCiNeLnZ00) - This helped me understand how to implement the main concepts into a full stack application.
+
+- [React Login Authentication](https://www.youtube.com/watch?v=nI8PYZNFtac&list=PL0Zuz27SZ-6PRCpm9clX0WiBEMB70FWwd&index=6) - This is a video which helped me set up authentication & authorization on my project.
+
+- [React Persistent User Login ](https://www.youtube.com/watch?v=27KeYk-5vJw&t=14s) - This video helped guide me on how to set up a persistent login for users, using Json Web Tokens.
+
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
+- Website - [DJHWebdevelopment](https://www.djhwebdevelopment.com)
+- Frontend Mentor - [@David-Henery4](https://www.frontendmentor.io/profile/David-Henery4)
+- LinkedIn - [David Henery](https://www.linkedin.com/in/david-henery-725458241)
 
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
 
-## Acknowledgments
-
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**

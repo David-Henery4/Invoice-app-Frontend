@@ -30,7 +30,7 @@ const BackBtn = ({ isOnInvoiceForm = false }) => {
   return (
     <Link
       to={isOnInvoiceForm || "/"}
-      className={`w-fit mb-8 flex justify-start items-center gap-6 text-xs tracking-body1 leading-body1 font-bold dark:text-basicWhite md:text-med ${
+      className={`w-fit mb-8 flex justify-start items-baseline gap-6 text-xs tracking-body1 leading-body1 font-bold hover:text-shadedTextLight dark:text-basicWhite dark:hover:text-textReallyDark md:text-med ${
         isOnInvoiceForm && "tab:hidden"
       }`}
       onClick={() => {
