@@ -1,24 +1,26 @@
-# Frontend Mentor - Invoice app
+# Frontend Mentor - Invoice app solution
 
-![Design preview for the Invoice app coding challenge](./preview.jpg)
+This is a solution to the [Invoice app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/invoice-app-i7KaLTQjl). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
 
-## Welcome! 👋
+## Table of contents
 
-Thanks for purchasing this premium Frontend Mentor coding challenge.
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+  - [Useful resources](#useful-resources)
+- [Author](#author)
 
-[Frontend Mentor](https://www.frontendmentor.io) challenges help you improve your coding skills by building realistic projects. These premium challenges are perfect portfolio pieces, so please feel free to use what you create in your portfolio to show others.
 
-**To do this challenge, you need a strong understanding of HTML, CSS, and JavaScript.**
+## Overview
 
-## The challenge
+### The challenge
 
-Your challenge is to build out this invoicing application and get it looking as close to the design as possible.
-
-You can use any tools you like to help you complete the challenge. So if you've got something you'd like to practice, feel free to give it a go.
-
-We provide the data in a local `data.json` file, so use that to populate the content on first load. If you want to take it up a notch, feel free to build this as a full-stack application!
-
-Your users should be able to:
+Users should be able to:
 
 - View the optimal layout for the app depending on their device's screen size
 - See hover states for all interactive elements on the page
@@ -27,85 +29,163 @@ Your users should be able to:
 - Save draft invoices, and mark pending invoices as paid
 - Filter invoices by status (draft/pending/paid)
 - Toggle light and dark mode
-- **Bonus**: Keep track of any changes, even after refreshing the browser (`localStorage` could be used for this if you're not building out a full-stack app)
+- **Bonus**: Keep track of any changes, even after refreshing the browser
 
-Want some support on the challenge? [Join our Slack community](https://www.frontendmentor.io/slack) and ask questions in the **#help** channel.
+### Screenshot
 
-### Expected Behaviour
+![Desktop Screenshot](./screenshot/desktop-screenshot.png)
 
-- Creating an invoice
-  - When creating a new invoice, an ID needs to be created. Each ID should be 2 random uppercased letters followed by 4 random numbers.
-  - Invoices can be created either as drafts or as pending. Clicking "Save as Draft" should allow the user to leave any form field blank, but should create an ID if one doesn't exist and set the status to "draft". Clicking "Save & Send" should require all forms fields to be filled in, and should set the status to "pending".
-  - Changing the Payments Terms field should set the `paymentDue` property based on the `createdAt` date plus the numbers of days set for the payment terms.
-  - The `total` should be the sum of all items on the invoice.
-- Editing an invoice
-  - When saving changes to an invoice, all fields are required when the "Save Changes" button is clicked. If the user clicks "Cancel", any unsaved changes should be reset.
-  - If the invoice being edited is a "draft", the status needs to be updated to "pending" when the "Save Changes" button is clicked. All fields are required at this stage.
-- Users should be able to mark invoices as paid by clicking the "Mark as Paid" button. This should change the invoice's status to "paid".
-- Users should receive a confirmation modal when trying to delete invoices.
-- Feel free to add custom styling for the date and dropdown form fields. The designs for those fields are optional extras and are mostly for illustration purposes.
 
-## Where to find everything
+### Links
 
-Your task is to build out the project to the design file provided. We provide both Sketch and Figma versions of the design, so you can choose which tool you prefer to use. You can download the design file on the platform. **Please be sure not to share them with anyone else.** The design download comes with a `README.md` file as well to help you get set up.
+(TO BE ADDED!)
+- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
 
-All the required assets for this project are in the `/assets` folder. The assets are already exported for the correct screen size and optimized. Some images are reusable at multiple screen sizes. So if you don't see an image in a specific folder, it will typically be in another folder for that page.
+## My process
 
-The design system in the design file will give you more information about the various colors, fonts, and styles used in this project.
+### Built with
 
-## Building your project
+- HTML5
+- CSS/SASS
+- Flexbox
+- CSS Grid
+- Mobile-first workflow
+- [React](https://reactjs.org) - JS library
+- [React-Router](https://reactrouter.com/en/main) - Page Routing
+- [Redux/Toolkit](https://redux-toolkit.js.org) - State Management
+- [Vite](https://v3.vitejs.dev) - Build Tool
+- [TailwindCSS](https://tailwindcss.com) - For styling
+- [Node.js](https://nodejs.org/en) - Backend Javascript Enviroment
+- [MongoDB](https://www.mongodb.com) - Database
+- [Express](https://expressjs.com) - Framework for Node.js
+- [Json Web Token](https://jwt.io) - Authorization + Authentication
+- [Axios](https://axios-http.com) - Promise Based HTTP Library
 
-Feel free to use any workflow that you feel comfortable with. Below is a suggested process, but do not feel like you need to follow these steps:
 
-1. Separate the `starter-code` from the rest of this project and rename it to something meaningful for you. Initialize the codebase as a public repository on [GitHub](https://github.com/). Creating a repo will make it easier to share your code with the community if you need help. If you're not sure how to do this, [have a read-through of this Try Git resource](https://try.github.io/). **⚠️ IMPORTANT ⚠️: There are already a couple of `.gitignore` files in this project. Please do not remove them or change the content of the files. If you create a brand new project, please use the `.gitignore` files provided in your new codebase. This is to avoid the accidental upload of the design files to GitHub. With these premium challenges, please be sure not to share the design files in your GitHub repo. Thanks!**
-2. Configure your repository to publish your code to a web address. This will also be useful if you need some help during a challenge as you can share the URL for your project with your repo URL. There are a number of ways to do this, and we provide some recommendations below.
-3. Look through the designs to start planning out how you'll tackle the project. This step is crucial to help you think ahead for CSS classes to create reusable styles.
-4. Before adding any styles, structure your content with HTML. Writing your HTML first can help focus your attention on creating well-structured content.
-5. Write out the base styles for your project, including general content styles, such as `font-family` and `font-size`.
-6. Start adding styles to the top of the page and work down. Only move on to the next section once you're happy you've completed the area you're working on.
+### What I learned
 
-## Deploying your project
+The main focus for me on this project was to learn how to build a full stack application for the first time, so I decided to use React, Express, MongoDB & Node.js in order to do this.
 
-As mentioned above, there are many ways to host your project for free. Our recommend hosts are:
+One of the main things I wanted to takeaway from this project was how to host and build my own REST APIs on the backend and how to interact with them on the frontend.
 
-- [GitHub Pages](https://pages.github.com/)
-- [Vercel](https://vercel.com/)
-- [Netlify](https://www.netlify.com/)
+I did this with the help of node & express, which I used to set up the base URL and to set the different routes/endpoints the different APIs would call to.
 
-You can host your site using one of these solutions or any of our other trusted providers. [Read more about our recommended and trusted hosts](https://medium.com/frontend-mentor/frontend-mentor-trusted-hosting-providers-bf000dfebe).
+The different endpoints would be things like "auth" for the authentication, "users" for the sign, login & logout and "invoices" in order to interact with the invoices.
 
-## Create a custom `README.md`
+I would then use different API methods to interact with them, such as, ".get()", in order to get the data from the API, ".post()" in order to post data to the API, ".patch()" with sends data to the API but indicates we want to update some data on the backend and ".delete()" which we use to delete a piece of data on the backend.
 
-We strongly recommend overwriting this `README.md` with a custom one. We've provided a template inside the [`README-template.md`](./README-template.md) file in this starter code.
+When building the logic for the APIs on the backend, I used mongoose.js, which is a library which helps build a connection between node.js & the MongoDB database. I used this with MongoDB schemas, which mongoose provides, in order to build CRUD operations and send and retrieve the data, to and from the MongoDB database.
 
-The template provides a guide for what to add. A custom `README` will help you explain your project and reflect on your learnings. Please feel free to edit our template as much as you like.
+I used Json Web Tokens in order to create authentication, autherization and signup/login capability to the app. This works by first issuing an access token and a refresh token to the user when they initially sign in.
 
-Once you've added your information to the template, delete this file and rename the `README-template.md` file to `README.md`. That will make it show up as your repository's README file.
+The access token has a short lifespan (10-15mins) and we use this to grab data from protected routes (EG- Access to a users invoices). The access token has a short lifespan for protection purposes, so no one can steal and access that users routes and it specificly has a short life span in order decrease the chances of this happening.
 
-## Submitting your solution
+The refresh token has a longer lifespan (5-7 days, somes longer). We store the refresh token in a "httpOnly" cookie so it has a very low chance of someone being able to access and steal it. We use the refresh token to refresh a new access token when the access token expires, so the user can still make requests to get things, like invoices, seemlessly.
 
-Submit your solution on the platform for the rest of the community to see. Follow our ["Complete guide to submitting solutions"](https://medium.com/frontend-mentor/a-complete-guide-to-submitting-solutions-on-frontend-mentor-ac6384162248) for tips on how to do this.
+We use the refresh token to make sure the user is still signed in and we send this, along with the access token to every request the user makes to private routes. When the refresh token does expire, the user will be signed out and the user will have to sign in again in order to access the application.
 
-Remember, if you're looking for feedback on your solution, be sure to ask questions when submitting it. The more specific and detailed you are with your questions, the higher the chance you'll get valuable feedback from the community.
+To conclude, I feel I understand the overall base concept of building the backend for an application but I feel I will need some more practice by building different and interesting applications in the future before things truly begin to stick and I can remember everything and also become more familiar with the syntax. 
 
-**⚠️ IMPORTANT ⚠️: With these premium challenges, please be sure not to upload the design files to GitHub when you're submitting to the platform and sharing it around. If you've created a brand new project, the easiest way to do that is to copy across the `.gitignore` provided in this starter project.**
+<br>
+<br>
 
-## Sharing your solution
+### Heres a small snippet showing the logic to create a new invoice, in the invoice controller file
 
-There are multiple places you can share your solution:
+<br>
 
-1. Share your solution page in the **#finished-projects** channel of the [Slack community](https://www.frontendmentor.io/slack). 
-2. Tweet [@frontendmentor](https://twitter.com/frontendmentor) and mention **@frontendmentor**, including the repo and live URLs in the tweet. We'd love to take a look at what you've built and help share it around.
-3. Share your solution on other social channels like LinkedIn.
-4. Blog about your experience building your project. Writing about your workflow, technical choices, and talking through your code is a brilliant way to reinforce what you've learned. Great platforms to write on are [dev.to](https://dev.to/), [Hashnode](https://hashnode.com/), and [CodeNewbie](https://community.codenewbie.org/).
+```js
+const Invoice = require("../models/Invoices");
 
-We provide templates to help you share your solution once you've submitted it on the platform. Please do edit them and include specific questions when you're looking for feedback. 
+const asyncHandler = require("express-async-handler");
 
-The more specific you are with your questions the more likely it is that another member of the community will give you feedback.
+// createInvoice
+// post /invoices
+// access: private
+const createNewInvoice = asyncHandler(async (req, res) => {
+  const { invoiceId, userId } = req.body;
 
-## Got feedback for us?
+  const newInvoiceData = { ...req.body };
 
-We love receiving feedback! We're always looking to improve our challenges and our platform. So if you have anything you'd like to mention, please email hi[at]frontendmentor[dot]io.
+  const duplicate = await Invoice.findOne({ invoiceId }).lean().exec();
+  if (duplicate) {
+    return res.status(409).json({ message: "Invoice already exists" });
+  }
 
-**Have fun building!** 🚀
+  const newInvoice = await Invoice.create(newInvoiceData);
+  const allInvoices = await Invoice.find({userId}).lean();
+  if (newInvoice) {
+    // created
+    res.status(201).json({ message: `New invoice created`, invoices: allInvoices });
+  } else {
+    res.status(400).json({ message: "Invalid user data received" });
+  }
+});
+
+module.exports = {
+  getAllInvoices,
+  createNewInvoice,
+  editInvoice,
+  deleteInvoice,
+};
+```
+<br>
+
+### Heres the code I used to create the different methods going to the invoice route
+
+(Using the "verifyJWT" here protectes all the routes below it by checking for the access token and see if it's expired or not, the user will need a access & refresh token in order to make a request to "invoice" routes.)
+
+```js
+const express = require("express");
+const router = express.Router();
+const invoicesController = require("../controllers/invoicesController");
+const verifyJWT = require("../middleware/verifyJWT");
+
+//Applies it to all the routes below
+router.use(verifyJWT);
+
+router.route("/:userId").get(invoicesController.getAllInvoices);
+
+router.route("/")
+
+  .post(invoicesController.createNewInvoice)
+  .patch(invoicesController.editInvoice)
+  .delete(invoicesController.deleteInvoice)
+
+
+
+//*********//
+module.exports = router;
+
+
+// This is the code we used in the server.js file to connect this file to the "BASEURL/invoices" endpoint.
+app.use("/invoices", require("./routes/invoicesRoute"))
+
+```
+
+
+### Continued development
+
+In the future I look forward to using the concepts and skills I've learnt in this project to build more interesting, full stack applications. I also want to practice using the mern stack as much possible so I can fully understand the concept of setting up and building a full stack application a lot more freely.
+
+
+### Useful resources
+
+When I was learning about the mern stack I primarily used Dave Gray's youtube videos on the subject to help me understand the concept and how to implement them into my own project. If you want to check them out, I've left the links to these down below.
+
+### Dave Grays's videos
+
+- [MERN Stack Full Tutorial & Project](https://www.youtube.com/watch?v=CvCiNeLnZ00) - This helped me understand how to implement the main concepts into a full stack application.
+
+- [React Login Authentication](https://www.youtube.com/watch?v=nI8PYZNFtac&list=PL0Zuz27SZ-6PRCpm9clX0WiBEMB70FWwd&index=6) - This is a video which helped me set up authentication & authorization on my project.
+
+- [React Persistent User Login ](https://www.youtube.com/watch?v=27KeYk-5vJw&t=14s) - This video helped guide me on how to set up a persistent login for users, using Json Web Tokens.
+
+
+## Author
+
+- Website - [DJHWebdevelopment](https://www.djhwebdevelopment.com)
+- Frontend Mentor - [@David-Henery4](https://www.frontendmentor.io/profile/David-Henery4)
+- LinkedIn - [David Henery](https://www.linkedin.com/in/david-henery-725458241)
+
 
