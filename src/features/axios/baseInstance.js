@@ -1,7 +1,7 @@
 import axios from "axios"
 
 
-const BASE_URL = "http://localhost:3500";
+const BASE_URL = "https://invoice-app-backend-b45s.onrender.com";
 
 const usersPost = axios.create({
   baseURL: BASE_URL,

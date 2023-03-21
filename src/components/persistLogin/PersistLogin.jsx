@@ -8,9 +8,12 @@ import { getInvoices } from "../../features/invoiceData/invoiceDataSlice";
 
 const getRefreshForLogin = async () => {
   try {
-    const res = await axios.get("http://localhost:3500/auth/refresh", {
-      withCredentials: true,
-    });
+    const res = await axios.get(
+      "https://invoice-app-backend-b45s.onrender.com/auth/refresh",
+      {
+        withCredentials: true,
+      }
+    );
     return res.data;
   } catch (error) {
     console.log(error);
