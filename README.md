@@ -38,9 +38,9 @@ Users should be able to:
 
 ### Links
 
-(TO BE ADDED!)
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+
+- Solution URL: [Frontend mentor Submitted solution](https://www.frontendmentor.io/solutions/invoice-appreact-nodejs-mongodb-express-tailwind-css-redux-T6uw1VPnqN)
+- Live Site URL: [qk-invoices](https://qk-invoices.netlify.app)
 
 ## My process
 

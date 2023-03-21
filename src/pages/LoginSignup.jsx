@@ -62,10 +62,10 @@ const LoginSignup = () => {
       {isLoading ? (
         <div className="lds-dual-ring"></div>
       ) : (
-        <div className="w-11/12 max-w-lg pt-10 pb-6 px-6 rounded-lg bg-basicWhite flex flex-col justify-center items-center gap-6 dark:bg-contentBgDark">
-          <h2 className="font-light text-4xl mb-6">
+        <main className="w-11/12 max-w-lg pt-10 pb-6 px-6 rounded-lg bg-basicWhite flex flex-col justify-center items-center gap-6 dark:bg-contentBgDark">
+          <h1 className="font-light text-4xl mb-6">
             {isSignUp ? "Sign up" : "Login"}
-          </h2>
+          </h1>
           {/**/}
           <div className="relative w-full grid gap-6">
             <div className="relative w-full grid gap-3">
@@ -161,7 +161,7 @@ const LoginSignup = () => {
               demo account
             </span>
           </p>
-        </div>
+        </main>
       )}
     </div>
   );
